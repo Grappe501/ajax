@@ -15,7 +15,7 @@ export default function VolunteerPage() {
     <SectionShell className="min-h-[50vh]">
       <SectionHeading
         title="Volunteer with AJAX"
-        subtitle="Tell us how you want to help — the same form as the homepage lives here for easy sharing."
+        subtitle="Tell us how you want to help — the same Netlify form as the homepage lives here for easy sharing and coordinator follow-up."
       />
       <VolunteerSignupForm />
       <div className="mt-10">

@@ -1,6 +1,7 @@
 "use client";
 
 import { Clock } from "lucide-react";
+import Link from "next/link";
 import { useState } from "react";
 
 import { buttonVariants } from "@/components/ui/button";
@@ -39,8 +40,14 @@ function TrainingDialog({ t }: { t: TrainingModule }) {
           </DialogDescription>
         </DialogHeader>
         <p className="text-sm leading-relaxed text-muted-foreground">
-          {t.description} Full modules and scheduling will live in the Phase 2
-          training center — this preview helps you know what to expect.
+          {t.description} Full Articulate 360 embeds and schedules will live on the{" "}
+          <Link
+            href="/training"
+            className="font-medium text-primary underline-offset-4 hover:underline"
+          >
+            training center
+          </Link>{" "}
+          page — this preview lists what is in production.
         </p>
       </DialogContent>
     </Dialog>

@@ -293,14 +293,20 @@ export function MarketingHome() {
         <SectionHeading
           eyebrow="Confidence"
           title="Petition rules and procedures"
-          subtitle="Short summaries first — open any topic for practical detail. When in doubt, ask a lead volunteer before you advise a signer."
+          subtitle="Arkansas law context, VoterView checks for Jacksonville addresses, witnessing, ink and corrections — open any topic. When in doubt, ask a lead before you advise a signer."
         />
         <RuleAccordion />
         <div className="mt-8 flex flex-wrap items-center gap-4">
-          <SecondaryButton href="/rules">Open full rules hub (preview)</SecondaryButton>
+          <SecondaryButton href="/rules">Full rules hub (print-friendly page)</SecondaryButton>
+          <Link
+            href="/training"
+            className="text-sm font-semibold text-primary underline-offset-4 hover:underline"
+          >
+            Training center
+          </Link>
           <a
             href="/ajax-petition-quick-guide.pdf"
-            className="text-sm font-semibold text-primary underline-offset-4 hover:underline"
+            className="text-sm font-semibold text-muted-foreground underline-offset-4 hover:underline"
             onClick={(e) => e.preventDefault()}
           >
             Printable quick guide (PDF — link TBD)
@@ -312,13 +318,16 @@ export function MarketingHome() {
       <SectionShell id="training" muted>
         <SectionHeading
           title="Training center preview"
-          subtitle="Structured modules help first-time volunteers feel prepared — and give experienced helpers a shared playbook."
+          subtitle="Articulate 360 modules for petitioning, tabling, and organizing will embed on the training page — this grid is the rollout plan."
         />
         <TrainingPreview />
-        <p className="mt-6 text-sm text-muted-foreground">
-          Phase 2 will expand this into a dedicated training center with schedules
-          and materials.
-        </p>
+        <div className="mt-6 flex flex-wrap items-center gap-4">
+          <SecondaryButton href="/training">Open training center</SecondaryButton>
+          <p className="text-sm text-muted-foreground">
+            No separate state certificate is required for AJAX volunteers — the rules hub plus these
+            modules are our standard.
+          </p>
+        </div>
       </SectionShell>
 
       {/* Events */}

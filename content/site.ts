@@ -23,6 +23,7 @@ export const site = {
     { label: "Events", href: "/#events" },
     { label: "FAQ", href: "/#faq" },
     { label: "Resources", href: "/resources" },
+    { label: "Training", href: "/training" },
   ],
   hero: {
     headline: "Build fair representation in Jacksonville",

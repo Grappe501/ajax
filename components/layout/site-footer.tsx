@@ -8,7 +8,8 @@ export function SiteFooter() {
   const quick = [
     { label: "Why It Matters", href: "/#why-it-matters" },
     { label: "Volunteer", href: "/#volunteer-form" },
-    { label: "Rules", href: "/#rules" },
+    { label: "Rules", href: "/rules" },
+    { label: "Training", href: "/training" },
     { label: "Events", href: "/events" },
     { label: "FAQ", href: "/#faq" },
     { label: "Resources", href: "/resources" },

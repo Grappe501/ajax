@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useState } from "react";
 
 import { Button } from "@/components/ui/button";
@@ -73,6 +74,15 @@ export function VolunteerSignupForm({ className }: { className?: string }) {
       onSubmit={onSubmit}
     >
       <input type="hidden" name="form-name" value={FORM_NAME} />
+      <p className="text-sm leading-relaxed text-muted-foreground">
+        <span className="font-semibold text-foreground">Where this goes: </span>
+        Submissions are sent securely through this site&apos;s form service (Netlify Forms) to the
+        campaign team. A coordinator follows up by email or phone. The same form is on the{" "}
+        <Link href="/volunteer" className="font-medium text-primary underline-offset-4 hover:underline">
+          volunteer page
+        </Link>{" "}
+        for easy sharing.
+      </p>
       <p className="hidden">
         <label>
           Do not fill this out: <input name="bot-field" />

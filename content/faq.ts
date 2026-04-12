@@ -38,19 +38,19 @@ export const faqItems: FaqItem[] = [
     category: "About Signing",
     question: "Who can sign?",
     answer:
-      "Eligibility rules are set by law and by the specific petition form. Sign only if you qualify under those rules, and ask a volunteer if you are unsure — we would rather double-check than risk an invalid signature.",
+      "For this Jacksonville municipal petition, signers should be registered voters whose residence is inside the City of Jacksonville, Arkansas, city limits — and generally 18 or older for standard registration. Volunteers use Arkansas VoterView (linked from the Secretary of State voter information page) to confirm registration, address, and age before anyone signs.\n\nIf someone is not registered, needs to update an address, or lives outside the city, they should not sign until they are eligible — they can still volunteer, host, or help in other ways.",
   },
   {
     category: "About Signing",
     question: "What is a “witness” on this petition?",
     answer:
-      "A witness is the volunteer accountable for a petition sheet from the first signature through notarization and official turn-in. Witnessing means you observed each signer execute the sheet correctly and you sign only in line with Arkansas rules and campaign training.\n\nYou do not pass a half-finished sheet around for someone else to “witness” without a clear, authorized process. You protect the sheet’s integrity the way you would protect someone’s ballot envelope — because democracy depends on trustworthy paperwork.",
+      "A witness is the volunteer accountable for a petition sheet from the first signature through notarization and official turn-in. Witnessing means you observed each signer execute the sheet correctly and you sign only where the form and campaign instructions say.\n\nAJAX uses volunteer circulators only — there is no separate state license you must earn before helping, but you are expected to read the rules hub and upcoming training modules. You do not pass a half-finished sheet around for someone else to “witness” without a clear, authorized process.",
   },
   {
     category: "About Signing",
     question: "What mistakes invalidate signatures?",
     answer:
-      "Common issues include missing information, incorrect dates, signatures that do not match what is required, witnessing by someone not lawfully authorized, and sheets that are not notarized or turned in through the required process. Read the rules section and ask a volunteer when in doubt.",
+      "Common issues include missing information, incorrect dates, addresses that do not match VoterView, signatures outside Jacksonville city limits, illegible lines, witnessing without observing each signer, and sheets that skip notarization or proper turn-in.\n\nIf someone signed who was not eligible, the campaign uses a single line through that entry — not scribbles or white-out. Use blue ink when possible (black as backup). See the petition rules hub for the full checklist.",
   },
   {
     category: "About Volunteering",
@@ -63,6 +63,13 @@ export const faqItems: FaqItem[] = [
     question: "What should volunteers avoid doing?",
     answer:
       "Do not guess on legal questions, pressure anyone to sign, or alter petition paperwork. When unsure, pause and get guidance from a lead volunteer or the campaign’s official materials.",
+  },
+  {
+    category: "About the Law and Process",
+    question:
+      "What do the 2025 Arkansas petition bills and the federal court injunction mean for Jacksonville?",
+    answer:
+      "Several 2025 acts (often referenced in news as Acts 218, 240, 274, 453, 602, and related sections) added requirements aimed largely at statewide initiative campaigns — photo ID at signing, ballot-title reading, reading-level review, paid canvasser rules, and more.\n\nIn League of Women Voters of Arkansas et al. v. Jester, the U.S. District Court for the Western District of Arkansas issued a preliminary injunction in 2025 limiting enforcement of certain provisions against parties to that case while litigation continues. The order’s scope is defined by the court — it does not replace municipal filing rules for Jacksonville.\n\nThis AJAX petition is a municipal measure with the city clerk. Volunteers should follow campaign counsel and the instructions on the official petition, not assume statewide initiative headlines apply line-for-line to Jacksonville.",
   },
   {
     category: "About the Law and Process",
