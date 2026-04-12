@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Netlify Forms — detection manifest (do not delete)</title>
+  </head>
+  <body>
+    <!-- Static manifest so Netlify can register forms at deploy time. -->
+    <form name="join-volunteer-team" data-netlify="true" netlify-honeypot="bot-field" hidden>
+      <input type="text" name="firstName" />
+      <input type="text" name="lastName" />
+      <input type="email" name="email" />
+      <input type="tel" name="phone" />
+      <input type="text" name="zipCode" />
+      <input type="checkbox" name="help_event_volunteer" value="yes" />
+      <input type="checkbox" name="help_petition_carrier" value="yes" />
+      <input type="checkbox" name="help_church_outreach" value="yes" />
+      <input type="checkbox" name="help_tabling" value="yes" />
+      <input type="checkbox" name="help_phone_text" value="yes" />
+      <input type="checkbox" name="help_hosting" value="yes" />
+      <input type="checkbox" name="help_leadership" value="yes" />
+      <textarea name="notes"></textarea>
+      <input name="bot-field" />
+    </form>
+    <form name="signing-alerts" data-netlify="true" netlify-honeypot="bot-field" hidden>
+      <input type="text" name="firstName" />
+      <input type="tel" name="mobilePhone" />
+      <input type="email" name="email" />
+      <input type="text" name="ward" />
+      <input name="bot-field" />
+    </form>
+    <form name="leadership-interest" data-netlify="true" netlify-honeypot="bot-field" hidden>
+      <input type="text" name="fullName" />
+      <input type="email" name="email" />
+      <input type="tel" name="phone" />
+      <input type="text" name="ward" />
+      <textarea name="experience"></textarea>
+      <textarea name="whyLead"></textarea>
+      <input name="bot-field" />
+    </form>
+    <form name="host-location" data-netlify="true" netlify-honeypot="bot-field" hidden>
+      <input type="text" name="fullName" />
+      <input type="text" name="organization" />
+      <input type="text" name="address" />
+      <input type="email" name="email" />
+      <input type="tel" name="phone" />
+      <input type="text" name="locationType" />
+      <input type="text" name="bestTimes" />
+      <textarea name="notes"></textarea>
+      <input name="bot-field" />
+    </form>
+  </body>
+</html>

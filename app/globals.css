@@ -1,5 +1,5 @@
-@import "tw-animate-css";
-@import "shadcn/tailwind.css";
+@import "../node_modules/tw-animate-css/dist/tw-animate.css";
+@import "../node_modules/shadcn/dist/tailwind.css";
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -142,12 +142,41 @@
     --sidebar-ring: oklch(0.556 0 0)
   }
   * {
-    @apply border-border outline-ring/50;
+    @apply border-border;
+    outline-color: color-mix(in oklab, var(--ring) 50%, transparent);
   }
   body {
     @apply bg-background text-foreground;
   }
   html {
     @apply font-sans;
+    scroll-behavior: smooth;
   }
+}
+
+/* AJAX Volunteer Hub — brand overrides (campaign navy, gold, warm paper) */
+:root {
+  --ajax-navy: oklch(0.32 0.06 260);
+  --ajax-gold: oklch(0.82 0.14 90);
+  --ajax-cream: oklch(0.99 0.01 95);
+  --ajax-charcoal: oklch(0.32 0.03 260);
+  --ajax-mist: oklch(0.94 0.02 250);
+  --background: var(--ajax-cream);
+  --foreground: var(--ajax-charcoal);
+  --card: oklch(0.995 0.005 95);
+  --card-foreground: var(--ajax-charcoal);
+  --popover: oklch(0.995 0.005 95);
+  --popover-foreground: var(--ajax-charcoal);
+  --primary: var(--ajax-navy);
+  --primary-foreground: oklch(0.99 0.01 95);
+  --secondary: var(--ajax-mist);
+  --secondary-foreground: var(--ajax-charcoal);
+  --muted: var(--ajax-mist);
+  --muted-foreground: oklch(0.45 0.03 260);
+  --accent: var(--ajax-gold);
+  --accent-foreground: var(--ajax-navy);
+  --border: oklch(0.88 0.02 250);
+  --input: oklch(0.88 0.02 250);
+  --ring: oklch(0.55 0.1 260);
+  --radius: 1rem;
 }
