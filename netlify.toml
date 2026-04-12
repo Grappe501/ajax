@@ -1,5 +1,8 @@
+# Publish must not be the repo root (clears Netlify UI "Publish directory" conflicts).
+# @netlify/plugin-nextjs expects the Next.js dist dir (default `.next`).
 [build]
   command = "npm run build"
+  publish = ".next"
 
 [[plugins]]
   package = "@netlify/plugin-nextjs"
