@@ -33,11 +33,11 @@ export function SiteHeader() {
           className="flex items-center gap-3 rounded-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
         >
           <Image
-            src="/logos/ajax-logo.svg"
-            alt="AJAX campaign logo"
-            width={120}
-            height={72}
-            className="h-11 w-auto rounded-lg"
+            src={site.brand.logoSrc}
+            alt={site.brand.logoAlt}
+            width={site.brand.logoWidth}
+            height={site.brand.logoHeight}
+            className="h-12 w-auto max-w-[min(168px,40vw)] object-contain object-left sm:h-14 sm:max-w-[188px]"
             priority
           />
           <span className="font-display text-lg font-bold leading-tight text-primary">

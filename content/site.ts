@@ -1,5 +1,12 @@
 export const site = {
   name: "AJAX Volunteer Hub",
+  brand: {
+    logoSrc: "/logos/ajax-logo.png",
+    logoAlt:
+      "AJAX — Accountability for Jacksonville’s at-large elections",
+    logoWidth: 1024,
+    logoHeight: 858,
+  },
   tagline:
     "The official volunteer home base for the AJAX campaign to replace Jacksonville’s at-large voting system with ward-based representation.",
   announcement: {

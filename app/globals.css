@@ -154,29 +154,29 @@
   }
 }
 
-/* AJAX Volunteer Hub — brand overrides (campaign navy, gold, warm paper) */
+/* AJAX — official logo palette (navy #002D62, gold #FDB913) */
 :root {
-  --ajax-navy: oklch(0.32 0.06 260);
-  --ajax-gold: oklch(0.82 0.14 90);
-  --ajax-cream: oklch(0.99 0.01 95);
-  --ajax-charcoal: oklch(0.32 0.03 260);
-  --ajax-mist: oklch(0.94 0.02 250);
+  --ajax-navy: #002d62;
+  --ajax-gold: #fdb913;
+  --ajax-cream: #f8fafc;
+  --ajax-charcoal: #1a2b45;
+  --ajax-mist: #eef2f7;
   --background: var(--ajax-cream);
   --foreground: var(--ajax-charcoal);
-  --card: oklch(0.995 0.005 95);
+  --card: #ffffff;
   --card-foreground: var(--ajax-charcoal);
-  --popover: oklch(0.995 0.005 95);
+  --popover: #ffffff;
   --popover-foreground: var(--ajax-charcoal);
   --primary: var(--ajax-navy);
-  --primary-foreground: oklch(0.99 0.01 95);
+  --primary-foreground: #ffffff;
   --secondary: var(--ajax-mist);
   --secondary-foreground: var(--ajax-charcoal);
   --muted: var(--ajax-mist);
-  --muted-foreground: oklch(0.45 0.03 260);
+  --muted-foreground: #4a5a72;
   --accent: var(--ajax-gold);
   --accent-foreground: var(--ajax-navy);
-  --border: oklch(0.88 0.02 250);
-  --input: oklch(0.88 0.02 250);
-  --ring: oklch(0.55 0.1 260);
+  --border: #dfe6ef;
+  --input: #dfe6ef;
+  --ring: #3d5a80;
   --radius: 1rem;
 }

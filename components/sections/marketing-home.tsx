@@ -66,7 +66,7 @@ export function MarketingHome() {
   return (
     <main id="top">
       {/* Hero */}
-      <section className="relative overflow-hidden border-b border-border bg-gradient-to-b from-secondary/50 via-background to-background">
+      <section className="relative overflow-hidden border-b border-border bg-gradient-to-b from-primary/[0.06] via-background to-secondary/40">
         <div className="mx-auto grid max-w-6xl items-center gap-10 px-4 py-16 sm:px-6 md:grid-cols-2 md:py-24 lg:px-8">
           <SectionReveal>
             <p className="text-sm font-semibold uppercase tracking-wide text-primary">
@@ -99,13 +99,13 @@ export function MarketingHome() {
             </CTACluster>
           </SectionReveal>
           <SectionReveal className="relative">
-            <div className="relative mx-auto max-w-md rounded-3xl border border-border/80 bg-card p-4 shadow-lg">
+            <div className="relative mx-auto max-w-md rounded-3xl border border-border/80 bg-card p-5 shadow-lg ring-1 ring-primary/5">
               <Image
-                src="/logos/ajax-logo.svg"
-                alt=""
-                width={520}
-                height={360}
-                className="h-auto w-full rounded-2xl"
+                src={site.brand.logoSrc}
+                alt={site.brand.logoAlt}
+                width={site.brand.logoWidth}
+                height={site.brand.logoHeight}
+                className="h-auto w-full rounded-2xl object-contain"
                 priority
               />
               <div className="mt-4 rounded-2xl bg-primary px-4 py-3 text-center text-primary-foreground">
