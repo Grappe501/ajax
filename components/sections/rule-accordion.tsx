@@ -8,6 +8,19 @@ import {
 } from "@/components/ui/accordion";
 import { rules } from "@/content/rules";
 
+function TextBlocks({ text, className }: { text: string; className?: string }) {
+  const parts = text.split("\n\n").filter(Boolean);
+  return (
+    <div className={className}>
+      {parts.map((para, idx) => (
+        <p key={idx} className="leading-relaxed [&:not(:first-child)]:mt-3">
+          {para}
+        </p>
+      ))}
+    </div>
+  );
+}
+
 export function RuleAccordion() {
   return (
     <Accordion multiple={false} className="w-full">
@@ -21,8 +34,10 @@ export function RuleAccordion() {
             {r.title}
           </AccordionTrigger>
           <AccordionContent className="space-y-3 pb-4 text-muted-foreground">
-            <p className="font-medium text-foreground">{r.summary}</p>
-            <p>{r.details}</p>
+            <div className="font-medium text-foreground">
+              <TextBlocks text={r.summary} />
+            </div>
+            <TextBlocks text={r.details} />
             {r.mistakes ? (
               <p>
                 <span className="font-semibold text-foreground">Watch for: </span>

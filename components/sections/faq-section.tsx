@@ -11,6 +11,19 @@ import {
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { faqItems } from "@/content/faq";
 
+function FaqAnswer({ text }: { text: string }) {
+  const parts = text.split("\n\n").filter(Boolean);
+  return (
+    <div className="space-y-3">
+      {parts.map((para, idx) => (
+        <p key={idx} className="leading-relaxed">
+          {para}
+        </p>
+      ))}
+    </div>
+  );
+}
+
 const categories = [
   "About the Petition",
   "About Signing",
@@ -54,7 +67,7 @@ export function FaqSection() {
                   {item.question}
                 </AccordionTrigger>
                 <AccordionContent className="pb-4 text-muted-foreground">
-                  {item.answer}
+                  <FaqAnswer text={item.answer} />
                 </AccordionContent>
               </AccordionItem>
             ))}

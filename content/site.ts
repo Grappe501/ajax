@@ -55,38 +55,70 @@ export const site = {
   whatCampaign: {
     title: "What this campaign is",
     atLarge:
-      "Today, Jacksonville uses at-large City Council races. That means candidates run citywide, and neighborhoods often share the same representatives as every other part of town.",
+      "Jacksonville, Arkansas, uses at-large City Council elections: every voter in the city can vote for council members in every ward. Candidates must live in the ward they seek to represent, but the electorate for each seat is the whole city — not just the people who share that neighborhood’s daily reality.",
     wardOnly:
-      "Ward-only voting means you elect council members from your own district — people who live near you and answer to the communities they represent.",
+      "Ward-based (ward-only) voting means the people who live in a ward are the primary electorate for that ward’s seats. Your neighbors help choose who speaks for your schools, your streets, and your corridor — and those representatives answer first to the community they share with you.",
     petition:
-      "This petition asks to put ward-based representation on the ballot so voters can decide whether Jacksonville’s council should reflect neighborhoods more directly.",
+      "This petition is how we qualify a measure for the ballot so voters — not insiders — can decide whether Jacksonville moves from citywide voting for ward seats to representation elected by ward.",
     local:
-      "For families, small businesses, and faith communities across Duval, that can mean clearer accountability, stronger local voice, and fairer elections.",
+      "For families, small businesses, congregations, and renters across Pulaski County’s second-largest city, that can mean clearer accountability, a stronger local voice, and elections where everyday Jacksonville matters as much as citywide name recognition.",
+    deepDive: [
+      {
+        title: "What Jacksonville’s charter looks like today",
+        body:
+          "The city’s own materials describe a mayor–council government with five wards and two council members per ward — ten councilors total — but those seats are filled through at-large, citywide elections. In practice, that means a candidate’s voter pool is all of Jacksonville, even though they must reside in a particular ward.\n\nThat structure can dilute neighborhood-specific priorities: a pocket of the city can be outvoted on who represents its ward by voters who never drive that corridor or send children to those schools. AJAX asks whether that still serves Jacksonville — or whether ward residents should pick their ward’s voice directly.",
+      },
+      {
+        title: "Ward-only voting: what actually changes",
+        body:
+          "Moving toward ward-based election of ward seats shifts the incentive structure. Instead of campaigning only for citywide popularity, council members must earn the trust of the people who share their sidewalks, drainage problems, and public-safety patterns.\n\nIt does not erase citywide challenges — it adds a direct line between a place and its vote. Issues like zoning near your home, recurring flooding on your street, or support for youth programs in your schools become harder to ignore when the electorate is the neighborhood living with the outcome.\n\nJacksonville maps five wards; each ward holds two positions (commonly labeled Position A and Position B) with staggered terms so wards keep experienced representation across election cycles. The exact ballot labels and schedules follow the city clerk’s election notices — the point of reform is aligning who votes for a seat with the community that seat was drawn to represent.",
+      },
+      {
+        title: "Why this is the pitch when you ask someone to sign",
+        body:
+          "Signing is not an endorsement of a party or personality. It is a request to let all voters decide whether Jacksonville’s council should be elected the way most people intuitively assume it already works — by neighborhood, not only by citywide name ID.\n\nIf you believe every part of town deserves a fair shot at being heard, ward-based voting is the structural lever. That is the story volunteers carry to doors, pews, and break rooms.",
+      },
+    ],
   },
   whyJacksonville: {
     title: "Why this matters to Jacksonville",
     subtitle:
-      "This is about practical representation — who shows up for your block, your corridor, and your neighbors.",
+      "This is about practical representation — who shows up for your block, your corridor, and your neighbors. Open any card for a fuller picture.",
     benefits: [
       {
         title: "Neighborhood voice",
-        body: "Communities get a clearer seat at the table when council seats are tied to place.",
+        summary:
+          "When council seats are tied to place, everyday problems get a microphone — not just citywide headlines.",
+        detail:
+          "At-large races reward citywide name recognition and broad messaging. That can leave corridor-level issues — a dangerous intersection, a recurring code issue on rental properties, a bus route gap — underheard because they do not move enough total votes across the entire city.\n\nWard-based voting lets communities organize visible support for representatives who cannot ignore the street-level conditions that define daily life. For Jacksonville’s diverse wards — from long-established neighborhoods to growing corridors — that means representation that looks like the people who actually live there.\n\nThis campaign is selling structure, not slogans: a fair shot for each part of town to be taken seriously.",
       },
       {
         title: "Accountability you can see",
-        body: "It is easier to know who is responsible for follow-through where you live.",
+        summary:
+          "You deserve to know exactly who is on the hook for follow-through where you live, work, and worship.",
+        detail:
+          "Under at-large voting, every council member is technically accountable to everyone — which can mean, in practice, accountability to no one in particular on a hyper-local issue. When your ward elects its own representatives, routes for constituent service become obvious: office hours, listening sessions, and public debate happen in the geography where policy lands.\n\nThat visibility matters for trust. Residents can reward preparation and punish neglect with votes that are not drowned out by unrelated parts of town. For renters, homeowners, and small-business owners alike, that is democracy with a return address.",
       },
       {
-        title: "Fairer elections",
-        body: "When districts are drawn fairly, more voters get meaningful competition.",
+        title: "Fairer, more meaningful elections",
+        summary:
+          "Competition should not require a citywide war chest just to fix a neighborhood problem.",
+        detail:
+          "Citywide contests often favor fundraising networks and media reach over grounded knowledge of a ward. Ward-sized electorates lower the barrier for qualified neighbors to run — teachers, firefighters, small-business owners, and longtime activists who would never outspend a citywide field can still mount credible campaigns among people who know their work.\n\nWhen districts are drawn fairly and openly, voters also gain clearer choices instead of a single at-large pile-on. AJAX is about asking whether Jacksonville wants elections where local effort and local relationships count as much as citywide ad buys.",
       },
       {
         title: "Trust in representation",
-        body: "Local ties build trust — especially when people are tired of politics that feels distant.",
+        summary:
+          "People are tired of politics that feels distant. Neighborhood ties rebuild confidence in public service.",
+        detail:
+          "Distrust often grows when government feels abstract — when residents cannot connect a decision to a face they have shaken hands with in their own community. Ward service areas encourage ongoing relationships: coaches, pastors, and block captains know who to call because the officeholder shares their civic ecosystem.\n\nThat does not erase disagreement; it grounds it. Residents can still hold vigorous debate, but the debate happens among people who share costs and benefits — a healthier foundation for problem-solving than anonymous frustration directed at a distant body.",
       },
       {
         title: "Momentum for the whole city",
-        body: "Stronger neighborhoods strengthen Jacksonville as a whole.",
+        summary:
+          "Strong neighborhoods do not subtract from Jacksonville — they are the engine of shared prosperity.",
+        detail:
+          "Investing in neighborhood voice is not parochialism. Safer streets, thriving corridors, and reliable services in every ward reduce drag on the entire city’s reputation, budget, and growth. When each ward can elect representatives attuned to local conditions, the council as a whole makes better-informed tradeoffs on regional issues — infrastructure, public safety, housing, and economic development — because fewer blind spots remain at the table.\n\nAJAX argues that Jacksonville wins when every ward can advocate for itself clearly — and when citywide leadership must answer to a chorus of grounded voices, not only to the loudest citywide brand.",
       },
     ],
   },

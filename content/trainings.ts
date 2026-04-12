@@ -21,7 +21,7 @@ export const trainings: TrainingModule[] = [
     slug: "signing-rules",
     title: "Signing Rules",
     description:
-      "Who can sign, how to witness, and how to help someone complete paperwork correctly.",
+      "Who can sign, what witnessing means from first signature to notarized turn-in, and how to help someone complete paperwork correctly.",
     minutes: 18,
     status: "available",
   },

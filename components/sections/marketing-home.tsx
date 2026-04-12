@@ -24,6 +24,12 @@ import { VolunteerSignupForm } from "@/components/forms/volunteer-signup-form";
 import { SectionHeading } from "@/components/layout/section-heading";
 import { SectionShell } from "@/components/layout/section-shell";
 import { SectionReveal } from "@/components/motion/section-reveal";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 import { Card } from "@/components/ui/card";
 import { events } from "@/content/events";
 import { site } from "@/content/site";
@@ -42,6 +48,19 @@ const startIcons = {
   volunteer: HeartHandshake,
   lead: MapPin,
 } as const;
+
+function MultilineAnswer({ text, className }: { text: string; className?: string }) {
+  const parts = text.split("\n\n").filter(Boolean);
+  return (
+    <div className={className}>
+      {parts.map((para, idx) => (
+        <p key={idx} className="leading-relaxed last:mb-0 [&:not(:first-child)]:mt-3">
+          {para}
+        </p>
+      ))}
+    </div>
+  );
+}
 
 export function MarketingHome() {
   return (
@@ -166,6 +185,30 @@ export function MarketingHome() {
             <p className="mt-3 text-muted-foreground">{site.whatCampaign.local}</p>
           </Card>
         </div>
+        <div className="mt-8">
+          <p className="font-display text-lg font-bold text-foreground">
+            Go deeper: Jacksonville’s system and what reform changes
+          </p>
+          <p className="mt-2 text-sm text-muted-foreground">
+            Short version above — open a topic below for the full case we make at doors and tables.
+          </p>
+          <Accordion multiple={false} className="mt-4 w-full space-y-3">
+            {site.whatCampaign.deepDive.map((item, i) => (
+              <AccordionItem
+                key={item.title}
+                value={`campaign-deep-${i}`}
+                className="rounded-xl border border-border/80 bg-card px-4 data-[state=open]:shadow-sm"
+              >
+                <AccordionTrigger className="text-left font-display text-base font-semibold hover:no-underline">
+                  {item.title}
+                </AccordionTrigger>
+                <AccordionContent className="pb-4 text-muted-foreground">
+                  <MultilineAnswer text={item.body} />
+                </AccordionContent>
+              </AccordionItem>
+            ))}
+          </Accordion>
+        </div>
       </SectionShell>
 
       {/* Why Jacksonville */}
@@ -174,22 +217,30 @@ export function MarketingHome() {
           title={site.whyJacksonville.title}
           subtitle={site.whyJacksonville.subtitle}
         />
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {site.whyJacksonville.benefits.map((b) => (
-            <Card
+        <Accordion multiple={false} className="w-full space-y-3">
+          {site.whyJacksonville.benefits.map((b, i) => (
+            <AccordionItem
               key={b.title}
-              className="rounded-2xl border-border/80 bg-card p-5 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
+              value={`why-jax-${i}`}
+              className="rounded-xl border border-border/80 bg-card px-4 data-[state=open]:shadow-sm"
             >
-              <div className="flex items-start gap-3">
-                <CheckCircle2 className="mt-0.5 size-5 shrink-0 text-primary" />
-                <div>
-                  <h3 className="font-display text-lg font-bold">{b.title}</h3>
-                  <p className="mt-2 text-sm text-muted-foreground">{b.body}</p>
-                </div>
-              </div>
-            </Card>
+              <AccordionTrigger className="py-4 text-left hover:no-underline">
+                <span className="flex items-start gap-3">
+                  <CheckCircle2 className="mt-0.5 size-5 shrink-0 text-primary" aria-hidden />
+                  <span>
+                    <span className="font-display text-base font-bold text-foreground">{b.title}</span>
+                    <span className="mt-1 block text-sm font-normal text-muted-foreground">
+                      {b.summary}
+                    </span>
+                  </span>
+                </span>
+              </AccordionTrigger>
+              <AccordionContent className="pb-4 pl-8 text-muted-foreground sm:pl-11">
+                <MultilineAnswer text={b.detail} />
+              </AccordionContent>
+            </AccordionItem>
           ))}
-        </div>
+        </Accordion>
       </SectionShell>
 
       {/* How volunteers */}
