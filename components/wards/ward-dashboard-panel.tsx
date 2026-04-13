@@ -5,7 +5,9 @@ import { organizing } from "@/content/organizing";
 import type { MyOrganizerRow, WardTeamStats } from "@/lib/organizing/types";
 
 import { CopyReferralButton } from "@/components/wards/copy-referral-button";
+import { PowerOfFiveReachPanel } from "@/components/wards/power-of-five-reach-panel";
 import { SharePublicSiteCard } from "@/components/wards/share-public-site-card";
+import type { ReachOutListRow } from "@/lib/reach/types";
 
 export function WardDashboardPanel({
   wardSlug,
@@ -16,6 +18,8 @@ export function WardDashboardPanel({
   downstreamTotal,
   rank,
   stats,
+  reachList,
+  voterDirectoryCount,
 }: {
   wardSlug: string;
   wardLabel: string;
@@ -25,6 +29,8 @@ export function WardDashboardPanel({
   downstreamTotal: number;
   rank: number | null;
   stats: WardTeamStats | null;
+  reachList: ReachOutListRow[];
+  voterDirectoryCount: number;
 }) {
   const encouragement =
     directRecruits === 0
@@ -40,7 +46,7 @@ export function WardDashboardPanel({
           {organizing.dashboardWelcome(me.display_name)}
         </h1>
         <p className="mt-2 text-lg text-muted-foreground">
-          {wardLabel} · your momentum, your team
+          {wardLabel} · Power of 5
         </p>
       </div>
 
@@ -48,7 +54,7 @@ export function WardDashboardPanel({
 
       <Card className="rounded-2xl border-primary/20 bg-primary/5 p-6">
         <p className="text-sm font-semibold uppercase tracking-wide text-primary">
-          Today&apos;s nudge
+          Next step
         </p>
         <p className="mt-2 text-lg leading-relaxed text-foreground">{encouragement}</p>
       </Card>
@@ -103,6 +109,12 @@ export function WardDashboardPanel({
           </code>
         </p>
       </Card>
+
+      <PowerOfFiveReachPanel
+        wardSlug={wardSlug}
+        initialRows={reachList}
+        voterDirectoryCount={voterDirectoryCount}
+      />
 
       <Card className="rounded-2xl border-border p-6">
         <h2 className="font-display text-xl font-bold text-primary">{organizing.trainTitle}</h2>

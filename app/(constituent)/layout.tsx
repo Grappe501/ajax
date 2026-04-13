@@ -2,9 +2,7 @@ import { ConstituentFooter } from "@/components/layout/constituent-footer";
 import { ConstituentHeader } from "@/components/layout/constituent-header";
 import { PublicThemeProvider } from "@/components/layout/public-theme";
 
-/**
- * Calm layout for shareable educational pages — no announcement bar or full volunteer nav.
- */
+/** Layout for shareable educational pages — simplified header/footer, no volunteer announcement bar. */
 export default function ConstituentLayout({
   children,
 }: {

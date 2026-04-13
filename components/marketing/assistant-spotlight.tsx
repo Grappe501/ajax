@@ -34,8 +34,8 @@ export function AssistantSpotlight() {
             <SectionHeading
               align="left"
               className="mb-0 mt-6 [&_h2]:text-white [&_h2]:drop-shadow-sm [&_p]:text-primary-foreground/85"
-              title="Questions before you take the next step?"
-              subtitle="Open the AJAX Guide anytime — it answers from approved campaign content, points you to rules and FAQs, and never replaces a lawyer or election official for legal specifics."
+              title="Questions?"
+              subtitle="AJAX Guide uses approved campaign text. For legal specifics, contact the city clerk or qualified counsel — not this chat."
             />
             <PrimaryButton
               type="button"

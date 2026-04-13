@@ -128,6 +128,69 @@ export type VolunteerSignupRow = {
   source: string;
 };
 
+export type OutreachQueueRow = {
+  id: string;
+  channel: string;
+  message_subject: string | null;
+  message_body: string;
+  contact_phone: string | null;
+  contact_email: string | null;
+  status: string;
+  created_at: string;
+  organizer_id: string;
+  organizer_display_name: string | null;
+  organizer_ward_slug: string | null;
+};
+
+export async function listPendingOutreachQueue(): Promise<OutreachQueueRow[] | null> {
+  const supabase = await createSupabaseServer();
+  if (!supabase) return null;
+
+  const { data: rows, error } = await supabase
+    .from("outreach_queue")
+    .select("id,channel,message_subject,message_body,contact_phone,contact_email,status,created_at,organizer_id")
+    .eq("status", "pending")
+    .order("created_at", { ascending: false })
+    .limit(300);
+
+  if (error) {
+    console.error("listPendingOutreachQueue:", error.message);
+    return null;
+  }
+
+  const list = rows ?? [];
+  if (list.length === 0) return [];
+
+  const orgIds = [...new Set(list.map((r) => r.organizer_id))];
+  const { data: orgs, error: oErr } = await supabase
+    .from("ward_organizers")
+    .select("id,display_name,ward_slug")
+    .in("id", orgIds);
+
+  if (oErr) {
+    console.error("listPendingOutreachQueue orgs:", oErr.message);
+  }
+
+  const map = new Map((orgs ?? []).map((o) => [o.id, o]));
+
+  return list.map((r) => {
+    const o = map.get(r.organizer_id);
+    return {
+      id: r.id,
+      channel: r.channel,
+      message_subject: r.message_subject,
+      message_body: r.message_body,
+      contact_phone: r.contact_phone,
+      contact_email: r.contact_email,
+      status: r.status,
+      created_at: r.created_at,
+      organizer_id: r.organizer_id,
+      organizer_display_name: o?.display_name ?? null,
+      organizer_ward_slug: o?.ward_slug ?? null,
+    };
+  });
+}
+
 export async function listVolunteerSignups(): Promise<VolunteerSignupRow[] | null> {
   const supabase = await createSupabaseServer();
   if (!supabase) return null;

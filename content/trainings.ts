@@ -37,7 +37,7 @@ export const trainings: TrainingModule[] = [
     slug: "tabling-basics",
     title: "Tabling Basics",
     description:
-      "Setup, signage, crowd flow, and how to run a calm, organized signing table.",
+      "Setup, signage, crowd flow, and how to run an organized signing table.",
     minutes: 16,
     status: "coming soon",
   },

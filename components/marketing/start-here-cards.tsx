@@ -19,7 +19,7 @@ export function StartHereCards() {
     <SectionShell id="start-here" muted>
       <SectionHeading
         title="Start here"
-        subtitle="Pick a path — each topic has its own page with room to grow as the campaign does."
+        subtitle="Each card opens a dedicated page."
       />
       <div className="grid gap-4 md:grid-cols-2">
         {site.startHere.map((card) => {

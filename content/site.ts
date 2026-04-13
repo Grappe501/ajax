@@ -29,17 +29,17 @@ export const site = {
   hero: {
     headline: "Fair representation that starts where you live",
     subhead:
-      "Curious, cautious, or ready to act — this door is for you. Understand the petition in plain language, sign when it feels right, or volunteer with neighbors who share your streets and schools.",
+      "Read what the petition does, find signing events, or volunteer. Everything here is written for Jacksonville residents first.",
     primaryCta: "Volunteer with us",
-    secondaryCta: "Read the calm explainer",
+    secondaryCta: "Read the initiative summary",
     trustLine:
-      "Inclusive, transparent, neighbor-led — no insider jargon required.",
+      "Neighbor-led, open materials, straight answers.",
   },
   startHere: [
     {
       id: "understand",
       title: "I want to understand the petition",
-      description: "Short, shareable explainer — no volunteer clutter.",
+      description: "Short overview you can share before someone signs.",
       href: "/initiative",
     },
     {
@@ -134,11 +134,11 @@ export const site = {
   volunteerStory: {
     title: "How volunteers make this move",
     body: [
-      "Volunteers power this campaign the way real change always happens: person to person. We educate voters, answer questions, host signing opportunities, table, call and text neighbors, canvass, and organize events.",
-      "There is a role for every comfort level — from first-time helpers to experienced organizers.",
+      "Volunteers reach voters directly: education, signing events, tabling, calls and texts, canvassing, and hosted activities.",
+      "Roles range from first-time helpers to experienced organizers.",
     ],
     reassurance:
-      "You do not have to know everything to help. You just need a place to start.",
+      "You do not need to know everything on day one — training and coordinators back you up.",
   },
   ladder: {
     title: "Choose your next step",
@@ -183,9 +183,9 @@ export const site = {
     ],
   },
   movement: {
-    title: "A growing movement",
+    title: "Signature progress",
     subtitle:
-      "Petition lines move through a clear pipeline: sheets are entered into the AJAX spreadsheet, each line is checked against Arkansas voter records (VoterView until our database is fully live), then valid signatures are marked on the voter file. Problem lines go to a revisit list for a clean signature at home. The figures below are internal campaign counts — not the city clerk’s final filing tally until a full pass is complete.",
+      "Sheets are logged in the campaign spreadsheet, then checked against voter records (VoterView until our file is live). Valid lines get marked on the voter file; problem lines go to a revisit list. Counts below are internal — not the city clerk’s final filing total until a full pass is done.",
     stats: [
       {
         label: "Raw signatures on petitions",
@@ -218,7 +218,7 @@ export const site = {
       },
       {
         quote:
-          "Clarity on the rules made it easy to help my neighbors sign with confidence.",
+          "Clear rules made it easier to help neighbors sign correctly.",
         attribution: "AJAX volunteer",
       },
     ],
@@ -228,7 +228,7 @@ export const site = {
   finalCta: {
     title: "Ready to help Jacksonville vote with clearer neighborhood voice?",
     subtitle:
-      "Pick the path that fits today. We will meet you there and help you take the next step.",
+      "Pick a next step; coordinators can help with the rest.",
     ctas: [
       { label: "Get Updates", href: "/connect#signing-alerts" },
       { label: "Volunteer", href: "/volunteer#join-form" },

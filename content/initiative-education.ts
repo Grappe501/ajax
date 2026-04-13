@@ -1,5 +1,5 @@
 /**
- * Constituent-facing explainer (/initiative) — calm copy, easy to share.
+ * Constituent-facing explainer (/initiative).
  * Deep-dive accordion pulls from `site.whatCampaign.deepDive` in the page component.
  */
 export const initiativeEducation = {
@@ -11,7 +11,7 @@ export const initiativeEducation = {
   hero: {
     eyebrow: "Jacksonville, Arkansas",
     title: "Your neighborhood. Your council seat.",
-    dek: "This short page explains the measure AJAX is working to put on the ballot — without volunteer tools, training menus, or extra noise. Share this link when someone just wants to understand before they sign.",
+    dek: "What the petition would do and how to get involved. Share this page with anyone who wants the basics before they sign.",
   },
   snapshot: {
     title: "Three things to know",

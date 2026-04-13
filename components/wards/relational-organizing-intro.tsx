@@ -32,18 +32,18 @@ export function RelationalOrganizingIntro({
             <div>
               <p className="font-semibold">Downstream reach</p>
               <p className="text-sm text-muted-foreground">
-                Your score grows when people you bring in build their own teams — that is
-                how wards accelerate.
+                When people you recruit add their own recruits, your downstream total grows — same
+                pattern as tools like REACH.
               </p>
             </div>
           </li>
           <li className="flex gap-3">
             <Target className="mt-0.5 size-5 shrink-0 text-primary" aria-hidden />
             <div>
-              <p className="font-semibold">Friendly competition</p>
+              <p className="font-semibold">Leaderboard</p>
               <p className="text-sm text-muted-foreground">
-                Leaderboards celebrate momentum, not pressure. We train first, celebrate
-                progress, and keep the ladder honest.
+                Rankings use downstream totals and dates so progress is visible and comparable
+                across organizers.
               </p>
             </div>
           </li>
@@ -51,7 +51,7 @@ export function RelationalOrganizingIntro({
       </div>
       <div className="rounded-2xl border border-primary/20 bg-primary/5 p-6">
         <p className="text-sm font-semibold uppercase tracking-wide text-primary">
-          Ward pulse
+          Ward snapshot
         </p>
         {stats ? (
           <dl className="mt-4 space-y-3">

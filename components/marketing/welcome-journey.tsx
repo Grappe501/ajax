@@ -18,32 +18,32 @@ import { cn } from "@/lib/utils";
 const steps = [
   {
     step: "01",
-    title: "Land with clarity",
-    body: "No jargon wall. Skim the initiative explainer or ask the AJAX Guide — same friendly voice everywhere.",
+    title: "Read the initiative",
+    body: "Short summary of what the petition would change and who can sign.",
     icon: BookOpen,
     href: "/initiative",
-    cta: "Read the explainer",
+    cta: "Open initiative",
   },
   {
     step: "02",
-    title: "See why it matters",
-    body: "Ward voice isn’t an abstract idea — it’s schools, streets, and accountability in your neighborhood.",
+    title: "Why it matters",
+    body: "How at-large voting differs from ward-only elections for Jacksonville.",
     icon: Heart,
     href: "/why-it-matters",
     cta: "Why it matters",
   },
   {
     step: "03",
-    title: "Choose your lane",
-    body: "Sign when you’re ready, volunteer when you have capacity — or both, on your timeline.",
+    title: "Sign or volunteer",
+    body: "Events and signing options, or a path to help collect signatures.",
     icon: PenLine,
     href: "/events",
     cta: "Events & signing",
   },
   {
     step: "04",
-    title: "Stay connected",
-    body: "Alerts, trainings, and neighbor-to-neighbor momentum — without pressure tactics.",
+    title: "Stay in the loop",
+    body: "Alerts and trainings when you want updates.",
     icon: Handshake,
     href: "/connect",
     cta: "Get updates",
@@ -56,9 +56,9 @@ export function WelcomeJourney() {
   return (
     <SectionShell className="ajax-section-muted border-b border-primary/10">
       <SectionHeading
-        eyebrow="Your path"
-        title="Welcoming by design"
-        subtitle="We built this front door for every kind of visitor — curious, cautious, or ready to act. Move in order, or jump to what fits today."
+        eyebrow="Start here"
+        title="Four steps"
+        subtitle="Use them in order or skip to what you need."
       />
       <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
         {steps.map((s, i) => (
@@ -97,7 +97,7 @@ export function WelcomeJourney() {
                     onClick={() => openAssistant("Summarize what AJAX is in two short paragraphs.")}
                     className="text-sm font-semibold text-muted-foreground underline-offset-4 transition hover:text-primary hover:underline"
                   >
-                    Ask the guide
+                    Ask AJAX Guide
                   </button>
                 ) : null}
               </div>

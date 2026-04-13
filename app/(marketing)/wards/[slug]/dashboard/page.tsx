@@ -17,6 +17,10 @@ import {
   fetchMyOrganizerRow,
   fetchWardTeamStats,
 } from "@/lib/organizing/data";
+import {
+  countVoterDirectoryForWard,
+  fetchReachOutListForOrganizer,
+} from "@/lib/reach/queries";
 import { getRequestOrigin } from "@/lib/request-origin";
 
 type Props = { params: Promise<{ slug: string }> };
@@ -64,13 +68,16 @@ export default async function WardDashboardPage({ params }: Props) {
     redirect(`/wards/${slug}/onboard`);
   }
 
-  const [directRecruits, downstreamTotal, rank, stats, siteBase] = await Promise.all([
-    fetchDirectRecruitCount(me.id),
-    fetchDownstreamTotal(me.id),
-    fetchLeaderboardRank(slug, me.id),
-    fetchWardTeamStats(slug),
-    getRequestOrigin(),
-  ]);
+  const [directRecruits, downstreamTotal, rank, stats, siteBase, reachList, voterDirCount] =
+    await Promise.all([
+      fetchDirectRecruitCount(me.id),
+      fetchDownstreamTotal(me.id),
+      fetchLeaderboardRank(slug, me.id),
+      fetchWardTeamStats(slug),
+      getRequestOrigin(),
+      fetchReachOutListForOrganizer(me.id),
+      countVoterDirectoryForWard(slug),
+    ]);
 
   return (
     <SectionShell className="min-h-[70vh]">
@@ -86,6 +93,8 @@ export default async function WardDashboardPage({ params }: Props) {
         downstreamTotal={downstreamTotal ?? 0}
         rank={rank}
         stats={stats}
+        reachList={reachList}
+        voterDirectoryCount={voterDirCount}
       />
       <p className="mt-10 text-center text-sm text-muted-foreground">
         <Link href={`/wards/${slug}`} className="font-semibold text-primary">

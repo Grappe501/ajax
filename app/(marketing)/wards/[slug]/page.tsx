@@ -29,7 +29,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!ward) return { title: "Ward" };
   return {
     title: `${ward.name} · Organizing board`,
-    description: `${ward.summary} Relational organizing and ward leaderboard for AJAX.`,
+    description: `${ward.summary} Power of 5 organizing board and ward leaderboard.`,
   };
 }
 
@@ -85,8 +85,8 @@ export default async function WardDetailPage({ params }: Props) {
 
       <SectionShell muted className="border-t-0 pb-20">
         <SectionHeading
-          title="Own the pace"
-          subtitle="Train your five, celebrate progress weekly, and keep the ladder honest. Speed follows trust."
+          title="Keep building"
+          subtitle="Use training and your referral link. Track progress on your ward dashboard."
         />
         <div className="flex flex-wrap gap-4">
           <PrimaryButton href={`/wards/${slug}/join`}>Start or grow my team</PrimaryButton>

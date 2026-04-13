@@ -3,10 +3,11 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
-  Activity,
   CheckSquare,
   HeartHandshake,
   LayoutDashboard,
+  Mail,
+  Radio,
   Sparkles,
   Users,
 } from "lucide-react";
@@ -23,6 +24,7 @@ const nav: {
   { href: "/admin", label: "Overview", icon: LayoutDashboard, match: "exact" },
   { href: "/admin/volunteers", label: "Volunteers", icon: HeartHandshake },
   { href: "/admin/approvals", label: "Approvals", icon: CheckSquare },
+  { href: "/admin/outreach", label: "Outreach queue", icon: Mail },
   { href: "/admin/team", label: "Team & roles", icon: Users },
   { href: "/admin/co-pilot", label: "Co-pilot", icon: Sparkles },
 ];
@@ -84,8 +86,8 @@ export function AdminShell({
       <div className="min-w-0 flex-1">
         <header className="flex items-center justify-between border-b border-white/10 bg-[#070f1c]/80 px-4 py-4 backdrop-blur-md md:px-8">
           <div className="flex items-center gap-2 text-zinc-500">
-            <Activity className="size-4" aria-hidden />
-            <span className="text-xs font-medium uppercase tracking-wider">Live ops</span>
+            <Radio className="size-4" aria-hidden />
+            <span className="text-xs font-medium uppercase tracking-wider">Operations</span>
           </div>
         </header>
         <div className="p-4 md:p-8">{children}</div>

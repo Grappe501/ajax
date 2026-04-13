@@ -27,7 +27,7 @@ export function WardLeaderboard({
 
       {!rows?.length ? (
         <p className="mt-6 text-sm text-muted-foreground">
-          No organizers on the board yet — be the first to start the ladder.
+          No organizers on the board yet — join and invite your five.
         </p>
       ) : (
         <ol className="mt-6 space-y-3">
