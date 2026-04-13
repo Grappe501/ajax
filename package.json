@@ -10,6 +10,8 @@
     "start": "next start",
     "lint": "eslint .",
     "audit:links": "node scripts/link-audit.mjs",
+    "db:push": "supabase db push",
+    "db:pull": "supabase db pull",
     "status": "node scripts/project-status.mjs",
     "list-voices:elevenlabs": "node scripts/list-elevenlabs-voices.mjs"
   },
@@ -43,6 +45,7 @@
     "eslint": "^9",
     "eslint-config-next": "^16.2.3",
     "postcss": "^8",
+    "supabase": "^2.89.1",
     "tailwindcss": "^3.4.1",
     "typescript": "^5"
   }
