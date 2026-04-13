@@ -20,3 +20,13 @@ export type MyOrganizerRow = {
   commitment_goal: number;
   created_at: string;
 };
+
+/** Someone who joined directly under you on this ward’s tree */
+export type DirectTeamMember = {
+  id: string;
+  display_name: string;
+  referral_code: string;
+  created_at: string;
+  direct_recruits: number;
+  downstream_total: number;
+};

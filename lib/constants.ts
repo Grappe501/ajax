@@ -1,20 +1,23 @@
-/** In-page section anchors — keep in sync with homepage `id` attributes */
+/** Legacy section ids on the homepage — prefer route paths in new code */
 export const SECTION = {
   home: "top",
-  whyItMatters: "why-it-matters",
-  whatCampaign: "what-this-campaign-is",
-  volunteers: "how-volunteers",
-  ladder: "ladder",
-  rules: "rules",
-  training: "training",
-  events: "events",
-  wards: "wards",
-  faq: "faq",
-  movement: "movement",
-  volunteerForm: "volunteer-form",
-  signingAlerts: "signing-alerts",
-  leadership: "leadership-form",
-  hostLocation: "host-location",
+  startHere: "start-here",
+} as const;
+
+export const ROUTES = {
+  home: "/",
+  campaign: "/campaign",
+  whyItMatters: "/why-it-matters",
+  volunteer: "/volunteer",
+  connect: "/connect",
+  rules: "/rules",
+  training: "/training",
+  events: "/events",
+  wards: "/wards",
+  movement: "/movement",
+  faq: "/faq",
+  resources: "/resources",
+  lead: "/lead",
 } as const;
 
 export const ANALYTICS_EVENT = {
@@ -25,6 +28,7 @@ export const ANALYTICS_EVENT = {
   submitSigningAlerts: "form_submit_signing_alerts",
   submitLeadership: "form_submit_leadership",
   submitHostLocation: "form_submit_host_location",
+  submitCampaignEvent: "form_submit_campaign_event",
   leadershipCta: "cta_leadership",
   hostLocationCta: "cta_host_location",
   rulesSection: "section_rules",

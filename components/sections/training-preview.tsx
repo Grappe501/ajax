@@ -60,7 +60,7 @@ export function TrainingPreview() {
       {trainings.map((t) => (
         <div
           key={t.slug}
-          className="flex flex-col rounded-2xl border border-border bg-card p-5 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
+          className="flex flex-col rounded-2xl border border-border/70 bg-gradient-to-b from-card via-card to-ajax-mist/40 p-6 shadow-ajax transition duration-300 hover:-translate-y-1 hover:border-primary/20 hover:shadow-ajax-lg"
         >
           <div className="flex items-start justify-between gap-2">
             <h3 className="font-display text-lg font-bold text-primary">{t.title}</h3>

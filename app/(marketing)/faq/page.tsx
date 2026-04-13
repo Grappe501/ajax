@@ -15,7 +15,7 @@ export default function FaqPage() {
     <SectionShell className="min-h-[50vh]">
       <SectionHeading
         title="Frequently asked questions"
-        subtitle="This hub mirrors the homepage FAQ for easy sharing."
+        subtitle="Browse by topic — the same Q&A content as the volunteer hub, on its own page for easy sharing."
       />
       <FaqSection />
       <div className="mt-10">

@@ -8,6 +8,30 @@ export default {
   ],
   theme: {
     extend: {
+      fontSize: {
+        "display-sm": ["2.25rem", { lineHeight: "1.1", letterSpacing: "-0.02em", fontWeight: "800" }],
+        "display": ["2.75rem", { lineHeight: "1.08", letterSpacing: "-0.03em", fontWeight: "800" }],
+        "display-lg": ["3.25rem", { lineHeight: "1.05", letterSpacing: "-0.03em", fontWeight: "800" }],
+      },
+      boxShadow: {
+        ajax: "0 4px 24px -4px rgba(0, 45, 98, 0.14), 0 0 0 1px rgba(0, 45, 98, 0.05)",
+        "ajax-lg": "0 12px 40px -8px rgba(0, 45, 98, 0.18), 0 0 0 1px rgba(0, 45, 98, 0.06)",
+        "ajax-gold": "0 4px 20px -2px rgba(253, 185, 19, 0.35)",
+      },
+      keyframes: {
+        "ajax-shimmer": {
+          "0%, 100%": { opacity: "0.4" },
+          "50%": { opacity: "0.7" },
+        },
+        "ajax-float": {
+          "0%, 100%": { transform: "translateY(0)" },
+          "50%": { transform: "translateY(-6px)" },
+        },
+      },
+      animation: {
+        "ajax-shimmer": "ajax-shimmer 8s ease-in-out infinite",
+        "ajax-float": "ajax-float 7s ease-in-out infinite",
+      },
       fontFamily: {
         sans: ["var(--font-sans-body)", "system-ui", "sans-serif"],
         display: ["var(--font-display)", "var(--font-sans-body)", "system-ui", "sans-serif"],
@@ -65,7 +89,9 @@ export default {
         },
         ajax: {
           navy: "var(--ajax-navy)",
+          "navy-deep": "var(--ajax-navy-deep)",
           gold: "var(--ajax-gold)",
+          "gold-soft": "var(--ajax-gold-soft)",
           cream: "var(--ajax-cream)",
           charcoal: "var(--ajax-charcoal)",
           mist: "var(--ajax-mist)",

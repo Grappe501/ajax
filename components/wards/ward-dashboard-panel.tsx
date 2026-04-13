@@ -107,7 +107,7 @@ export function WardDashboardPanel({
           ))}
         </ul>
         <Link
-          href="/#training"
+          href="/training"
           className="mt-4 inline-flex text-sm font-semibold text-primary underline-offset-4 hover:underline"
         >
           Open training previews

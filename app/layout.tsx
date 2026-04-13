@@ -61,8 +61,10 @@ export default function RootLayout({
   return (
     <html lang="en" className="theme">
       <body
-        className={`${display.variable} ${sans.variable} min-h-screen bg-background font-sans text-foreground antialiased`}
+        className={`${display.variable} ${sans.variable} relative min-h-screen bg-background font-sans text-foreground antialiased`}
       >
+        <div className="ajax-page-backdrop" aria-hidden />
+        <div className="ajax-page-grid" aria-hidden />
         {children}
       </body>
     </html>

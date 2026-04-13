@@ -43,12 +43,12 @@ export function FaqSection() {
 
   return (
     <Tabs defaultValue={categories[0]} className="w-full">
-      <TabsList className="mb-6 flex h-auto w-full flex-wrap justify-start gap-2 bg-muted/50 p-2">
+      <TabsList className="mb-8 flex h-auto w-full flex-wrap justify-start gap-2 rounded-2xl border border-border/60 bg-white/90 p-2 shadow-inner shadow-primary/[0.06] backdrop-blur-sm">
         {categories.map((c) => (
           <TabsTrigger
             key={c}
             value={c}
-            className="rounded-lg px-3 py-2 text-left text-xs font-semibold sm:text-sm"
+            className="rounded-xl px-3 py-2.5 text-left text-xs font-bold transition sm:px-4 sm:text-sm data-active:bg-primary data-active:text-primary-foreground data-active:shadow-md"
           >
             {c.replace("About ", "")}
           </TabsTrigger>
@@ -61,7 +61,7 @@ export function FaqSection() {
               <AccordionItem
                 key={item.question}
                 value={`${c}-${i}`}
-                className="rounded-xl border border-border/80 bg-card px-4"
+                className="rounded-2xl border border-border/70 bg-card/95 px-4 shadow-sm transition-shadow data-[state=open]:border-primary/20 data-[state=open]:shadow-ajax"
               >
                 <AccordionTrigger className="text-left font-medium hover:no-underline">
                   {item.question}

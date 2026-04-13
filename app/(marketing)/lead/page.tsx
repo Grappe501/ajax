@@ -19,7 +19,7 @@ export default function LeadPage() {
       />
       <LeadershipInterestForm />
       <div className="mt-10">
-        <PrimaryButton href="/#ladder">Review the engagement ladder</PrimaryButton>
+        <PrimaryButton href="/volunteer#ladder">Review the engagement ladder</PrimaryButton>
       </div>
     </SectionShell>
   );

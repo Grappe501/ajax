@@ -157,10 +157,12 @@
 /* AJAX — official logo palette (navy #002D62, gold #FDB913) */
 :root {
   --ajax-navy: #002d62;
+  --ajax-navy-deep: #001a35;
   --ajax-gold: #fdb913;
-  --ajax-cream: #f8fafc;
-  --ajax-charcoal: #1a2b45;
-  --ajax-mist: #eef2f7;
+  --ajax-gold-soft: #ffc82d;
+  --ajax-cream: #f4f7fb;
+  --ajax-charcoal: #152238;
+  --ajax-mist: #e8edf5;
   --background: var(--ajax-cream);
   --foreground: var(--ajax-charcoal);
   --card: #ffffff;
@@ -172,11 +174,68 @@
   --secondary: var(--ajax-mist);
   --secondary-foreground: var(--ajax-charcoal);
   --muted: var(--ajax-mist);
-  --muted-foreground: #4a5a72;
+  --muted-foreground: #4a5d78;
   --accent: var(--ajax-gold);
   --accent-foreground: var(--ajax-navy);
-  --border: #dfe6ef;
-  --input: #dfe6ef;
+  --border: #d4dde9;
+  --input: #d4dde9;
   --ring: #3d5a80;
   --radius: 1rem;
+}
+
+/* Atmospheric page backdrop (fixed, non-interactive) */
+.ajax-page-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-color: var(--ajax-cream);
+  background-image:
+    radial-gradient(ellipse 100% 80% at 50% -30%, rgba(253, 185, 19, 0.14), transparent 55%),
+    radial-gradient(ellipse 70% 50% at 100% 10%, rgba(0, 45, 98, 0.09), transparent 50%),
+    radial-gradient(ellipse 55% 45% at 0% 40%, rgba(0, 45, 98, 0.06), transparent 45%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.5) 0%, transparent 35%, transparent 100%);
+}
+
+.ajax-page-grid {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0.45;
+  background-image:
+    linear-gradient(rgba(0, 45, 98, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 45, 98, 0.04) 1px, transparent 1px);
+  background-size: 72px 72px;
+  mask-image: radial-gradient(ellipse 85% 70% at 50% 35%, black 15%, transparent 72%);
+}
+
+@layer utilities {
+  .ajax-hero-glow {
+    background-image:
+      radial-gradient(ellipse 120% 100% at 70% 20%, rgba(253, 185, 19, 0.18), transparent 55%),
+      radial-gradient(ellipse 90% 80% at 10% 60%, rgba(0, 45, 98, 0.12), transparent 50%);
+  }
+
+  .ajax-card-elevated {
+    @apply rounded-2xl border border-white/60 bg-card shadow-[0_4px_24px_-4px_rgba(0,45,98,0.12),0_0_0_1px_rgba(0,45,98,0.04)] backdrop-blur-sm;
+  }
+
+  .ajax-section-muted {
+    background: linear-gradient(
+      180deg,
+      rgba(232, 237, 245, 0.85) 0%,
+      rgba(244, 247, 251, 0.5) 40%,
+      var(--ajax-cream) 100%
+    );
+  }
+
+  .text-balance-safe {
+    text-wrap: balance;
+  }
+}
+
+::selection {
+  background: color-mix(in srgb, var(--ajax-gold) 35%, transparent);
+  color: var(--ajax-charcoal);
 }

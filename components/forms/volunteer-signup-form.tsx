@@ -46,7 +46,7 @@ export function VolunteerSignupForm({ className }: { className?: string }) {
     return (
       <div
         className={cn(
-          "rounded-2xl border border-border bg-card p-6 text-card-foreground shadow-sm",
+          "ajax-card-elevated border-primary/10 p-8 text-card-foreground",
           className,
         )}
       >
@@ -68,7 +68,7 @@ export function VolunteerSignupForm({ className }: { className?: string }) {
       data-netlify="true"
       netlify-honeypot="bot-field"
       className={cn(
-        "space-y-5 rounded-2xl border border-border bg-card p-6 shadow-sm",
+        "ajax-card-elevated space-y-5 border-primary/10 bg-gradient-to-b from-card to-ajax-mist/30 p-6 md:p-8",
         className,
       )}
       onSubmit={onSubmit}

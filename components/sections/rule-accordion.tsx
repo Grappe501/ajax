@@ -28,7 +28,7 @@ function TextBlocks({ text, className }: { text: string; className?: string }) {
 function RuleLinks({ links }: { links: RuleItem["links"] }) {
   if (!links?.length) return null;
   return (
-    <div className="rounded-xl border border-primary/15 bg-primary/[0.04] p-4">
+    <div className="rounded-2xl border border-primary/20 bg-primary/[0.06] p-4 shadow-inner">
       <p className="text-xs font-semibold uppercase tracking-wide text-primary">
         Official references & reading
       </p>
@@ -53,7 +53,7 @@ function RuleLinks({ links }: { links: RuleItem["links"] }) {
 export function RuleAccordion() {
   return (
     <div className="space-y-4">
-      <p className="rounded-xl border border-border/80 bg-muted/40 px-4 py-3 text-sm leading-relaxed text-muted-foreground">
+      <p className="rounded-2xl border border-primary/15 bg-gradient-to-br from-white to-ajax-mist/50 px-5 py-4 text-sm leading-relaxed text-muted-foreground shadow-sm">
         {rulesLegalDisclaimer}
       </p>
       <Accordion multiple className="w-full">
@@ -61,7 +61,7 @@ export function RuleAccordion() {
           <AccordionItem
             key={r.title}
             value={`item-${i}`}
-            className="rounded-xl border border-border/80 bg-card px-4 data-[state=open]:shadow-sm"
+            className="rounded-2xl border border-border/70 bg-card/95 px-4 shadow-sm transition-shadow data-[state=open]:border-primary/20 data-[state=open]:shadow-ajax"
           >
             <AccordionTrigger className="text-left font-display text-base font-semibold hover:no-underline">
               {r.title}

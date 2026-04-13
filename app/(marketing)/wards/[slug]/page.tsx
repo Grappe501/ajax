@@ -90,8 +90,8 @@ export default async function WardDetailPage({ params }: Props) {
         />
         <div className="flex flex-wrap gap-4">
           <PrimaryButton href={`/wards/${slug}/join`}>Start or grow my team</PrimaryButton>
-          <SecondaryButton href="/#training">Train the basics</SecondaryButton>
-          <SecondaryButton href="/#volunteer-form">Talk to a coordinator</SecondaryButton>
+          <SecondaryButton href="/training">Train the basics</SecondaryButton>
+          <SecondaryButton href="/volunteer">Talk to a coordinator</SecondaryButton>
         </div>
       </SectionShell>
     </>
