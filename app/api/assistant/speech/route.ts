@@ -1,9 +1,11 @@
+import { ElevenLabsClient } from "@elevenlabs/elevenlabs-js";
 import { NextResponse } from "next/server";
 
 /** Align with assistant reply length; protects quota / cost. */
 const MAX_TEXT_CHARS = 4000;
 
-const ELEVENLABS_TTS_URL = "https://api.elevenlabs.io/v1/text-to-speech";
+/** Default matches ElevenLabs README; override with ELEVENLABS_MODEL_ID (e.g. eleven_turbo_v2_5). */
+const DEFAULT_MODEL_ID = "eleven_multilingual_v2";
 
 export async function POST(request: Request) {
   const apiKey = process.env.ELEVENLABS_API_KEY?.trim();
@@ -30,37 +32,22 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "text_too_long" }, { status: 400 });
   }
 
-  const modelId = process.env.ELEVENLABS_MODEL_ID?.trim() || "eleven_turbo_v2_5";
+  const modelId = process.env.ELEVENLABS_MODEL_ID?.trim() || DEFAULT_MODEL_ID;
+
+  const client = new ElevenLabsClient({ apiKey });
 
   try {
-    const res = await fetch(`${ELEVENLABS_TTS_URL}/${encodeURIComponent(voiceId)}`, {
-      method: "POST",
-      headers: {
-        "xi-api-key": apiKey,
-        "Content-Type": "application/json",
-        Accept: "audio/mpeg",
+    const stream = await client.textToSpeech.convert(voiceId, {
+      text,
+      modelId,
+      outputFormat: "mp3_44100_128",
+      voiceSettings: {
+        stability: 0.45,
+        similarityBoost: 0.8,
       },
-      body: JSON.stringify({
-        text,
-        model_id: modelId,
-        voice_settings: {
-          stability: 0.45,
-          similarity_boost: 0.8,
-        },
-      }),
     });
 
-    if (!res.ok) {
-      const errText = await res.text();
-      console.error("ElevenLabs TTS:", res.status, errText.slice(0, 400));
-      return NextResponse.json(
-        { error: "tts_unavailable", message: "Voice synthesis failed. Try again." },
-        { status: 502 },
-      );
-    }
-
-    const buf = await res.arrayBuffer();
-    return new NextResponse(buf, {
+    return new NextResponse(stream, {
       status: 200,
       headers: {
         "Content-Type": "audio/mpeg",
@@ -68,9 +55,9 @@ export async function POST(request: Request) {
       },
     });
   } catch (e) {
-    console.error("assistant speech route:", e);
+    console.error("ElevenLabs TTS (SDK):", e);
     return NextResponse.json(
-      { error: "network", message: "Could not reach voice service." },
+      { error: "tts_unavailable", message: "Voice synthesis failed. Try again." },
       { status: 502 },
     );
   }
