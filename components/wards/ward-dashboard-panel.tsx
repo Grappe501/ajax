@@ -4,6 +4,7 @@ import { Card } from "@/components/ui/card";
 import { organizing } from "@/content/organizing";
 import type { MyOrganizerRow, WardTeamStats } from "@/lib/organizing/types";
 
+import { DashboardAgentPanel } from "@/components/agents/dashboard-agent-panel";
 import { CopyReferralButton } from "@/components/wards/copy-referral-button";
 import { PowerOfFiveReachPanel } from "@/components/wards/power-of-five-reach-panel";
 import { SharePublicSiteCard } from "@/components/wards/share-public-site-card";
@@ -51,6 +52,14 @@ export function WardDashboardPanel({
       </div>
 
       <SharePublicSiteCard siteBase={siteBase} />
+
+      <DashboardAgentPanel
+        variant="ward"
+        agentId="piney"
+        wardSlug={wardSlug}
+        title="Piney · ward copilot"
+        subtitle="Search your ward voter file and summarize your reach list — same permissions as this dashboard."
+      />
 
       <Card className="rounded-2xl border-primary/20 bg-primary/5 p-6">
         <p className="text-sm font-semibold uppercase tracking-wide text-primary">

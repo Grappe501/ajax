@@ -8,6 +8,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { ASSISTANT_QUICK_PROMPTS } from "@/content/assistant-knowledge";
+import { AssistantCloudMic } from "@/components/assistant/assistant-cloud-mic";
 import { useAssistant } from "@/components/assistant/assistant-context";
 import { useVoiceChat } from "@/hooks/use-voice-chat";
 import { cn } from "@/lib/utils";
@@ -267,6 +268,13 @@ export function AjaxAssistantDock() {
                 }}
                 disabled={pending}
               />
+              <AssistantCloudMic
+                disabled={pending}
+                onQuestionText={(text) => {
+                  setInput(text);
+                  void send(text);
+                }}
+              />
               {voice.listenSupported ? (
                 <Button
                   type="button"
@@ -302,11 +310,16 @@ export function AjaxAssistantDock() {
             </div>
             {voice.listenSupported ? (
               <p className="mt-2 text-[10px] leading-relaxed text-muted-foreground">
-                Tap the mic to dictate (works best in Chrome or Edge). Use the speaker control in the
-                header to turn read-aloud on or off — when the campaign enables ElevenLabs, replies use
-                that voice; otherwise your browser reads the text.
+                Browser mic: fast dictation. <strong className="font-semibold text-foreground">Cloud</strong> uses
+                OpenAI transcription (better in noise). Speaker in the header controls read-aloud (ElevenLabs when
+                configured).
               </p>
-            ) : null}
+            ) : (
+              <p className="mt-2 text-[10px] leading-relaxed text-muted-foreground">
+                Use <strong className="font-semibold text-foreground">Cloud</strong> to speak your question (OpenAI
+                Whisper).
+              </p>
+            )}
             <p className="mt-3 text-[10px] leading-relaxed text-muted-foreground">
               For rules & witnessing, see{" "}
               <Link href="/rules" className="font-semibold text-primary underline-offset-2 hover:underline">

@@ -12,6 +12,7 @@ import {
   Users,
 } from "lucide-react";
 
+import { AdminFloatingAgent } from "@/components/admin/admin-floating-agent";
 import type { CampaignAdminRole } from "@/lib/admin/auth";
 import { cn } from "@/lib/utils";
 
@@ -90,8 +91,9 @@ export function AdminShell({
             <span className="text-xs font-medium uppercase tracking-wider">Operations</span>
           </div>
         </header>
-        <div className="p-4 md:p-8">{children}</div>
+        <div className="p-4 pb-28 md:p-8 md:pb-32">{children}</div>
       </div>
+      <AdminFloatingAgent />
     </div>
   );
 }

@@ -26,6 +26,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import { VoiceAugmentedTextarea } from "@/components/voice/voice-augmented-textarea";
 
 const templateKeys = ["smsInvite", "smsEvent", "emailInvite"] as const;
 
@@ -274,11 +275,13 @@ export function PowerOfFiveReachPanel({
           </div>
           <div className="sm:col-span-2">
             <Label htmlFor="manual-notes">Notes</Label>
-            <Textarea
+            <VoiceAugmentedTextarea
               id="manual-notes"
               value={manual.notes}
-              onChange={(e) => setManual((m) => ({ ...m, notes: e.target.value }))}
+              onChange={(v) => setManual((m) => ({ ...m, notes: v }))}
               rows={2}
+              placeholder="Type or tap the mic to dictate — review before save."
+              disabled={pending}
             />
           </div>
         </div>

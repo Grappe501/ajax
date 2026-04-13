@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 
 import { elevenLabsMp3Stream } from "@/lib/elevenlabs/tts-stream";
 
-/** Align with assistant reply length; protects quota / cost. */
+/** Alias for `/api/assistant/speech` — voice module entry point. */
 const MAX_TEXT_CHARS = 4000;
 
 export async function POST(request: Request) {
@@ -33,14 +33,11 @@ export async function POST(request: Request) {
   } catch (e) {
     if ((e as Error).message === "elevenlabs_not_configured") {
       return NextResponse.json(
-        { error: "not_configured", message: "ElevenLabs voice is not configured on this server." },
+        { error: "not_configured", message: "ElevenLabs is not configured." },
         { status: 503 },
       );
     }
-    console.error("ElevenLabs TTS:", e);
-    return NextResponse.json(
-      { error: "tts_unavailable", message: "Voice synthesis failed. Try again." },
-      { status: 502 },
-    );
+    console.error("voice tts:", e);
+    return NextResponse.json({ error: "tts_unavailable" }, { status: 502 });
   }
 }
