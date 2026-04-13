@@ -5,10 +5,12 @@ import { organizing } from "@/content/organizing";
 import type { MyOrganizerRow, WardTeamStats } from "@/lib/organizing/types";
 
 import { CopyReferralButton } from "@/components/wards/copy-referral-button";
+import { SharePublicSiteCard } from "@/components/wards/share-public-site-card";
 
 export function WardDashboardPanel({
   wardSlug,
   wardLabel,
+  siteBase,
   me,
   directRecruits,
   downstreamTotal,
@@ -17,6 +19,7 @@ export function WardDashboardPanel({
 }: {
   wardSlug: string;
   wardLabel: string;
+  siteBase: string;
   me: MyOrganizerRow;
   directRecruits: number;
   downstreamTotal: number;
@@ -40,6 +43,8 @@ export function WardDashboardPanel({
           {wardLabel} · your momentum, your team
         </p>
       </div>
+
+      <SharePublicSiteCard siteBase={siteBase} />
 
       <Card className="rounded-2xl border-primary/20 bg-primary/5 p-6">
         <p className="text-sm font-semibold uppercase tracking-wide text-primary">

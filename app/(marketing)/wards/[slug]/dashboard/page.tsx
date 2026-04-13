@@ -17,6 +17,7 @@ import {
   fetchMyOrganizerRow,
   fetchWardTeamStats,
 } from "@/lib/organizing/data";
+import { getRequestOrigin } from "@/lib/request-origin";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -63,11 +64,12 @@ export default async function WardDashboardPage({ params }: Props) {
     redirect(`/wards/${slug}/onboard`);
   }
 
-  const [directRecruits, downstreamTotal, rank, stats] = await Promise.all([
+  const [directRecruits, downstreamTotal, rank, stats, siteBase] = await Promise.all([
     fetchDirectRecruitCount(me.id),
     fetchDownstreamTotal(me.id),
     fetchLeaderboardRank(slug, me.id),
     fetchWardTeamStats(slug),
+    getRequestOrigin(),
   ]);
 
   return (
@@ -78,6 +80,7 @@ export default async function WardDashboardPage({ params }: Props) {
       <WardDashboardPanel
         wardSlug={slug}
         wardLabel={ward.name}
+        siteBase={siteBase}
         me={me}
         directRecruits={directRecruits ?? 0}
         downstreamTotal={downstreamTotal ?? 0}

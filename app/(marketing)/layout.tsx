@@ -1,6 +1,7 @@
 import { AnnouncementBar } from "@/components/layout/announcement-bar";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
+import { PublicThemeProvider } from "@/components/layout/public-theme";
 
 export default function MarketingLayout({
   children,
@@ -8,11 +9,13 @@ export default function MarketingLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="marketing-public-root">
-      <AnnouncementBar />
-      <SiteHeader />
-      {children}
-      <SiteFooter />
-    </div>
+    <PublicThemeProvider>
+      <div className="marketing-public-root">
+        <AnnouncementBar />
+        <SiteHeader />
+        {children}
+        <SiteFooter />
+      </div>
+    </PublicThemeProvider>
   );
 }

@@ -14,6 +14,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
+import { PublicThemeToggle } from "@/components/layout/public-theme-toggle";
 import { site } from "@/content/site";
 import { ANALYTICS_EVENT } from "@/lib/constants";
 import { trackEvent } from "@/lib/analytics";
@@ -26,7 +27,7 @@ export function SiteHeader() {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-40 border-b border-white/20 bg-white/75 shadow-sm shadow-primary/5 backdrop-blur-xl supports-[backdrop-filter]:bg-white/65">
+    <header className="sticky top-0 z-40 border-b border-border/60 bg-card/85 shadow-sm shadow-primary/5 backdrop-blur-xl supports-[backdrop-filter]:bg-card/75">
       <div
         className="pointer-events-none absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-accent/50 to-transparent"
         aria-hidden
@@ -73,6 +74,7 @@ export function SiteHeader() {
         </nav>
 
         <div className="flex items-center gap-2">
+          <PublicThemeToggle className="hidden sm:inline-flex" />
           <Link
             href={joinHref}
             onClick={() => trackEvent(ANALYTICS_EVENT.joinVolunteerCta)}
@@ -84,6 +86,7 @@ export function SiteHeader() {
             Join the Team
           </Link>
 
+          <PublicThemeToggle className="sm:hidden" />
           <Sheet open={open} onOpenChange={setOpen}>
             <SheetTrigger
               className={cn(
@@ -96,7 +99,7 @@ export function SiteHeader() {
             </SheetTrigger>
             <SheetContent
               side="right"
-              className="w-[min(100%,380px)] border-l border-primary/10 bg-gradient-to-b from-white to-ajax-mist/50"
+              className="w-[min(100%,380px)] border-l border-primary/10 bg-gradient-to-b from-card to-secondary/40"
             >
               <SheetHeader>
                 <SheetTitle className="font-display text-left text-xl text-primary">

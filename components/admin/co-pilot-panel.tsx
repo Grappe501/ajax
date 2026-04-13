@@ -1,10 +1,12 @@
 "use client";
 
-import { Loader2, Send } from "lucide-react";
-import { useState } from "react";
+import { Loader2, Mic, Send, Volume2, VolumeX } from "lucide-react";
+import { useEffect, useState } from "react";
 
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
+import { useVoiceChat } from "@/hooks/use-voice-chat";
+import { cn } from "@/lib/utils";
 
 const starters = [
   "What should we prioritize today given the current queue?",
@@ -17,6 +19,14 @@ export function CoPilotPanel() {
   const [log, setLog] = useState<{ role: "user" | "assistant"; text: string }[]>([]);
   const [pending, setPending] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const voice = useVoiceChat();
+
+  useEffect(() => {
+    return () => {
+      voice.stopSpeaking();
+      voice.stopListening();
+    };
+  }, [voice]);
 
   async function send(text: string) {
     const t = text.trim();
@@ -40,6 +50,7 @@ export function CoPilotPanel() {
       }
       if (data.reply) {
         setLog((prev) => [...prev, { role: "assistant", text: data.reply! }]);
+        voice.speak(data.reply);
       }
     } catch {
       setError("Network error");
@@ -51,6 +62,24 @@ export function CoPilotPanel() {
   return (
     <div className="grid gap-8 lg:grid-cols-[1fr_320px]">
       <div className="flex min-h-[420px] flex-col rounded-2xl border border-white/10 bg-[#070f1c]">
+        <div className="flex shrink-0 items-center justify-end gap-1 border-b border-white/10 px-4 py-2">
+          {voice.speakSupported ? (
+            <button
+              type="button"
+              onClick={() => voice.setAutoSpeak((v) => !v)}
+              className="rounded-lg p-2 text-zinc-400 transition hover:bg-white/5 hover:text-white"
+              aria-pressed={voice.autoSpeak}
+              aria-label={voice.autoSpeak ? "Read replies aloud: on" : "Read replies aloud: off"}
+              title={voice.autoSpeak ? "Mute voice replies" : "Read replies aloud"}
+            >
+              {voice.autoSpeak ? (
+                <Volume2 className="size-5" aria-hidden />
+              ) : (
+                <VolumeX className="size-5" aria-hidden />
+              )}
+            </button>
+          ) : null}
+        </div>
         <div className="min-h-0 flex-1 space-y-4 overflow-y-auto p-5">
           {log.length === 0 ? (
             <p className="text-sm text-zinc-500">
@@ -88,7 +117,9 @@ export function CoPilotPanel() {
               value={input}
               onChange={(e) => setInput(e.target.value)}
               rows={3}
-              placeholder="Ask the co-pilot…"
+              placeholder={
+                voice.isListening ? "Listening…" : "Ask the co-pilot (type or use mic)…"
+              }
               className="border-white/10 bg-[#050a12] text-sm text-zinc-100"
               onKeyDown={(e) => {
                 if (e.key === "Enter" && !e.shiftKey) {
@@ -97,6 +128,26 @@ export function CoPilotPanel() {
                 }
               }}
             />
+            {voice.listenSupported ? (
+              <Button
+                type="button"
+                variant="outline"
+                className={cn(
+                  "h-auto shrink-0 border-white/20 bg-[#050a12] text-zinc-100 hover:bg-white/10",
+                  voice.isListening && "border-red-400/80 bg-red-950/40 text-red-200",
+                )}
+                disabled={pending}
+                aria-pressed={voice.isListening}
+                aria-label={voice.isListening ? "Stop voice input" : "Voice input"}
+                onClick={() =>
+                  voice.toggleListen((text) =>
+                    setInput((prev) => (prev.trim() ? `${prev.trim()} ${text}` : text)),
+                  )
+                }
+              >
+                <Mic className={cn("size-5", voice.isListening && "animate-pulse")} aria-hidden />
+              </Button>
+            ) : null}
             <Button
               type="button"
               className="h-auto shrink-0 bg-[#fdb913] text-[#001a35] hover:bg-[#ffc82d]"
@@ -107,6 +158,11 @@ export function CoPilotPanel() {
               <Send className="size-5" />
             </Button>
           </div>
+          {voice.listenSupported ? (
+            <p className="mt-2 text-[10px] text-zinc-500">
+              Mic: dictate your question. Speaker (above): read-aloud for replies.
+            </p>
+          ) : null}
         </div>
       </div>
       <aside className="space-y-3">

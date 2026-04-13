@@ -262,3 +262,62 @@
   background: color-mix(in srgb, var(--ajax-gold) 35%, transparent);
   color: var(--ajax-charcoal);
 }
+
+/* Public marketing + initiative — optional dark surface (toggle in header; not used on /admin or /canvass) */
+html.public-dark {
+  color-scheme: dark;
+  --ajax-cream: #060a12;
+  --ajax-charcoal: #e8edf5;
+  --ajax-mist: #141c2c;
+  --ajax-navy-deep: #020617;
+  --background: #060a12;
+  --foreground: #e8edf5;
+  --card: #0f172a;
+  --card-foreground: #e8edf5;
+  --popover: #0f172a;
+  --popover-foreground: #e8edf5;
+  --primary: #93c5fd;
+  --primary-foreground: #020617;
+  --secondary: #1e293b;
+  --secondary-foreground: #e8edf5;
+  --muted: #1e293b;
+  --muted-foreground: #94a3b8;
+  --accent: #fdb913;
+  --accent-foreground: #020617;
+  --border: rgba(148, 163, 184, 0.22);
+  --input: rgba(148, 163, 184, 0.28);
+  --ring: #3b82f6;
+}
+
+html.public-dark ::selection {
+  color: #020617;
+}
+
+html.public-dark .ajax-page-backdrop {
+  background-color: #030712;
+  background-image:
+    radial-gradient(ellipse 100% 80% at 50% -30%, rgba(253, 185, 19, 0.1), transparent 55%),
+    radial-gradient(ellipse 70% 50% at 100% 10%, rgba(59, 130, 246, 0.12), transparent 50%),
+    radial-gradient(ellipse 55% 45% at 0% 40%, rgba(0, 45, 98, 0.2), transparent 45%),
+    linear-gradient(180deg, rgba(15, 23, 42, 0.85) 0%, transparent 38%, transparent 100%);
+}
+
+html.public-dark .ajax-page-grid {
+  opacity: 0.22;
+  background-image:
+    linear-gradient(rgba(148, 163, 184, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(148, 163, 184, 0.06) 1px, transparent 1px);
+}
+
+html.public-dark .marketing-public-root::before {
+  opacity: 0.45;
+  background:
+    radial-gradient(ellipse 100% 70% at 10% 0%, rgba(253, 185, 19, 0.07), transparent 50%),
+    radial-gradient(ellipse 80% 50% at 90% 15%, rgba(59, 130, 246, 0.1), transparent 45%);
+}
+
+html.public-dark .ajax-hero-glow {
+  background-image:
+    radial-gradient(ellipse 120% 100% at 70% 20%, rgba(253, 185, 19, 0.12), transparent 55%),
+    radial-gradient(ellipse 90% 80% at 10% 60%, rgba(59, 130, 246, 0.1), transparent 50%);
+}

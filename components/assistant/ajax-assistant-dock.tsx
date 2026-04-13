@@ -2,13 +2,14 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { MessageCircle, Send, Sparkles, X } from "lucide-react";
+import { MessageCircle, Mic, Send, Sparkles, Volume2, VolumeX, X } from "lucide-react";
 import { useCallback, useEffect, useRef, useState } from "react";
 
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { ASSISTANT_QUICK_PROMPTS } from "@/content/assistant-knowledge";
 import { useAssistant } from "@/components/assistant/assistant-context";
+import { useVoiceChat } from "@/hooks/use-voice-chat";
 import { cn } from "@/lib/utils";
 
 type Msg = { role: "user" | "assistant"; content: string };
@@ -29,6 +30,7 @@ export function AjaxAssistantDock() {
   const [pending, setPending] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const listRef = useRef<HTMLDivElement>(null);
+  const voice = useVoiceChat();
 
   const scrollToEnd = useCallback(() => {
     const el = listRef.current;
@@ -73,6 +75,7 @@ export function AjaxAssistantDock() {
         const reply = typeof data.reply === "string" ? data.reply : "";
         if (reply) {
           setMessages((prev) => [...prev, { role: "assistant", content: reply }]);
+          voice.speak(reply);
         }
       } catch {
         setMessages((prev) => prev.slice(0, -1));
@@ -81,7 +84,7 @@ export function AjaxAssistantDock() {
         setPending(false);
       }
     },
-    [messages, pending],
+    [messages, pending, voice],
   );
 
   const prevOpen = useRef(isOpen);
@@ -92,6 +95,13 @@ export function AjaxAssistantDock() {
     }
     prevOpen.current = isOpen;
   }, [isOpen, consumePrefill, send]);
+
+  useEffect(() => {
+    if (!isOpen) {
+      voice.stopSpeaking();
+      voice.stopListening();
+    }
+  }, [isOpen, voice]);
 
   if (hideChrome) {
     return null;
@@ -131,26 +141,44 @@ export function AjaxAssistantDock() {
         />
         <aside
           className={cn(
-            "absolute flex max-h-[92dvh] w-full flex-col border-l border-white/10 bg-[#f8fafc] text-[#152238] shadow-2xl motion-safe:transition-transform motion-safe:duration-300 motion-reduce:transition-none",
+            "absolute flex max-h-[92dvh] w-full flex-col border-l border-white/10 bg-card text-foreground shadow-2xl motion-safe:transition-transform motion-safe:duration-300 motion-reduce:transition-none",
             "bottom-0 right-0 top-auto max-h-[88dvh] rounded-t-3xl sm:bottom-0 sm:top-0 sm:max-h-none sm:w-[min(100%,420px)] sm:rounded-none",
             isOpen ? "translate-y-0 sm:translate-x-0" : "translate-y-full sm:translate-y-0 sm:translate-x-full",
           )}
         >
-          <header className="flex shrink-0 items-start justify-between gap-3 border-b border-[#d4dde9] bg-gradient-to-r from-[#002d62] to-[#0a3566] px-4 py-4 text-white">
+          <header className="flex shrink-0 items-start justify-between gap-3 border-b border-border/80 bg-gradient-to-r from-[#002d62] to-[#0a3566] px-4 py-4 text-white">
             <div>
               <p className="font-display text-lg font-bold tracking-tight">AJAX Guide</p>
               <p className="mt-1 text-xs leading-relaxed text-white/85">
                 Answers use approved campaign info — not legal advice.
               </p>
             </div>
-            <button
-              type="button"
-              onClick={closeAssistant}
-              className="rounded-lg p-2 text-white/90 transition hover:bg-white/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#fdb913]"
-              aria-label="Close assistant"
-            >
-              <X className="size-5" />
-            </button>
+            <div className="flex shrink-0 items-center gap-1">
+              {voice.speakSupported ? (
+                <button
+                  type="button"
+                  onClick={() => voice.setAutoSpeak((v) => !v)}
+                  className="rounded-lg p-2 text-white/90 transition hover:bg-white/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#fdb913]"
+                  aria-pressed={voice.autoSpeak}
+                  aria-label={voice.autoSpeak ? "Read replies aloud: on" : "Read replies aloud: off"}
+                  title={voice.autoSpeak ? "Mute voice replies" : "Read replies aloud"}
+                >
+                  {voice.autoSpeak ? (
+                    <Volume2 className="size-5" aria-hidden />
+                  ) : (
+                    <VolumeX className="size-5" aria-hidden />
+                  )}
+                </button>
+              ) : null}
+              <button
+                type="button"
+                onClick={closeAssistant}
+                className="rounded-lg p-2 text-white/90 transition hover:bg-white/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#fdb913]"
+                aria-label="Close assistant"
+              >
+                <X className="size-5" />
+              </button>
+            </div>
           </header>
 
           <div
@@ -166,14 +194,14 @@ export function AjaxAssistantDock() {
                   "rounded-2xl px-3.5 py-2.5 text-sm leading-relaxed",
                   m.role === "user"
                     ? "ml-6 bg-[#002d62] text-white"
-                    : "mr-4 border border-[#d4dde9] bg-white text-[#152238] shadow-sm",
+                    : "mr-4 border border-border bg-background text-foreground shadow-sm",
                 )}
               >
                 {m.content}
               </div>
             ))}
             {pending ? (
-              <p className="text-xs text-[#4a5d78]">
+              <p className="text-xs text-muted-foreground">
                 <span className="inline-flex items-center gap-2">
                   <MessageCircle className="size-4 animate-pulse" aria-hidden />
                   Thinking…
@@ -187,8 +215,8 @@ export function AjaxAssistantDock() {
             ) : null}
           </div>
 
-          <div className="shrink-0 border-t border-[#d4dde9] bg-white px-3 pb-4 pt-3">
-            <p className="mb-2 text-[10px] font-bold uppercase tracking-wider text-[#4a5d78]">
+          <div className="shrink-0 border-t border-border bg-card px-3 pb-4 pt-3">
+            <p className="mb-2 text-[10px] font-bold uppercase tracking-wider text-muted-foreground">
               Quick prompts
             </p>
             <div className="mb-3 flex flex-wrap gap-1.5">
@@ -208,9 +236,11 @@ export function AjaxAssistantDock() {
               <Textarea
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
-                placeholder="Type a question…"
+                placeholder={
+                  voice.isListening ? "Listening… speak now" : "Type a question or use the mic…"
+                }
                 rows={2}
-                className="min-h-0 flex-1 resize-none rounded-xl border-[#d4dde9] text-sm"
+                className="min-h-0 flex-1 resize-none rounded-xl border-border text-sm"
                 onKeyDown={(e) => {
                   if (e.key === "Enter" && !e.shiftKey) {
                     e.preventDefault();
@@ -219,10 +249,32 @@ export function AjaxAssistantDock() {
                 }}
                 disabled={pending}
               />
+              {voice.listenSupported ? (
+                <Button
+                  type="button"
+                  variant="outline"
+                  size="icon"
+                  className={cn(
+                    "h-auto shrink-0 rounded-xl border-border",
+                    voice.isListening && "border-red-400/80 bg-red-50 text-red-700",
+                  )}
+                  disabled={pending}
+                  aria-pressed={voice.isListening}
+                  aria-label={voice.isListening ? "Stop voice input" : "Voice input"}
+                  title={voice.isListening ? "Stop listening" : "Speak your question"}
+                  onClick={() =>
+                    voice.toggleListen((text) =>
+                      setInput((prev) => (prev.trim() ? `${prev.trim()} ${text}` : text)),
+                    )
+                  }
+                >
+                  <Mic className={cn("size-4", voice.isListening && "animate-pulse")} aria-hidden />
+                </Button>
+              ) : null}
               <Button
                 type="button"
                 size="icon"
-                className="h-auto shrink-0 rounded-xl bg-[#002d62] hover:bg-[#001a35]"
+                className="h-auto shrink-0 rounded-xl bg-[#002d62] text-white hover:bg-[#001a35]"
                 disabled={pending || !input.trim()}
                 onClick={() => void send(input)}
                 aria-label="Send message"
@@ -230,9 +282,15 @@ export function AjaxAssistantDock() {
                 <Send className="size-4" />
               </Button>
             </div>
-            <p className="mt-3 text-[10px] leading-relaxed text-[#4a5d78]">
+            {voice.listenSupported ? (
+              <p className="mt-2 text-[10px] leading-relaxed text-muted-foreground">
+                Tap the mic to dictate (works best in Chrome or Edge). Use the speaker control in the
+                header to turn read-aloud on or off.
+              </p>
+            ) : null}
+            <p className="mt-3 text-[10px] leading-relaxed text-muted-foreground">
               For rules & witnessing, see{" "}
-              <Link href="/rules" className="font-semibold text-[#002d62] underline-offset-2 hover:underline">
+              <Link href="/rules" className="font-semibold text-primary underline-offset-2 hover:underline">
                 Petition rules
               </Link>
               . Questions for coordinators:{" "}

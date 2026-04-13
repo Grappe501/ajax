@@ -25,8 +25,11 @@ const fontPublic = Plus_Jakarta_Sans({
   weight: ["600", "700", "800"],
 });
 
+const siteUrl =
+  process.env.NEXT_PUBLIC_SITE_URL ?? "https://ajax-volunteer-hub.netlify.app";
+
 export const metadata: Metadata = {
-  metadataBase: new URL("https://ajax-volunteer-hub.netlify.app"),
+  metadataBase: new URL(siteUrl),
   title: {
     default: "AJAX Volunteer Hub",
     template: "%s · AJAX Volunteer Hub",
@@ -43,21 +46,12 @@ export const metadata: Metadata = {
       "Learn the petition, sign with confidence, or volunteer — with a guided path and the AJAX Guide for questions.",
     type: "website",
     locale: "en_US",
-    images: [
-      {
-        url: site.brand.logoSrc,
-        width: site.brand.logoWidth,
-        height: site.brand.logoHeight,
-        alt: "AJAX",
-      },
-    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "AJAX Volunteer Hub",
     description:
       "Ward-based representation for Jacksonville — guided paths to learn, sign, and volunteer.",
-    images: [site.brand.logoSrc],
   },
 };
 

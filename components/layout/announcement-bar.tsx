@@ -10,7 +10,7 @@ import { trackEvent } from "@/lib/analytics";
 export function AnnouncementBar() {
   const { announcement } = site;
   return (
-    <div className="relative overflow-hidden border-b border-white/10 bg-gradient-to-r from-primary via-[#003a7a] to-primary text-primary-foreground">
+    <div className="relative overflow-hidden border-b border-white/10 bg-gradient-to-r from-[#002d62] via-[#003a7a] to-[#002d62] text-white">
       <div
         className="pointer-events-none absolute inset-0 bg-[linear-gradient(110deg,transparent_0%,rgba(253,185,19,0.08)_45%,transparent_70%)]"
         aria-hidden
