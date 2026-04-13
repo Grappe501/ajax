@@ -25,8 +25,11 @@ export type VoiceChatControls = {
   stopSpeaking: () => void;
 };
 
+/** Canonical campaign TTS route (shared with voice module). */
+const VOICE_TTS_URL = "/api/voice/tts";
+
 /**
- * Push-to-talk via Web Speech API. Assistant replies: ElevenLabs TTS from `/api/assistant/speech`
+ * Push-to-talk via Web Speech API. Assistant replies: ElevenLabs TTS from `/api/voice/tts`
  * when configured server-side, otherwise browser `speechSynthesis`.
  */
 export function useVoiceChat(): VoiceChatControls {
@@ -105,7 +108,7 @@ export function useVoiceChat(): VoiceChatControls {
 
       void (async () => {
         try {
-          const res = await fetch("/api/assistant/speech", {
+          const res = await fetch(VOICE_TTS_URL, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ text: trimmed }),

@@ -53,13 +53,38 @@ export function WardDashboardPanel({
 
       <SharePublicSiteCard siteBase={siteBase} />
 
-      <DashboardAgentPanel
-        variant="ward"
-        agentId="piney"
-        wardSlug={wardSlug}
-        title="Piney · ward copilot"
-        subtitle="Search your ward voter file and summarize your reach list — same permissions as this dashboard."
-      />
+      <section className="space-y-4" aria-label="Ward AI assistants">
+        <div>
+          <h2 className="font-display text-xl font-bold text-primary md:text-2xl">Ward AI assistants</h2>
+          <p className="mt-1 text-sm text-muted-foreground">
+            Same data tools and permissions — different tones. Piney is local and neighborly; Comet is fast
+            for outreach; Dawn is warm for onboarding questions.
+          </p>
+        </div>
+        <div className="grid gap-6 lg:grid-cols-3">
+          <DashboardAgentPanel
+            variant="ward"
+            agentId="piney"
+            wardSlug={wardSlug}
+            title="Piney"
+            subtitle="Grounded, place-aware — turf, streets, voter lookup."
+          />
+          <DashboardAgentPanel
+            variant="ward"
+            agentId="comet"
+            wardSlug={wardSlug}
+            title="Comet"
+            subtitle="Fast, direct — quick lists, call energy, next actions."
+          />
+          <DashboardAgentPanel
+            variant="ward"
+            agentId="dawn"
+            wardSlug={wardSlug}
+            title="Dawn"
+            subtitle="Warm onboarding — explain steps simply without pressure."
+          />
+        </div>
+      </section>
 
       <Card className="rounded-2xl border-primary/20 bg-primary/5 p-6">
         <p className="text-sm font-semibold uppercase tracking-wide text-primary">
