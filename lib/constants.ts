@@ -31,6 +31,7 @@ export const ANALYTICS_EVENT = {
   submitLeadership: "form_submit_leadership",
   submitHostLocation: "form_submit_host_location",
   submitCampaignEvent: "form_submit_campaign_event",
+  submitNotaryInterest: "form_submit_notary_interest",
   leadershipCta: "cta_leadership",
   hostLocationCta: "cta_host_location",
   rulesSection: "section_rules",

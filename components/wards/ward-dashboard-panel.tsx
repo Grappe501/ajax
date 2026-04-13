@@ -21,6 +21,7 @@ export function WardDashboardPanel({
   stats,
   reachList,
   voterDirectoryCount,
+  reachReadOnly = false,
 }: {
   wardSlug: string;
   wardLabel: string;
@@ -32,6 +33,7 @@ export function WardDashboardPanel({
   stats: WardTeamStats | null;
   reachList: ReachOutListRow[];
   voterDirectoryCount: number;
+  reachReadOnly?: boolean;
 }) {
   const encouragement =
     directRecruits === 0
@@ -148,6 +150,7 @@ export function WardDashboardPanel({
         wardSlug={wardSlug}
         initialRows={reachList}
         voterDirectoryCount={voterDirectoryCount}
+        readOnly={reachReadOnly}
       />
 
       <Card className="rounded-2xl border-border p-6">

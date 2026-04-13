@@ -1,13 +1,16 @@
 import type { Metadata } from "next";
+import { cookies } from "next/headers";
 import Link from "next/link";
 import { notFound, redirect } from "next/navigation";
 
+import { Card } from "@/components/ui/card";
 import { SectionShell } from "@/components/layout/section-shell";
-import { PrimaryButton } from "@/components/cta/primary-button";
 import { SupabaseNotice } from "@/components/wards/supabase-notice";
 import { WardDashboardPanel } from "@/components/wards/ward-dashboard-panel";
 import { WardSignOutButton } from "@/components/wards/ward-sign-out-button";
 import { wards } from "@/content/wards";
+import { mockOrganizerRow, mockReachList, mockWardStats } from "@/lib/dev/mock-dashboard";
+import { DEV_COOKIE, isDevPortalEnabled } from "@/lib/dev-mode";
 import { createSupabaseServer } from "@/lib/supabase/server";
 import { isSupabaseConfigured } from "@/lib/supabase/env";
 import {
@@ -37,6 +40,41 @@ export default async function WardDashboardPage({ params }: Props) {
   const { slug } = await params;
   const ward = wards.find((w) => w.slug === slug);
   if (!ward) notFound();
+
+  const jar = await cookies();
+  const devWardDemo = jar.get(DEV_COOKIE.wardDemoSlug)?.value;
+  if (isDevPortalEnabled() && devWardDemo === slug) {
+    const siteBase = await getRequestOrigin();
+    const me = mockOrganizerRow(slug);
+    const reachList = mockReachList(slug);
+    return (
+      <SectionShell className="min-h-[70vh]">
+        <Card className="mb-6 rounded-2xl border-amber-500/35 bg-amber-500/10 p-4 text-sm text-foreground shadow-sm">
+          <strong className="font-semibold">Development preview.</strong> Dummy data only — set via{" "}
+          <code className="rounded bg-background/80 px-1.5 py-0.5 font-mono text-xs">/dev</code>. Sign in with Supabase
+          for a live ward dashboard.
+        </Card>
+        <WardDashboardPanel
+          wardSlug={slug}
+          wardLabel={ward.name}
+          siteBase={siteBase}
+          me={me}
+          directRecruits={2}
+          downstreamTotal={5}
+          rank={3}
+          stats={mockWardStats()}
+          reachList={reachList}
+          voterDirectoryCount={0}
+          reachReadOnly
+        />
+        <p className="mt-10 text-center text-sm text-muted-foreground">
+          <Link href={`/wards/${slug}`} className="font-semibold text-primary">
+            ← Ward public board
+          </Link>
+        </p>
+      </SectionShell>
+    );
+  }
 
   if (!isSupabaseConfigured()) {
     return (

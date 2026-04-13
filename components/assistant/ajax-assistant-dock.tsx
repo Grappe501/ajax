@@ -17,8 +17,8 @@ type Msg = { role: "user" | "assistant"; content: string };
 
 export function AjaxAssistantDock() {
   const pathname = usePathname();
-  const hideChrome =
-    (pathname?.startsWith("/canvass") ?? false) || (pathname?.startsWith("/admin") ?? false);
+  /** Keep the AJAX Guide FAB on canvass and field tools; hide only inside admin to reduce overlap with ops UI. */
+  const hideChrome = pathname?.startsWith("/admin") ?? false;
   const { isOpen, openAssistant, closeAssistant, consumePrefill } = useAssistant();
   const [messages, setMessages] = useState<Msg[]>([
     {

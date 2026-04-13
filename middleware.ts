@@ -1,6 +1,7 @@
 import { createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
 
+import { DEV_COOKIE, isDevAdminBypassAllowed } from "@/lib/dev-mode";
 import { isSupabaseConfigured } from "@/lib/supabase/env";
 
 export async function middleware(request: NextRequest) {
@@ -37,7 +38,9 @@ export async function middleware(request: NextRequest) {
 
   const path = request.nextUrl.pathname;
   if (path.startsWith("/admin") && !path.startsWith("/admin/login")) {
-    if (!user) {
+    const devBypass =
+      isDevAdminBypassAllowed() && request.cookies.get(DEV_COOKIE.adminBypass)?.value === "1";
+    if (!user && !devBypass) {
       const url = request.nextUrl.clone();
       url.pathname = "/admin/login";
       url.searchParams.set("next", path);

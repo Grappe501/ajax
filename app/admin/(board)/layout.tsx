@@ -1,10 +1,21 @@
+import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
 import { AdminShell } from "@/components/admin/admin-shell";
 import { getCampaignAdminSession } from "@/lib/admin/auth";
+import { DEV_COOKIE, isDevAdminBypassAllowed } from "@/lib/dev-mode";
 import { isSupabaseConfigured } from "@/lib/supabase/env";
 
 export default async function AdminBoardLayout({ children }: { children: React.ReactNode }) {
+  const jar = await cookies();
+  if (isDevAdminBypassAllowed() && jar.get(DEV_COOKIE.adminBypass)?.value === "1") {
+    return (
+      <AdminShell role="owner" email="dev.preview@local">
+        {children}
+      </AdminShell>
+    );
+  }
+
   if (!isSupabaseConfigured()) {
     return (
       <div className="min-h-dvh bg-[#050a12] p-8 text-zinc-300">

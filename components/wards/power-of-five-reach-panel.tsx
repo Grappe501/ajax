@@ -34,10 +34,13 @@ export function PowerOfFiveReachPanel({
   wardSlug,
   initialRows,
   voterDirectoryCount,
+  readOnly = false,
 }: {
   wardSlug: string;
   initialRows: ReachOutListRow[];
   voterDirectoryCount: number;
+  /** Dev / preview: show list UI without server mutations (no search, add, queue). */
+  readOnly?: boolean;
 }) {
   const router = useRouter();
   const [pending, startTransition] = useTransition();
@@ -150,6 +153,41 @@ export function PowerOfFiveReachPanel({
       })),
     [],
   );
+
+  if (readOnly) {
+    return (
+      <Card className="rounded-2xl border-border p-6">
+        <p className="rounded-xl border border-amber-500/35 bg-amber-500/10 px-4 py-3 text-sm text-foreground">
+          <strong className="font-semibold">Preview mode.</strong> Connect Supabase and sign in to search the voter
+          directory, add contacts, and queue outreach. This table shows sample rows only.
+        </p>
+        <h2 className="font-display mt-6 text-xl font-bold text-primary">{powerOfFiveReach.sectionTitle}</h2>
+        <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{powerOfFiveReach.sectionIntro}</p>
+        <p className="mt-4 text-xs font-semibold uppercase text-muted-foreground">Sample reach list</p>
+        {rows.length === 0 ? (
+          <p className="mt-3 text-sm text-muted-foreground">No demo rows.</p>
+        ) : (
+          <ul className="mt-3 space-y-2">
+            {rows.map((row) => (
+              <li
+                key={row.id}
+                className="rounded-xl border border-border/80 bg-background/60 px-3 py-3 text-sm"
+              >
+                <p className="font-semibold">{row.display_name}</p>
+                <p className="text-muted-foreground">
+                  {[row.address_line, row.city, row.zip].filter(Boolean).join(", ") || "—"}
+                </p>
+                <p className="text-xs text-muted-foreground">
+                  {[row.phone, row.email].filter(Boolean).join(" · ") || "—"}
+                </p>
+              </li>
+            ))}
+          </ul>
+        )}
+        <p className="mt-6 text-xs text-muted-foreground">{powerOfFiveReach.outreachDisclaimer}</p>
+      </Card>
+    );
+  }
 
   return (
     <Card className="rounded-2xl border-border p-6">

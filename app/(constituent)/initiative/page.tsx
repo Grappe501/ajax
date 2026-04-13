@@ -4,6 +4,7 @@ import { CheckCircle2 } from "lucide-react";
 
 import { PrimaryButton } from "@/components/cta/primary-button";
 import { SecondaryButton } from "@/components/cta/secondary-button";
+import { InitiativeSubnav } from "@/components/initiative/initiative-subnav";
 import {
   Accordion,
   AccordionContent,
@@ -30,12 +31,34 @@ export const metadata: Metadata = {
 
 export default function InitiativeEducationPage() {
   return (
-    <div className="mx-auto max-w-2xl px-4 py-14 sm:px-6 sm:py-20">
+    <div className="mx-auto max-w-3xl px-4 py-14 sm:px-6 sm:py-20">
+      <InitiativeSubnav className="mb-10" />
       <p className="text-xs font-bold uppercase tracking-[0.2em] text-primary">{hero.eyebrow}</p>
       <h1 className="font-display mt-3 text-3xl font-extrabold tracking-[-0.03em] text-foreground sm:text-4xl">
         {hero.title}
       </h1>
       <p className="mt-4 text-lg leading-relaxed text-muted-foreground">{hero.dek}</p>
+
+      <section className="mt-10 rounded-2xl border border-primary/20 bg-card p-6 shadow-sm sm:p-8">
+        <h2 className="font-display text-lg font-bold text-foreground">Petition education hub</h2>
+        <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+          Walk through the real petition layout, read the ordinance text, and learn how signing works — step by step.
+        </p>
+        <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+          <PrimaryButton href="/initiative/petition" className="justify-center">
+            Petition Coach
+          </PrimaryButton>
+          <SecondaryButton href="/initiative/language" className="justify-center">
+            Initiative language
+          </SecondaryButton>
+          <SecondaryButton href="/initiative/how-to-sign" className="justify-center">
+            How to sign
+          </SecondaryButton>
+          <SecondaryButton href="/initiative/instructions" className="justify-center">
+            Full instructions
+          </SecondaryButton>
+        </div>
+      </section>
 
       <section className="mt-12">
         <h2 className="font-display text-xl font-bold text-foreground">{snapshot.title}</h2>

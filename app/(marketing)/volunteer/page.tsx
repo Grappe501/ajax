@@ -29,6 +29,7 @@ export default function VolunteerPage() {
         <VolunteerSignupForm preferDatabase={preferDatabase} />
         <div className="mt-10 flex flex-wrap gap-4">
           <SecondaryButton href="/connect">Get signing alerts or host</SecondaryButton>
+          <SecondaryButton href="/initiative/notaries">Notary support</SecondaryButton>
           <SecondaryButton href="/training">Training center</SecondaryButton>
           <SecondaryButton href="/wards">Ward teams</SecondaryButton>
         </div>

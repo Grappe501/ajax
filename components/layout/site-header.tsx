@@ -20,7 +20,7 @@ import { ANALYTICS_EVENT } from "@/lib/constants";
 import { trackEvent } from "@/lib/analytics";
 import { cn } from "@/lib/utils";
 
-const joinHref = "/volunteer";
+const joinHref = "/hub";
 
 export function SiteHeader() {
   const pathname = usePathname();
@@ -83,7 +83,7 @@ export function SiteHeader() {
               "hidden rounded-xl border border-accent/30 px-5 font-semibold shadow-ajax transition hover:shadow-ajax-lg sm:inline-flex",
             )}
           >
-            Join the Team
+            Volunteer hub
           </Link>
 
           <PublicThemeToggle className="sm:hidden" />
@@ -128,7 +128,7 @@ export function SiteHeader() {
                     "mt-4 flex h-11 items-center justify-center rounded-xl border border-accent/30 font-semibold shadow-ajax",
                   )}
                 >
-                  Join the Team
+                  Volunteer hub
                 </Link>
               </nav>
             </SheetContent>

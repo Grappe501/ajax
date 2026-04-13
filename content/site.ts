@@ -12,11 +12,12 @@ export const site = {
   announcement: {
     goal: "Goal: 1,000 verified signatures by July 1, 2026",
     sub: "Join the volunteer team today — every conversation moves us closer.",
-    ctaLabel: "Join the Team",
-    ctaHref: "/volunteer",
+    ctaLabel: "Volunteer hub",
+    ctaHref: "/hub",
   },
   nav: [
     { label: "Home", href: "/" },
+    { label: "Volunteer hub", href: "/hub" },
     { label: "Initiative", href: "/initiative" },
     { label: "Why It Matters", href: "/why-it-matters" },
     { label: "Volunteer", href: "/volunteer" },

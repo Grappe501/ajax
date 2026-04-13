@@ -19,7 +19,7 @@ export function HomeHero() {
         <SectionReveal>
           <div className="inline-flex flex-wrap items-center gap-2">
             <span className="inline-flex items-center rounded-r-full border border-primary/15 border-l-4 border-l-accent bg-card/95 px-4 py-1.5 font-display text-[11px] font-bold uppercase tracking-[0.22em] text-primary shadow-sm shadow-primary/5 backdrop-blur-sm">
-              Volunteer hub
+              Public campaign site
             </span>
             <span className="rounded-full border border-primary/10 bg-card/80 px-3 py-1 text-[11px] font-semibold uppercase tracking-wide text-muted-foreground backdrop-blur-sm">
               Jacksonville, AR
@@ -40,10 +40,10 @@ export function HomeHero() {
           </p>
           <CTACluster className="mt-10">
             <PrimaryButton
-              href="/volunteer"
+              href="/hub"
               analyticsEvent={() => trackEvent(ANALYTICS_EVENT.joinVolunteerCta)}
             >
-              {site.hero.primaryCta}
+              Enter volunteer hub
             </PrimaryButton>
             <SecondaryButton
               href="/initiative"
