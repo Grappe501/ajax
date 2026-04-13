@@ -81,5 +81,7 @@ export async function submitCampaignEvent(formData: FormData): Promise<SubmitCam
 
   revalidatePath("/events");
   revalidatePath("/events/submit");
+  revalidatePath("/admin");
+  revalidatePath("/admin/approvals");
   return { ok: true };
 }

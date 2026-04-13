@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowRight, CheckCircle2, Clock, Users } from "lucide-react";
+import { ArrowRight, CheckCircle2, Clock, HeartHandshake, Users } from "lucide-react";
 
 import { getCampaignPulse } from "@/lib/admin/queries";
 
@@ -23,7 +23,13 @@ export default async function AdminOverviewPage() {
         </p>
       </div>
 
-      <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+      <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-5">
+        <StatCard
+          icon={HeartHandshake}
+          label="Volunteer signups (total)"
+          value={pulse?.volunteer_signups ?? "—"}
+          tone="rose"
+        />
         <StatCard
           icon={Clock}
           label="Events awaiting review"
@@ -50,7 +56,21 @@ export default async function AdminOverviewPage() {
         />
       </div>
 
-      <div className="grid gap-6 lg:grid-cols-2">
+      <div className="grid gap-6 lg:grid-cols-3">
+        <div className="rounded-2xl border border-white/10 bg-[#070f1c] p-6">
+          <h2 className="font-display text-lg font-bold text-white">Volunteer queue</h2>
+          <p className="mt-2 text-sm text-zinc-400">
+            Interest form submissions from the public volunteer page — name, contact, and how people
+            want to help.
+          </p>
+          <Link
+            href="/admin/volunteers"
+            className="mt-4 inline-flex items-center gap-2 text-sm font-bold text-[#fdb913] hover:underline"
+          >
+            View signups
+            <ArrowRight className="size-4" />
+          </Link>
+        </div>
         <div className="rounded-2xl border border-white/10 bg-[#070f1c] p-6">
           <h2 className="font-display text-lg font-bold text-white">Approval queue</h2>
           <p className="mt-2 text-sm text-zinc-400">
@@ -93,7 +113,7 @@ function StatCard({
   icon: React.ComponentType<{ className?: string }>;
   label: string;
   value: string | number;
-  tone: "amber" | "emerald" | "zinc" | "sky";
+  tone: "amber" | "emerald" | "zinc" | "sky" | "rose";
 }) {
   const ring =
     tone === "amber"
@@ -102,7 +122,9 @@ function StatCard({
         ? "from-emerald-500/20 to-transparent"
         : tone === "sky"
           ? "from-sky-500/20 to-transparent"
-          : "from-zinc-500/15 to-transparent";
+          : tone === "rose"
+            ? "from-rose-500/20 to-transparent"
+            : "from-zinc-500/15 to-transparent";
 
   return (
     <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-[#070f1c] p-5">

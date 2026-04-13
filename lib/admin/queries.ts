@@ -43,6 +43,7 @@ export type PulseStats = {
   rejected_events: number;
   total_events: number;
   organizers: number | null;
+  volunteer_signups: number | null;
 };
 
 export async function getCampaignPulse(): Promise<PulseStats | null> {
@@ -59,17 +60,21 @@ export async function getCampaignPulse(): Promise<PulseStats | null> {
     return count ?? 0;
   }
 
-  const [pending_events, approved_events, rejected_events, totalRow, orgRow] = await Promise.all([
-    countEvents("pending"),
-    countEvents("approved"),
-    countEvents("rejected"),
-    db.from("campaign_events").select("*", { count: "exact", head: true }),
-    db.from("ward_organizers").select("*", { count: "exact", head: true }),
-  ]);
+  const [pending_events, approved_events, rejected_events, totalRow, orgRow, volRow] =
+    await Promise.all([
+      countEvents("pending"),
+      countEvents("approved"),
+      countEvents("rejected"),
+      db.from("campaign_events").select("*", { count: "exact", head: true }),
+      db.from("ward_organizers").select("*", { count: "exact", head: true }),
+      db.from("volunteer_signups").select("*", { count: "exact", head: true }),
+    ]);
 
   const total_events = totalRow.count ?? 0;
   let organizers: number | null = null;
   if (!orgRow.error && typeof orgRow.count === "number") organizers = orgRow.count;
+  let volunteer_signups: number | null = null;
+  if (!volRow.error && typeof volRow.count === "number") volunteer_signups = volRow.count;
 
   return {
     pending_events,
@@ -77,6 +82,7 @@ export async function getCampaignPulse(): Promise<PulseStats | null> {
     rejected_events,
     total_events,
     organizers,
+    volunteer_signups,
   };
 }
 
@@ -101,4 +107,42 @@ export async function listCampaignAdmins(): Promise<TeamMemberRow[] | null> {
     return null;
   }
   return (data ?? []) as TeamMemberRow[];
+}
+
+export type VolunteerSignupRow = {
+  id: string;
+  created_at: string;
+  first_name: string;
+  last_name: string;
+  email: string;
+  phone: string;
+  zip_code: string;
+  help_event_volunteer: boolean;
+  help_petition_carrier: boolean;
+  help_church_outreach: boolean;
+  help_tabling: boolean;
+  help_phone_text: boolean;
+  help_hosting: boolean;
+  help_leadership: boolean;
+  notes: string | null;
+  source: string;
+};
+
+export async function listVolunteerSignups(): Promise<VolunteerSignupRow[] | null> {
+  const supabase = await createSupabaseServer();
+  if (!supabase) return null;
+
+  const { data, error } = await supabase
+    .from("volunteer_signups")
+    .select(
+      "id,created_at,first_name,last_name,email,phone,zip_code,help_event_volunteer,help_petition_carrier,help_church_outreach,help_tabling,help_phone_text,help_hosting,help_leadership,notes,source",
+    )
+    .order("created_at", { ascending: false })
+    .limit(500);
+
+  if (error) {
+    console.error("admin volunteer signups:", error.message);
+    return null;
+  }
+  return (data ?? []) as VolunteerSignupRow[];
 }

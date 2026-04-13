@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import {
   Activity,
   CheckSquare,
+  HeartHandshake,
   LayoutDashboard,
   Sparkles,
   Users,
@@ -20,6 +21,7 @@ const nav: {
   match?: "exact";
 }[] = [
   { href: "/admin", label: "Overview", icon: LayoutDashboard, match: "exact" },
+  { href: "/admin/volunteers", label: "Volunteers", icon: HeartHandshake },
   { href: "/admin/approvals", label: "Approvals", icon: CheckSquare },
   { href: "/admin/team", label: "Team & roles", icon: Users },
   { href: "/admin/co-pilot", label: "Co-pilot", icon: Sparkles },

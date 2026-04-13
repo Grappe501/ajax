@@ -10,6 +10,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { ANALYTICS_EVENT } from "@/lib/constants";
 import { trackEvent } from "@/lib/analytics";
 import { submitNetlifyForm } from "@/lib/netlify-form";
+import { submitVolunteerSignup } from "@/lib/volunteers/actions";
 import { cn } from "@/lib/utils";
 
 const FORM_NAME = "join-volunteer-team";
@@ -24,7 +25,14 @@ const helpOptions = [
   { id: "help_leadership", label: "Leadership interest" },
 ] as const;
 
-export function VolunteerSignupForm({ className }: { className?: string }) {
+export function VolunteerSignupForm({
+  className,
+  /** When true, saves to Supabase (coordinators see /admin/volunteers). Otherwise Netlify Forms. */
+  preferDatabase = false,
+}: {
+  className?: string;
+  preferDatabase?: boolean;
+}) {
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">(
     "idle",
   );
@@ -33,6 +41,14 @@ export function VolunteerSignupForm({ className }: { className?: string }) {
     e.preventDefault();
     setStatus("submitting");
     try {
+      if (preferDatabase) {
+        const fd = new FormData(e.currentTarget);
+        const result = await submitVolunteerSignup(fd);
+        if (!result.ok) throw new Error("save failed");
+        trackEvent(ANALYTICS_EVENT.submitVolunteer);
+        setStatus("success");
+        return;
+      }
       const res = await submitNetlifyForm(FORM_NAME, e.currentTarget);
       if (!res.ok) throw new Error("Network error");
       trackEvent(ANALYTICS_EVENT.submitVolunteer);
@@ -54,8 +70,25 @@ export function VolunteerSignupForm({ className }: { className?: string }) {
           You are on the list — thank you.
         </p>
         <p className="mt-2 text-muted-foreground">
-          A volunteer coordinator will follow up with next steps. If you do not
-          hear back within a few days, email the campaign inbox.
+          {preferDatabase ? (
+            <>
+              Your details are in the coordinator queue. Someone from the team will follow up soon.
+              You can also explore{" "}
+              <Link href="/wards" className="font-semibold text-primary underline-offset-4 hover:underline">
+                ward teams
+              </Link>{" "}
+              or{" "}
+              <Link href="/events" className="font-semibold text-primary underline-offset-4 hover:underline">
+                upcoming events
+              </Link>
+              .
+            </>
+          ) : (
+            <>
+              A volunteer coordinator will follow up with next steps. If you do not hear back within
+              a few days, email the campaign inbox.
+            </>
+          )}
         </p>
       </div>
     );
@@ -65,23 +98,37 @@ export function VolunteerSignupForm({ className }: { className?: string }) {
     <form
       name={FORM_NAME}
       method="POST"
-      data-netlify="true"
-      netlify-honeypot="bot-field"
+      data-netlify={preferDatabase ? undefined : "true"}
+      netlify-honeypot={preferDatabase ? undefined : "bot-field"}
       className={cn(
         "ajax-card-elevated space-y-5 border-primary/10 bg-gradient-to-b from-card to-ajax-mist/30 p-6 md:p-8",
         className,
       )}
       onSubmit={onSubmit}
     >
-      <input type="hidden" name="form-name" value={FORM_NAME} />
+      {!preferDatabase ? <input type="hidden" name="form-name" value={FORM_NAME} /> : null}
       <p className="text-sm leading-relaxed text-muted-foreground">
         <span className="font-semibold text-foreground">Where this goes: </span>
-        Submissions are sent securely through this site&apos;s form service (Netlify Forms) to the
-        campaign team. A coordinator follows up by email or phone. The same form is on the{" "}
-        <Link href="/volunteer" className="font-medium text-primary underline-offset-4 hover:underline">
-          volunteer page
-        </Link>{" "}
-        for easy sharing.
+        {preferDatabase ? (
+          <>
+            Submissions are saved to the campaign database so coordinators can follow up. You can
+            still share this page widely — the same form is on the{" "}
+            <Link href="/volunteer" className="font-medium text-primary underline-offset-4 hover:underline">
+              volunteer page
+            </Link>
+            .
+          </>
+        ) : (
+          <>
+            Submissions are sent securely through this site&apos;s form service (Netlify Forms) to
+            the campaign team. A coordinator follows up by email or phone. Connect Supabase on the
+            site to also queue signups in the operations board. The same form is on the{" "}
+            <Link href="/volunteer" className="font-medium text-primary underline-offset-4 hover:underline">
+              volunteer page
+            </Link>{" "}
+            for easy sharing.
+          </>
+        )}
       </p>
       <p className="hidden">
         <label>

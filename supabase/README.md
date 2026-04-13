@@ -8,6 +8,7 @@ Apply migrations **in filename order** so foreign keys and policies line up:
 | 2 | `20260413120000_campaign_events.sql` | `campaign_events`, public calendar RLS, demo events |
 | 3 | `20260413140000_canvass_units.sql` | `canvass_units`, map demo pins |
 | 4 | `20260413160000_campaign_admins.sql` | `campaign_admins`, admin policies on events |
+| 5 | `20260415120000_volunteer_signups.sql` | `volunteer_signups` — public insert, admins read |
 
 ## Apply on hosted Supabase
 

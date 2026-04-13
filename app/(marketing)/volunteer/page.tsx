@@ -6,6 +6,7 @@ import { LadderSection } from "@/components/marketing/ladder-section";
 import { VolunteerStorySection } from "@/components/marketing/volunteer-story-section";
 import { SectionHeading } from "@/components/layout/section-heading";
 import { SectionShell } from "@/components/layout/section-shell";
+import { isSupabaseConfigured } from "@/lib/supabase/env";
 
 export const metadata: Metadata = {
   title: "Volunteer",
@@ -14,6 +15,8 @@ export const metadata: Metadata = {
 };
 
 export default function VolunteerPage() {
+  const preferDatabase = isSupabaseConfigured();
+
   return (
     <>
       <VolunteerStorySection />
@@ -23,7 +26,7 @@ export default function VolunteerPage() {
           title="Join the volunteer team"
           subtitle="Short form, fast follow-up — tell us how you want to help and we will connect you with the right lead."
         />
-        <VolunteerSignupForm />
+        <VolunteerSignupForm preferDatabase={preferDatabase} />
         <div className="mt-10 flex flex-wrap gap-4">
           <SecondaryButton href="/connect">Get signing alerts or host</SecondaryButton>
           <SecondaryButton href="/training">Training center</SecondaryButton>
