@@ -59,24 +59,42 @@ export function AjaxAssistantDock() {
             messages: nextMessages.map((m) => ({ role: m.role, content: m.content })),
           }),
         });
-        const data = (await res.json()) as { reply?: string; message?: string; error?: string };
+
+        let data: { reply?: string; message?: string; error?: string };
+        try {
+          data = (await res.json()) as typeof data;
+        } catch {
+          setMessages((prev) => prev.slice(0, -1));
+          setError(
+            res.ok
+              ? "The assistant returned an invalid response. Please try again."
+              : `Assistant error (${res.status}). Please try again or use the FAQ.`,
+          );
+          return;
+        }
 
         if (!res.ok) {
           setMessages((prev) => prev.slice(0, -1));
           setError(
             data.message ??
               (data.error === "not_configured"
-                ? "The assistant is not enabled on this deployment yet. Try the FAQ or email hello@ajaxcampaign.org."
-                : "Something went wrong. Please try again."),
+                ? "The assistant is not enabled on this deployment yet. Add OPENAI_API_KEY in Netlify (or .env.local locally), redeploy, then try again — or use the FAQ and hello@ajaxcampaign.org."
+                : data.error === "rate_limited"
+                  ? "Too many requests right now. Wait a minute and try again."
+                  : "Something went wrong. Please try again."),
           );
           return;
         }
 
-        const reply = typeof data.reply === "string" ? data.reply : "";
-        if (reply) {
-          setMessages((prev) => [...prev, { role: "assistant", content: reply }]);
-          voice.speak(reply);
+        const reply = typeof data.reply === "string" ? data.reply.trim() : "";
+        if (!reply) {
+          setMessages((prev) => prev.slice(0, -1));
+          setError("The assistant did not return text. Try a shorter question or open the FAQ.");
+          return;
         }
+
+        setMessages((prev) => [...prev, { role: "assistant", content: reply }]);
+        voice.speak(reply);
       } catch {
         setMessages((prev) => prev.slice(0, -1));
         setError("Network error — check your connection and try again.");

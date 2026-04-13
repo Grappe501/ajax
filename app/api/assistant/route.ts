@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 
-import { ASSISTANT_SYSTEM_PROMPT } from "@/content/assistant-knowledge";
+import { getAssistantSystemContent } from "@/content/assistant-knowledge";
 
 const MAX_MESSAGES = 16;
 const MAX_USER_CHARS = 2000;
@@ -61,28 +61,69 @@ export async function POST(request: Request) {
       },
       body: JSON.stringify({
         model: "gpt-4o-mini",
-        temperature: 0.35,
-        max_tokens: 700,
-        messages: [{ role: "system", content: ASSISTANT_SYSTEM_PROMPT }, ...cleaned],
+        temperature: 0.4,
+        max_tokens: 900,
+        messages: [{ role: "system", content: getAssistantSystemContent() }, ...cleaned],
       }),
     });
 
+    const rawText = await res.text();
+
     if (!res.ok) {
-      const t = await res.text();
-      console.error("OpenAI error:", res.status, t.slice(0, 200));
+      let openaiMessage = "";
+      try {
+        const errJson = JSON.parse(rawText) as { error?: { message?: string; code?: string } };
+        openaiMessage = errJson.error?.message ?? "";
+      } catch {
+        /* ignore */
+      }
+      console.error("OpenAI error:", res.status, openaiMessage || rawText.slice(0, 300));
+
+      if (res.status === 401) {
+        return NextResponse.json(
+          {
+            error: "not_configured",
+            message:
+              "Assistant API key is invalid or expired. Check OPENAI_API_KEY on the server (e.g. Netlify env vars).",
+          },
+          { status: 503 },
+        );
+      }
+      if (res.status === 429) {
+        return NextResponse.json(
+          {
+            error: "rate_limited",
+            message: "The assistant is busy right now. Please try again in a minute.",
+          },
+          { status: 503 },
+        );
+      }
       return NextResponse.json(
-        { error: "assistant_unavailable", message: "Try again in a moment." },
+        {
+          error: "assistant_unavailable",
+          message: "The assistant could not complete a reply. Try again in a moment.",
+        },
         { status: 502 },
       );
     }
 
-    const data = (await res.json()) as {
-      choices?: { message?: { content?: string } }[];
-    };
+    let data: { choices?: { message?: { content?: string | null }; finish_reason?: string }[] };
+    try {
+      data = JSON.parse(rawText) as typeof data;
+    } catch {
+      console.error("OpenAI: non-JSON success body", rawText.slice(0, 200));
+      return NextResponse.json(
+        { error: "assistant_unavailable", message: "Unexpected response from assistant." },
+        { status: 502 },
+      );
+    }
+
     const text = data.choices?.[0]?.message?.content?.trim();
     if (!text) {
+      const reason = data.choices?.[0]?.finish_reason;
+      console.error("OpenAI: empty assistant content", { finish_reason: reason });
       return NextResponse.json(
-        { error: "empty_response", message: "No reply from assistant." },
+        { error: "empty_response", message: "No reply from assistant. Try rephrasing your question." },
         { status: 502 },
       );
     }
