@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
@@ -43,9 +44,9 @@ export default async function AdminBoardLayout({ children }: { children: React.R
           </code>{" "}
           in Supabase.
         </p>
-        <a href="/" className="mt-8 text-sm font-semibold text-[#fdb913] hover:underline">
+        <Link href="/" className="mt-8 text-sm font-semibold text-[#fdb913] hover:underline">
           Return home
-        </a>
+        </Link>
       </div>
     );
   }

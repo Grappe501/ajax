@@ -40,12 +40,14 @@ export function PublicThemeProvider({ children }: { children: ReactNode }) {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    setMounted(true);
-    setThemeState(readStoredTheme());
     const mq = window.matchMedia("(prefers-color-scheme: dark)");
-    setSystemDark(mq.matches);
     const onChange = () => setSystemDark(mq.matches);
     mq.addEventListener("change", onChange);
+    queueMicrotask(() => {
+      setMounted(true);
+      setThemeState(readStoredTheme());
+      setSystemDark(mq.matches);
+    });
     return () => mq.removeEventListener("change", onChange);
   }, []);
 

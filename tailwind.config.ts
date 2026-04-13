@@ -16,7 +16,9 @@ export default {
       boxShadow: {
         ajax: "0 4px 24px -4px rgba(0, 45, 98, 0.14), 0 0 0 1px rgba(0, 45, 98, 0.05)",
         "ajax-lg": "0 12px 40px -8px rgba(0, 45, 98, 0.18), 0 0 0 1px rgba(0, 45, 98, 0.06)",
+        "ajax-xl": "0 24px 64px -20px rgba(0, 45, 98, 0.22), 0 0 0 1px rgba(0, 45, 98, 0.06)",
         "ajax-gold": "0 4px 20px -2px rgba(253, 185, 19, 0.35)",
+        "ajax-fab": "0 12px 40px -6px rgba(0, 45, 98, 0.45), 0 0 0 1px rgba(255,255,255,0.12), inset 0 1px 0 rgba(255,255,255,0.15)",
       },
       keyframes: {
         "ajax-shimmer": {

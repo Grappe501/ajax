@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 
 import { getSttPromptHint } from "@/content/vocabulary";
+import { getOpenAIApiKey } from "@/lib/ai/env";
 import type { VoiceCleanupMode } from "@/lib/voice/modes";
 
 const MAX_IN = 8000;
@@ -24,7 +25,7 @@ Use tags like: supporter, undecided, wrong_number, moved, callback, declined, ot
 }
 
 export async function POST(request: Request) {
-  const apiKey = process.env.OPENAI_API_KEY?.trim();
+  const apiKey = getOpenAIApiKey();
   if (!apiKey) {
     return NextResponse.json(
       { error: "not_configured", message: "OPENAI_API_KEY is not set on the server." },

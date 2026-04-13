@@ -67,7 +67,9 @@ export default function RootLayout({
       >
         <AssistantProvider>
           <div className="ajax-page-backdrop" aria-hidden />
+          <div className="ajax-page-mesh" aria-hidden />
           <div className="ajax-page-grid" aria-hidden />
+          <div className="ajax-page-noise" aria-hidden />
           {children}
           <AjaxAssistantDock />
         </AssistantProvider>

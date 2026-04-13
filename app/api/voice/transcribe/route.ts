@@ -1,11 +1,12 @@
 import { NextResponse } from "next/server";
 
 import { getSttPromptHint } from "@/content/vocabulary";
+import { getOpenAIApiKey } from "@/lib/ai/env";
 
 const MAX_BYTES = 24 * 1024 * 1024; /* ~25MB Whisper cap */
 
 export async function POST(request: Request) {
-  const apiKey = process.env.OPENAI_API_KEY?.trim();
+  const apiKey = getOpenAIApiKey();
   if (!apiKey) {
     return NextResponse.json(
       { error: "not_configured", message: "OPENAI_API_KEY is not set on the server." },

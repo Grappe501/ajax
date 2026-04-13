@@ -102,10 +102,10 @@ export function PetitionCoach() {
   }, [listIndex, ordered]);
 
   useEffect(() => {
-    if (selected) {
-      const idx = ordered.findIndex((x) => x.id === selected.id);
-      if (idx >= 0) setListIndex(idx);
-    }
+    if (!selected) return;
+    const idx = ordered.findIndex((x) => x.id === selected.id);
+    if (idx < 0) return;
+    queueMicrotask(() => setListIndex(idx));
   }, [selected, ordered]);
 
   const before = beforeYouStartCopy[role];

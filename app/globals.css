@@ -197,6 +197,21 @@
     linear-gradient(180deg, rgba(255, 255, 255, 0.5) 0%, transparent 35%, transparent 100%);
 }
 
+/* Slow-moving mesh — depth without distracting motion */
+.ajax-page-mesh {
+  position: fixed;
+  inset: -20%;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0.42;
+  background:
+    radial-gradient(ellipse 80% 60% at 20% 10%, rgba(253, 185, 19, 0.12), transparent 55%),
+    radial-gradient(ellipse 70% 50% at 85% 25%, rgba(0, 45, 98, 0.14), transparent 50%),
+    conic-gradient(from 210deg at 50% 80%, rgba(0, 45, 98, 0.06), transparent 35%, rgba(253, 185, 19, 0.05), transparent 70%);
+  animation: ajax-mesh-drift 32s ease-in-out infinite;
+  will-change: transform;
+}
+
 .ajax-page-grid {
   position: fixed;
   inset: 0;
@@ -210,6 +225,41 @@
   mask-image: radial-gradient(ellipse 85% 70% at 50% 35%, black 15%, transparent 72%);
 }
 
+/* Film grain — breaks banding on large gradients */
+.ajax-page-noise {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  mix-blend-mode: overlay;
+}
+
+@keyframes ajax-mesh-drift {
+  0%,
+  100% {
+    transform: translate(0, 0) rotate(0deg) scale(1);
+  }
+  33% {
+    transform: translate(2%, -1%) rotate(1deg) scale(1.03);
+  }
+  66% {
+    transform: translate(-1.5%, 2%) rotate(-0.8deg) scale(0.98);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ajax-page-mesh {
+    animation: none;
+    opacity: 0.28;
+  }
+
+  .ajax-page-noise {
+    opacity: 0.02;
+  }
+}
+
 @layer utilities {
   .ajax-hero-glow {
     background-image:
@@ -218,7 +268,20 @@
   }
 
   .ajax-card-elevated {
-    @apply rounded-2xl border border-white/60 bg-card shadow-[0_4px_24px_-4px_rgba(0,45,98,0.12),0_0_0_1px_rgba(0,45,98,0.04)] backdrop-blur-sm;
+    @apply rounded-2xl border border-white/70 bg-card shadow-ajax backdrop-blur-md;
+    background-color: color-mix(in srgb, var(--card) 94%, transparent);
+    box-shadow:
+      0 4px 28px -6px rgba(0, 45, 98, 0.14),
+      0 0 0 1px rgba(0, 45, 98, 0.05),
+      inset 0 1px 0 0 rgba(255, 255, 255, 0.65);
+  }
+
+  .ajax-glass-header {
+    @apply border-b border-white/10 bg-gradient-to-r from-[#002d62] via-[#063a72] to-[#0a3566] text-white shadow-inner;
+    background-image:
+      radial-gradient(ellipse 120% 100% at 0% 0%, rgba(253, 185, 19, 0.15), transparent 55%),
+      radial-gradient(ellipse 80% 80% at 100% 100%, rgba(59, 130, 246, 0.12), transparent 50%),
+      linear-gradient(105deg, #002d62 0%, #063a72 45%, #0a3566 100%);
   }
 
   .ajax-section-muted {
@@ -302,11 +365,24 @@ html.public-dark .ajax-page-backdrop {
     linear-gradient(180deg, rgba(15, 23, 42, 0.85) 0%, transparent 38%, transparent 100%);
 }
 
+html.public-dark .ajax-page-mesh {
+  opacity: 0.32;
+  background:
+    radial-gradient(ellipse 80% 60% at 20% 10%, rgba(253, 185, 19, 0.08), transparent 55%),
+    radial-gradient(ellipse 70% 50% at 85% 25%, rgba(59, 130, 246, 0.18), transparent 50%),
+    conic-gradient(from 210deg at 50% 80%, rgba(15, 23, 42, 0.4), transparent 40%, rgba(253, 185, 19, 0.04), transparent 70%);
+}
+
 html.public-dark .ajax-page-grid {
   opacity: 0.22;
   background-image:
     linear-gradient(rgba(148, 163, 184, 0.06) 1px, transparent 1px),
     linear-gradient(90deg, rgba(148, 163, 184, 0.06) 1px, transparent 1px);
+}
+
+html.public-dark .ajax-page-noise {
+  opacity: 0.04;
+  mix-blend-mode: soft-light;
 }
 
 html.public-dark .marketing-public-root::before {

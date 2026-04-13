@@ -27,9 +27,13 @@ export function SiteHeader() {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-40 border-b border-border/60 bg-card/85 shadow-sm shadow-primary/5 backdrop-blur-xl supports-[backdrop-filter]:bg-card/75">
+    <header className="sticky top-0 z-40 border-b border-border/50 bg-card/70 shadow-[0_8px_32px_-18px_rgba(0,45,98,0.18)] backdrop-blur-2xl supports-[backdrop-filter]:bg-card/55">
       <div
-        className="pointer-events-none absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-accent/50 to-transparent"
+        className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/40 to-transparent opacity-80"
+        aria-hidden
+      />
+      <div
+        className="pointer-events-none absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-accent/45 to-transparent"
         aria-hidden
       />
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3.5 sm:px-6 lg:px-8">

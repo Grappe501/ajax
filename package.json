@@ -8,7 +8,8 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
+    "lint": "eslint .",
+    "audit:links": "node scripts/link-audit.mjs",
     "status": "node scripts/project-status.mjs",
     "list-voices:elevenlabs": "node scripts/list-elevenlabs-voices.mjs"
   },

@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 
 import { getAssistantSystemContent } from "@/content/assistant-knowledge";
+import { getOpenAIApiKey, OPENAI_CHAT_MODEL } from "@/lib/ai/env";
 
 const MAX_MESSAGES = 16;
 const MAX_USER_CHARS = 2000;
@@ -8,7 +9,7 @@ const MAX_USER_CHARS = 2000;
 type ChatMessage = { role: "user" | "assistant"; content: string };
 
 export async function POST(request: Request) {
-  const apiKey = process.env.OPENAI_API_KEY?.trim();
+  const apiKey = getOpenAIApiKey();
   if (!apiKey) {
     return NextResponse.json(
       {
@@ -60,7 +61,7 @@ export async function POST(request: Request) {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        model: "gpt-4o-mini",
+        model: OPENAI_CHAT_MODEL,
         temperature: 0.4,
         max_tokens: 900,
         messages: [{ role: "system", content: getAssistantSystemContent() }, ...cleaned],

@@ -12,6 +12,7 @@ import {
   toolSearchVotersInWard,
   toolSummarizeReachList,
 } from "@/lib/agents/tool-executors";
+import { getOpenAIApiKey } from "@/lib/ai/env";
 import { getMyOrganizerIdForWard } from "@/lib/reach/organizer";
 import { isSupabaseConfigured } from "@/lib/supabase/env";
 
@@ -69,7 +70,7 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "not_configured", message: "Supabase not configured." }, { status: 503 });
   }
 
-  const apiKey = process.env.OPENAI_API_KEY?.trim();
+  const apiKey = getOpenAIApiKey();
   if (!apiKey) {
     return NextResponse.json(
       { error: "not_configured", message: "OPENAI_API_KEY is not set on the server." },

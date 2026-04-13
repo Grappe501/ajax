@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 
 import { getCampaignAdminSession } from "@/lib/admin/auth";
+import { getOpenAIApiKey } from "@/lib/ai/env";
 import { getCampaignPulse, listPendingCampaignEvents } from "@/lib/admin/queries";
 import { CO_PILOT_SYSTEM_PROMPT } from "@/content/admin-co-pilot";
 
@@ -11,7 +12,7 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Unauthorized" }, { status });
   }
 
-  const apiKey = process.env.OPENAI_API_KEY?.trim();
+  const apiKey = getOpenAIApiKey();
   if (!apiKey) {
     return NextResponse.json(
       { error: "not_configured", message: "OPENAI_API_KEY is not set on the server." },

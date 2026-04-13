@@ -30,8 +30,26 @@ export function AjaxAssistantDock() {
   const [input, setInput] = useState("");
   const [pending, setPending] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  /** Server has OPENAI — from public /api/assistant/status (no key exposed). */
+  const [aiBackend, setAiBackend] = useState<"unknown" | "configured" | "offline">("unknown");
   const listRef = useRef<HTMLDivElement>(null);
   const voice = useVoiceChat();
+
+  useEffect(() => {
+    let cancelled = false;
+    void fetch("/api/assistant/status")
+      .then((r) => r.json() as Promise<{ configured?: boolean }>)
+      .then((d) => {
+        if (cancelled) return;
+        setAiBackend(d.configured ? "configured" : "offline");
+      })
+      .catch(() => {
+        if (!cancelled) setAiBackend("offline");
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, []);
 
   const scrollToEnd = useCallback(() => {
     const el = listRef.current;
@@ -132,14 +150,31 @@ export function AjaxAssistantDock() {
         type="button"
         onClick={() => openAssistant()}
         className={cn(
-          "fixed bottom-5 right-5 z-50 flex h-14 w-14 items-center justify-center rounded-2xl border border-white/30 bg-gradient-to-br from-[#002d62] to-[#001a35] text-white shadow-[0_12px_40px_-6px_rgba(0,45,98,0.55)] transition hover:scale-[1.03] hover:shadow-xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#fdb913]",
+          "group fixed bottom-5 right-5 z-50 flex h-14 w-14 items-center justify-center rounded-2xl border border-white/25 bg-gradient-to-br from-[#002d62] via-[#002852] to-[#001a35] text-white shadow-ajax-fab transition motion-safe:hover:scale-[1.04] motion-safe:hover:shadow-xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#fdb913]",
+          aiBackend === "configured" && "ring-2 ring-emerald-400/45",
           isOpen && "pointer-events-none opacity-0",
         )}
         aria-haspopup="dialog"
         aria-expanded={isOpen}
         aria-label="Open AJAX Guide assistant"
+        title={
+          aiBackend === "configured"
+            ? "AJAX Guide — AI backend connected"
+            : aiBackend === "offline"
+              ? "AJAX Guide — add OPENAI_API_KEY for full AI answers"
+              : "AJAX Guide"
+        }
       >
-        <Sparkles className="size-7" aria-hidden />
+        <span
+          className={cn(
+            "absolute right-2 top-2 size-2 rounded-full ring-2 ring-white/30",
+            aiBackend === "configured" && "bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.9)]",
+            aiBackend === "offline" && "bg-amber-400 shadow-[0_0_6px_rgba(251,191,36,0.7)]",
+            aiBackend === "unknown" && "bg-slate-300/80",
+          )}
+          aria-hidden
+        />
+        <Sparkles className="relative size-7 motion-safe:transition-transform motion-safe:group-hover:rotate-6" aria-hidden />
       </button>
 
       <div
@@ -154,22 +189,33 @@ export function AjaxAssistantDock() {
       >
         <button
           type="button"
-          className="absolute inset-0 bg-[#001a35]/55 backdrop-blur-[2px] motion-safe:transition-opacity"
+          className="absolute inset-0 bg-[#001a35]/50 backdrop-blur-md motion-safe:transition-opacity"
           aria-label="Close assistant overlay"
           onClick={closeAssistant}
         />
         <aside
           className={cn(
-            "absolute flex max-h-[92dvh] w-full flex-col border-l border-white/10 bg-card text-foreground shadow-2xl motion-safe:transition-transform motion-safe:duration-300 motion-reduce:transition-none",
+            "absolute flex max-h-[92dvh] w-full flex-col border-l border-white/15 bg-card/95 text-foreground shadow-ajax-xl backdrop-blur-xl motion-safe:transition-transform motion-safe:duration-300 motion-reduce:transition-none",
             "bottom-0 right-0 top-auto max-h-[88dvh] rounded-t-3xl sm:bottom-0 sm:top-0 sm:max-h-none sm:w-[min(100%,420px)] sm:rounded-none",
             isOpen ? "translate-y-0 sm:translate-x-0" : "translate-y-full sm:translate-y-0 sm:translate-x-full",
           )}
         >
-          <header className="flex shrink-0 items-start justify-between gap-3 border-b border-border/80 bg-gradient-to-r from-[#002d62] to-[#0a3566] px-4 py-4 text-white">
+          <header className="ajax-glass-header flex shrink-0 items-start justify-between gap-3 px-4 py-4">
             <div>
               <p className="font-display text-lg font-bold tracking-tight">AJAX Guide</p>
-              <p className="mt-1 text-xs leading-relaxed text-white/85">
-                Answers use approved campaign info — not legal advice.
+              <p className="mt-1 flex flex-wrap items-center gap-x-2 gap-y-1 text-xs leading-relaxed text-white/88">
+                <span>Approved campaign info — not legal advice.</span>
+                {aiBackend === "configured" ? (
+                  <span className="inline-flex items-center gap-1 rounded-full bg-white/10 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-emerald-200">
+                    <span className="size-1.5 rounded-full bg-emerald-400 shadow-[0_0_6px_#34d399]" aria-hidden />
+                    AI online
+                  </span>
+                ) : aiBackend === "offline" ? (
+                  <span className="inline-flex items-center gap-1 rounded-full bg-black/20 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-amber-100">
+                    <span className="size-1.5 rounded-full bg-amber-400" aria-hidden />
+                    Key needed
+                  </span>
+                ) : null}
               </p>
             </div>
             <div className="flex shrink-0 items-center gap-1">
@@ -212,8 +258,8 @@ export function AjaxAssistantDock() {
                 className={cn(
                   "rounded-2xl px-3.5 py-2.5 text-sm leading-relaxed",
                   m.role === "user"
-                    ? "ml-6 bg-[#002d62] text-white"
-                    : "mr-4 border border-border bg-background text-foreground shadow-sm",
+                    ? "ml-6 bg-gradient-to-br from-[#002d62] to-[#001f45] text-white shadow-md shadow-primary/20"
+                    : "mr-4 border border-border/80 bg-background/90 text-foreground shadow-sm backdrop-blur-sm",
                 )}
               >
                 {m.content}

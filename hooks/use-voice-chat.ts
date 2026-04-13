@@ -47,8 +47,10 @@ export function useVoiceChat(): VoiceChatControls {
   const blobUrlRef = useRef<string | null>(null);
 
   useEffect(() => {
-    setListenSupported(getSpeechRecognitionCtor() !== null);
-    setSpeakSupported(true);
+    queueMicrotask(() => {
+      setListenSupported(getSpeechRecognitionCtor() !== null);
+      setSpeakSupported(true);
+    });
   }, []);
 
   const stopListening = useCallback(() => {
