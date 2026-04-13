@@ -1,5 +1,9 @@
 # Publish must not be the repo root (clears Netlify UI "Publish directory" conflicts).
 # @netlify/plugin-nextjs expects the Next.js dist dir (default `.next`).
+#
+# Secrets (OPENAI_API_KEY for /api/assistant, Supabase keys, etc.): set in the Netlify UI
+# (Site configuration → Environment variables), not in this file. Redeploy after adding or changing.
+
 [build]
   command = "npm run build"
   publish = ".next"

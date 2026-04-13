@@ -19,7 +19,7 @@ export const wards: Ward[] = [
   {
     slug: "ward-2",
     name: "Ward 2",
-    summary: "Beaches and coastal communities — volunteer briefings underway.",
+    summary: "Northeast Jacksonville — US-67 / Main corridor and nearby neighborhoods.",
     status: "building",
     captain: "Captain recruiting (placeholder)",
   },

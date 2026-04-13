@@ -8,6 +8,7 @@ import { SectionShell } from "@/components/layout/section-shell";
 import { RelationalOrganizingIntro } from "@/components/wards/relational-organizing-intro";
 import { SupabaseNotice } from "@/components/wards/supabase-notice";
 import { WardLeaderboard } from "@/components/wards/ward-leaderboard";
+import { WardCoverageSection } from "@/components/wards/ward-coverage-section";
 import { wards } from "@/content/wards";
 import {
   fetchWardLeaderboard,
@@ -38,6 +39,8 @@ export default async function WardDetailPage({ params }: Props) {
   const ward = wards.find((w) => w.slug === slug);
   if (!ward) notFound();
 
+  const mapsApiKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY?.trim() ?? "";
+
   const [leaderboard, teamStats] = await Promise.all([
     fetchWardLeaderboard(slug, 15),
     fetchWardTeamStats(slug),
@@ -67,6 +70,10 @@ export default async function WardDetailPage({ params }: Props) {
             <SecondaryButton href="/wards">All wards</SecondaryButton>
           </div>
         </div>
+      </SectionShell>
+
+      <SectionShell className="border-t-0">
+        <WardCoverageSection wardSlug={ward.slug} wardName={ward.name} mapsApiKey={mapsApiKey} />
       </SectionShell>
 
       {!isSupabaseConfigured() ? (
