@@ -10,7 +10,7 @@ export default function ConstituentLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="flex min-h-screen flex-col">
+    <div className="marketing-public-root flex min-h-screen flex-col">
       <ConstituentHeader />
       <div className="flex-1">{children}</div>
       <ConstituentFooter />

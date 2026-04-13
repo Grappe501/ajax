@@ -17,6 +17,12 @@ export default function ResourcesPage() {
         subtitle="Handbooks, printable guides, and partner toolkits will live here in Phase 2."
       />
       <ul className="list-inside list-disc space-y-2 text-muted-foreground">
+        <li>
+          <a href="/canvass/map" className="font-semibold text-primary underline-offset-4 hover:underline">
+            Field canvass map
+          </a>{" "}
+          (Google Maps + voter pins — sign in required)
+        </li>
         <li>Petition quick guide (PDF) — link TBD</li>
         <li>Volunteer onboarding packet — link TBD</li>
         <li>Partner messaging one-pager — link TBD</li>

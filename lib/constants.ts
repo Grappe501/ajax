@@ -18,6 +18,8 @@ export const ROUTES = {
   faq: "/faq",
   resources: "/resources",
   lead: "/lead",
+  canvassMap: "/canvass/map",
+  admin: "/admin",
 } as const;
 
 export const ANALYTICS_EVENT = {

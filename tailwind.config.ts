@@ -35,6 +35,14 @@ export default {
       fontFamily: {
         sans: ["var(--font-sans-body)", "system-ui", "sans-serif"],
         display: ["var(--font-display)", "var(--font-sans-body)", "system-ui", "sans-serif"],
+        /** Optional — set on marketing layout for a more contemporary public hero */
+        publicDisplay: [
+          "var(--font-public)",
+          "var(--font-display)",
+          "var(--font-sans-body)",
+          "system-ui",
+          "sans-serif",
+        ],
       },
       colors: {
         background: "var(--background)",

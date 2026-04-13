@@ -9,7 +9,7 @@ import { site } from "@/content/site";
 export const metadata: Metadata = {
   title: "Movement",
   description:
-    "Momentum, volunteer energy, and partner organizations supporting AJAX — updated as the campaign publishes numbers.",
+    "Petition pipeline KPIs: raw signatures, spreadsheet entry, voter-file matching, and voter-record marks — plus stories from the AJAX field team.",
 };
 
 export default function MovementPage() {

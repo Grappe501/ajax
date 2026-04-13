@@ -6,17 +6,23 @@ import { site } from "@/content/site";
 export function MovementPageContent() {
   return (
     <>
-      <div className="grid gap-4 md:grid-cols-3">
+      <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
         {site.movement.stats.map((s) => (
           <Card
             key={s.label}
-            className="rounded-2xl border-border/80 bg-secondary/30 p-6 text-center shadow-sm"
+            className="flex flex-col rounded-2xl border-border/80 bg-secondary/30 p-6 text-center shadow-sm"
           >
-            <p className="font-display text-4xl font-extrabold text-primary">{s.value}</p>
-            <p className="mt-2 text-sm font-medium text-muted-foreground">{s.label}</p>
+            <p className="font-display text-4xl font-extrabold tabular-nums text-primary">{s.value}</p>
+            <p className="mt-2 text-sm font-semibold leading-snug text-foreground">{s.label}</p>
+            {"hint" in s && s.hint ? (
+              <p className="mt-3 text-xs leading-relaxed text-muted-foreground">{s.hint}</p>
+            ) : null}
           </Card>
         ))}
       </div>
+      <p className="mt-6 max-w-3xl text-sm leading-relaxed text-muted-foreground">
+        {site.movement.revisitNote}
+      </p>
       <div className="mt-10 grid gap-6 lg:grid-cols-2">
         {site.movement.quotes.map((q) => (
           <Card key={q.quote} className="rounded-2xl border-border/80 p-6 shadow-sm">

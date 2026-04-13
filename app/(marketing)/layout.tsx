@@ -8,11 +8,11 @@ export default function MarketingLayout({
   children: React.ReactNode;
 }) {
   return (
-    <>
+    <div className="marketing-public-root">
       <AnnouncementBar />
       <SiteHeader />
       {children}
       <SiteFooter />
-    </>
+    </div>
   );
 }

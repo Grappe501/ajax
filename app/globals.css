@@ -233,6 +233,29 @@
   .text-balance-safe {
     text-wrap: balance;
   }
+
+  /* Public marketing surface — layered depth without clutter */
+  .marketing-public-root {
+    position: relative;
+  }
+
+  .marketing-public-root::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    opacity: 0.55;
+    background:
+      radial-gradient(ellipse 100% 70% at 10% 0%, rgba(253, 185, 19, 0.09), transparent 50%),
+      radial-gradient(ellipse 80% 50% at 90% 15%, rgba(0, 45, 98, 0.07), transparent 45%);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .marketing-public-root::before {
+      opacity: 0.35;
+    }
+  }
 }
 
 ::selection {

@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
-import { Montserrat, Open_Sans } from "next/font/google";
+import { Montserrat, Open_Sans, Plus_Jakarta_Sans } from "next/font/google";
 
+import { AjaxAssistantDock } from "@/components/assistant/ajax-assistant-dock";
+import { AssistantProvider } from "@/components/assistant/assistant-context";
 import { site } from "@/content/site";
 
 import "./globals.css";
@@ -17,6 +19,12 @@ const sans = Open_Sans({
   weight: ["400", "600", "700"],
 });
 
+const fontPublic = Plus_Jakarta_Sans({
+  variable: "--font-public",
+  subsets: ["latin"],
+  weight: ["600", "700", "800"],
+});
+
 export const metadata: Metadata = {
   metadataBase: new URL("https://ajax-volunteer-hub.netlify.app"),
   title: {
@@ -24,7 +32,7 @@ export const metadata: Metadata = {
     template: "%s · AJAX Volunteer Hub",
   },
   description:
-    "The official volunteer home base for the AJAX campaign to replace Jacksonville’s at-large voting system with ward-based representation.",
+    "Jacksonville’s campaign for ward-based representation — a welcoming public site with clear paths to learn, sign, volunteer, and get answers from the AJAX Guide.",
   icons: {
     icon: site.brand.logoSrc,
     apple: site.brand.logoSrc,
@@ -32,7 +40,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "AJAX Volunteer Hub",
     description:
-      "Learn the petition. Sign with confidence. Volunteer with purpose — Jacksonville’s grassroots campaign for ward-based representation.",
+      "Learn the petition, sign with confidence, or volunteer — with a guided path and the AJAX Guide for questions.",
     type: "website",
     locale: "en_US",
     images: [
@@ -48,7 +56,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "AJAX Volunteer Hub",
     description:
-      "Grassroots volunteer home for fairer representation in Jacksonville.",
+      "Ward-based representation for Jacksonville — guided paths to learn, sign, and volunteer.",
     images: [site.brand.logoSrc],
   },
 };
@@ -61,11 +69,14 @@ export default function RootLayout({
   return (
     <html lang="en" className="theme">
       <body
-        className={`${display.variable} ${sans.variable} relative min-h-screen bg-background font-sans text-foreground antialiased`}
+        className={`${display.variable} ${sans.variable} ${fontPublic.variable} relative min-h-screen bg-background font-sans text-foreground antialiased`}
       >
-        <div className="ajax-page-backdrop" aria-hidden />
-        <div className="ajax-page-grid" aria-hidden />
-        {children}
+        <AssistantProvider>
+          <div className="ajax-page-backdrop" aria-hidden />
+          <div className="ajax-page-grid" aria-hidden />
+          {children}
+          <AjaxAssistantDock />
+        </AssistantProvider>
       </body>
     </html>
   );

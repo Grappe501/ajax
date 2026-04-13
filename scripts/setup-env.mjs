@@ -28,6 +28,12 @@ const site =
     "NEXT_PUBLIC_SITE_URL [http://localhost:3000]: ",
   )).trim() || "http://localhost:3000";
 
+const mapsKey = (
+  await rl.question(
+    "NEXT_PUBLIC_GOOGLE_MAPS_API_KEY (optional, for /canvass/map — press Enter to skip): ",
+  )
+).trim();
+
 rl.close();
 
 const lines = [
@@ -35,6 +41,7 @@ const lines = [
   `NEXT_PUBLIC_SUPABASE_URL=${url.trim()}`,
   `NEXT_PUBLIC_SUPABASE_ANON_KEY=${key.trim()}`,
   `NEXT_PUBLIC_SITE_URL=${site.trim()}`,
+  ...(mapsKey ? [`NEXT_PUBLIC_GOOGLE_MAPS_API_KEY=${mapsKey}`] : []),
   "",
 ];
 

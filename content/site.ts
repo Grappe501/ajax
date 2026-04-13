@@ -27,13 +27,13 @@ export const site = {
     { label: "Training", href: "/training" },
   ],
   hero: {
-    headline: "Build fair representation in Jacksonville",
+    headline: "Fair representation that starts where you live",
     subhead:
-      "Learn the petition. Sign with confidence. Volunteer with purpose.",
-    primaryCta: "Join the Volunteer Team",
-    secondaryCta: "Learn How the Petition Works",
+      "Curious, cautious, or ready to act — this door is for you. Understand the petition in plain language, sign when it feels right, or volunteer with neighbors who share your streets and schools.",
+    primaryCta: "Volunteer with us",
+    secondaryCta: "Read the calm explainer",
     trustLine:
-      "Grassroots, neighbor-to-neighbor — organized for clarity and impact.",
+      "Inclusive, transparent, neighbor-led — no insider jargon required.",
   },
   startHere: [
     {
@@ -185,26 +185,45 @@ export const site = {
   movement: {
     title: "A growing movement",
     subtitle:
-      "Numbers update as the campaign publishes verified totals. Until then, this space holds the story: neighbors organizing neighbors.",
+      "Petition lines move through a clear pipeline: sheets are entered into the AJAX spreadsheet, each line is checked against Arkansas voter records (VoterView until our database is fully live), then valid signatures are marked on the voter file. Problem lines go to a revisit list for a clean signature at home. The figures below are internal campaign counts — not the city clerk’s final filing tally until a full pass is complete.",
     stats: [
-      { label: "Verified signatures (placeholder)", value: "—" },
-      { label: "Volunteers stepped up (placeholder)", value: "—" },
-      { label: "Ward teams forming (placeholder)", value: "—" },
+      {
+        label: "Raw signatures on petitions",
+        value: "440",
+        hint: "Total ink on sheets returned to the campaign",
+      },
+      {
+        label: "Logged in AJAX spreadsheet",
+        value: "~350",
+        hint: "Digitized from sheets; remainder queued for entry",
+      },
+      {
+        label: "Matched to voter file",
+        value: "0",
+        hint: "Cross-checked in VoterView / official voter data — not started yet",
+      },
+      {
+        label: "Marked on voter record",
+        value: "0",
+        hint: "Registration file updated to reflect petition participation",
+      },
     ],
+    revisitNote:
+      "Any line with a petition or witnessing issue is tracked separately so the signer can be revisited for a new signature once the sheet is corrected.",
     quotes: [
       {
         quote:
           "We are not waiting for someone else to speak for our side of town.",
-        attribution: "Local supporter (placeholder)",
+        attribution: "Jacksonville supporter",
       },
       {
         quote:
           "Clarity on the rules made it easy to help my neighbors sign with confidence.",
-        attribution: "Volunteer (placeholder)",
+        attribution: "AJAX volunteer",
       },
     ],
     partners:
-      "Churches, small businesses, and community partners are joining as locations and messengers (placeholder list).",
+      "Churches, small businesses, and community partners are stepping up as hosts and messengers as schedules and locations firm up.",
   },
   finalCta: {
     title: "Ready to help Jacksonville vote with clearer neighborhood voice?",
