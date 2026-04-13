@@ -285,7 +285,8 @@ export function AjaxAssistantDock() {
             {voice.listenSupported ? (
               <p className="mt-2 text-[10px] leading-relaxed text-muted-foreground">
                 Tap the mic to dictate (works best in Chrome or Edge). Use the speaker control in the
-                header to turn read-aloud on or off.
+                header to turn read-aloud on or off — when the campaign enables ElevenLabs, replies use
+                that voice; otherwise your browser reads the text.
               </p>
             ) : null}
             <p className="mt-3 text-[10px] leading-relaxed text-muted-foreground">

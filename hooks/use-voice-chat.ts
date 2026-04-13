@@ -11,7 +11,7 @@ function getSpeechRecognitionCtor(): SpeechRecognitionConstructor | null {
 export type VoiceChatControls = {
   /** Browser can capture speech (Chrome/Edge/Safari; may need permission). */
   listenSupported: boolean;
-  /** Browser can speak replies. */
+  /** Read-aloud is available (ElevenLabs via API and/or browser speech synthesis). */
   speakSupported: boolean;
   /** Mic is actively listening. */
   isListening: boolean;
@@ -26,7 +26,8 @@ export type VoiceChatControls = {
 };
 
 /**
- * Web Speech API: push-to-talk input + optional TTS for assistant replies.
+ * Push-to-talk via Web Speech API. Assistant replies: ElevenLabs TTS from `/api/assistant/speech`
+ * when configured server-side, otherwise browser `speechSynthesis`.
  */
 export function useVoiceChat(): VoiceChatControls {
   const [listenSupported, setListenSupported] = useState(false);
@@ -38,9 +39,13 @@ export function useVoiceChat(): VoiceChatControls {
   const onTranscriptRef = useRef<(text: string) => void>(() => {});
   const onInterimRef = useRef<((text: string) => void) | undefined>(undefined);
 
+  const abortSpeechRef = useRef<AbortController | null>(null);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+  const blobUrlRef = useRef<string | null>(null);
+
   useEffect(() => {
     setListenSupported(getSpeechRecognitionCtor() !== null);
-    setSpeakSupported(typeof window !== "undefined" && "speechSynthesis" in window);
+    setSpeakSupported(true);
   }, []);
 
   const stopListening = useCallback(() => {
@@ -57,6 +62,24 @@ export function useVoiceChat(): VoiceChatControls {
   }, []);
 
   const stopSpeaking = useCallback(() => {
+    abortSpeechRef.current?.abort();
+    abortSpeechRef.current = null;
+
+    if (audioRef.current) {
+      try {
+        audioRef.current.pause();
+        audioRef.current.src = "";
+      } catch {
+        /* ignore */
+      }
+      audioRef.current = null;
+    }
+
+    if (blobUrlRef.current) {
+      URL.revokeObjectURL(blobUrlRef.current);
+      blobUrlRef.current = null;
+    }
+
     if (typeof window !== "undefined" && window.speechSynthesis) {
       window.speechSynthesis.cancel();
     }
@@ -65,14 +88,69 @@ export function useVoiceChat(): VoiceChatControls {
   const speak = useCallback(
     (text: string) => {
       if (!autoSpeak || !text.trim()) return;
-      if (typeof window === "undefined" || !window.speechSynthesis) return;
-      window.speechSynthesis.cancel();
-      const u = new SpeechSynthesisUtterance(text.trim());
-      u.lang = "en-US";
-      u.rate = 0.95;
-      window.speechSynthesis.speak(u);
+      stopSpeaking();
+
+      const trimmed = text.trim();
+      const ac = new AbortController();
+      abortSpeechRef.current = ac;
+
+      const fallbackBrowserTts = () => {
+        if (typeof window === "undefined" || !window.speechSynthesis) return;
+        window.speechSynthesis.cancel();
+        const u = new SpeechSynthesisUtterance(trimmed);
+        u.lang = "en-US";
+        u.rate = 0.95;
+        window.speechSynthesis.speak(u);
+      };
+
+      void (async () => {
+        try {
+          const res = await fetch("/api/assistant/speech", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ text: trimmed }),
+            signal: ac.signal,
+          });
+
+          if (ac.signal.aborted) return;
+
+          const contentType = res.headers.get("content-type") ?? "";
+          if (res.ok && contentType.includes("audio")) {
+            const blob = await res.blob();
+            if (ac.signal.aborted) return;
+
+            const url = URL.createObjectURL(blob);
+            blobUrlRef.current = url;
+            const audio = new Audio(url);
+            audioRef.current = audio;
+            audio.onended = () => {
+              if (blobUrlRef.current === url) {
+                URL.revokeObjectURL(url);
+                blobUrlRef.current = null;
+              }
+            };
+
+            try {
+              await audio.play();
+            } catch {
+              if (blobUrlRef.current === url) {
+                URL.revokeObjectURL(url);
+                blobUrlRef.current = null;
+              }
+              audioRef.current = null;
+              if (!ac.signal.aborted) fallbackBrowserTts();
+            }
+            return;
+          }
+        } catch (e) {
+          if (ac.signal.aborted) return;
+          if (e instanceof DOMException && e.name === "AbortError") return;
+        }
+
+        if (!ac.signal.aborted) fallbackBrowserTts();
+      })();
     },
-    [autoSpeak],
+    [autoSpeak, stopSpeaking],
   );
 
   const toggleListen = useCallback(
