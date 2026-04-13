@@ -1,24 +1,7 @@
 -- AJAX relational organizing: Power-of-5 tree per ward, leaderboard-ready.
 -- Apply in Supabase SQL editor or: supabase db push
-
-create or replace function public.organizer_descendant_count(p_id uuid)
-returns integer
-language sql
-stable
-security definer
-set search_path = public
-as $$
-  with recursive down as (
-    select id, parent_id
-    from public.ward_organizers
-    where parent_id = p_id
-    union all
-    select c.id, c.parent_id
-    from public.ward_organizers c
-    inner join down d on c.parent_id = d.id
-  )
-  select coalesce((select count(*)::int from down), 0);
-$$;
+--
+-- Table and triggers MUST exist before functions that reference ward_organizers.
 
 create table if not exists public.ward_organizers (
   id uuid primary key default gen_random_uuid(),
@@ -71,6 +54,26 @@ drop trigger if exists trg_ward_organizers_updated on public.ward_organizers;
 create trigger trg_ward_organizers_updated
   before update on public.ward_organizers
   for each row execute function public.touch_ward_organizers_updated_at();
+
+-- Depends on ward_organizers existing (recursive descendant count).
+create or replace function public.organizer_descendant_count(p_id uuid)
+returns integer
+language sql
+stable
+security definer
+set search_path = public
+as $$
+  with recursive down as (
+    select id, parent_id
+    from public.ward_organizers
+    where parent_id = p_id
+    union all
+    select c.id, c.parent_id
+    from public.ward_organizers c
+    inner join down d on c.parent_id = d.id
+  )
+  select coalesce((select count(*)::int from down), 0);
+$$;
 
 -- Public leaderboard via RPC (no auth_user_id exposure to clients)
 create or replace function public.get_ward_leaderboard(p_ward_slug text, p_limit int default 25)

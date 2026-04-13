@@ -15,6 +15,8 @@ Apply migrations **in filename order** so foreign keys and policies line up:
 2. Paste each file **in order**, run, confirm success.
 3. Or use the CLI (if linked): `supabase db push`
 
+**Note:** `ward_organizing.sql` creates the `ward_organizers` table *before* any function that references it. If you ever see `relation "ward_organizers" does not exist` on the first function in an old copy of the file, replace the file with the current repo version and run it again (or run the full corrected migration from a clean database).
+
 ## Environment (Next.js)
 
 Set in Netlify / `.env.local`:
