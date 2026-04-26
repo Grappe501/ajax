@@ -1,3 +1,5 @@
+import { getLegalSourceById } from "@/content/legal/sourceRegistry";
+
 export type RuleLink = {
   label: string;
   href: string;
@@ -35,19 +37,19 @@ export const rules: RuleItem[] = [
       },
       {
         label: "Arkansas Secretary of State — Initiatives & Referenda",
-        href: "https://www.sos.arkansas.gov/elections/initiatives-and-referenda/",
+        href: getLegalSourceById("legal-sos-initiatives-referenda").url,
       },
       {
         label: "2025–2026 Initiatives & Referenda Handbook (PDF)",
-        href: "https://www.sos.arkansas.gov/uploads/elections/2025-2026_I__R_Handbook_-_December_2025_(00000005)_Final_copy_12.31_.25_.pdf",
+        href: getLegalSourceById("legal-sos-handbook-ir-2025-2026-pdf").url,
       },
       {
         label: "Arkansas Code (official search)",
-        href: "https://portal.arkansas.gov/service/arkansas-code-search-laws-and-statutes/",
+        href: getLegalSourceById("legal-arkansas-code-portal").url,
       },
       {
         label: "Reporting: federal injunction on several 2025 direct-democracy laws (context)",
-        href: "https://arkansasadvocate.com/2025/11/19/judge-issues-injunction-against-arkansas-direct-democracy-laws/",
+        href: getLegalSourceById("legal-arkansas-advocate-injunction-2025-11").url,
       },
     ],
     sources:
@@ -62,15 +64,15 @@ export const rules: RuleItem[] = [
     links: [
       {
         label: "Arkansas Secretary of State — Voter information (VoterView link)",
-        href: "https://www.sos.arkansas.gov/elections/voter-information/",
+        href: getLegalSourceById("legal-sos-voter-information").url,
       },
       {
         label: "VoterView (registration lookup)",
-        href: "https://www.voterview.ar-nova.org/VoterView",
+        href: getLegalSourceById("legal-voterview").url,
       },
       {
         label: "Voter registration application (PDF)",
-        href: "https://www.sos.arkansas.gov/uploads/elections/Voter_Reg_App._8-2023_.pdf",
+        href: getLegalSourceById("legal-sos-voter-registration-pdf").url,
       },
     ],
     mistakes:

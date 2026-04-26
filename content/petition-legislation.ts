@@ -4,6 +4,8 @@
  * Verify text and codification with arkleg.state.ar.us and the official Arkansas Code.
  */
 
+import { buildArklegBillUrl, getLegalSourceById } from "@/content/legal/sourceRegistry";
+
 export type LegislationEntry = {
   slug: string;
   shortTitle: string;
@@ -32,9 +34,6 @@ export const legislationIndexIntro = {
     "Session numbering and press shorthand vary. Always confirm the enrolled act and codified sections before relying on this for filing strategy.",
 } as const;
 
-const arkleg = (year: number, bill: string) =>
-  `https://arkleg.state.ar.us/Bills/Detail?ddBienniumSession=${year}%2F${year}R&id=${bill}`;
-
 export const legislationEntries: LegislationEntry[] = [
   {
     slug: "act-951-sb614-2021",
@@ -53,11 +52,11 @@ export const legislationEntries: LegislationEntry[] = [
     jacksonvilleNote:
       "AJAX uses unpaid volunteers, so several pay/compensation clauses are chiefly context — but the cultural shift (more criminal exposure statewide) affects how neighbors interpret petition workers everywhere.",
     litigationWatch: false,
-    arklegQueryPath: arkleg(2021, "SB614"),
+    arklegQueryPath: buildArklegBillUrl(2021, "SB614"),
     sources: [
       {
         label: "Ballotpedia — 2021 Arkansas restrictions overview",
-        href: "https://news.ballotpedia.org/2021/05/03/arkansas-passes-bill-with-multiple-restrictions-on-the-ballot-initiative-process/",
+        href: getLegalSourceById("legal-ballotpedia-news-2021-05-arkansas-restrictions").url,
       },
     ],
   },
@@ -78,9 +77,9 @@ export const legislationEntries: LegislationEntry[] = [
     jacksonvilleNote:
       "Municipal petitions still need city/clerk alignment, but the AG’s statewide jurisprudence shapes the legal culture volunteers read about in the news.",
     litigationWatch: false,
-    arklegQueryPath: arkleg(2023, "HB1320"),
+    arklegQueryPath: buildArklegBillUrl(2023, "HB1320"),
     sources: [
-      { label: "Arkansas Legislature — HB1320", href: arkleg(2023, "HB1320") },
+      { label: "Arkansas Legislature — HB1320", href: buildArklegBillUrl(2023, "HB1320") },
     ],
   },
   {
@@ -100,8 +99,8 @@ export const legislationEntries: LegislationEntry[] = [
     jacksonvilleNote:
       "Jacksonville’s measure is not a 75-county campaign, but this act is why neighbors hear about ‘county quotas’ on TV — distinguish local filing rules when you train volunteers.",
     litigationWatch: true,
-    arklegQueryPath: arkleg(2023, "HB1419"),
-    sources: [{ label: "Arkansas Legislature — HB1419", href: arkleg(2023, "HB1419") }],
+    arklegQueryPath: buildArklegBillUrl(2023, "HB1419"),
+    sources: [{ label: "Arkansas Legislature — HB1419", href: buildArklegBillUrl(2023, "HB1419") }],
   },
   {
     slug: "act-766-sb377-2023",
@@ -120,8 +119,8 @@ export const legislationEntries: LegislationEntry[] = [
     jacksonvilleNote:
       "Even peaceful Jacksonville tabling can get tense — knowing interference is regulated helps coordinators escalate to law enforcement with vocabulary that matches the code.",
     litigationWatch: false,
-    arklegQueryPath: arkleg(2023, "SB377"),
-    sources: [{ label: "Arkansas Legislature — SB377", href: arkleg(2023, "SB377") }],
+    arklegQueryPath: buildArklegBillUrl(2023, "SB377"),
+    sources: [{ label: "Arkansas Legislature — SB377", href: buildArklegBillUrl(2023, "SB377") }],
   },
   {
     slug: "act-115-sb102-2025",
@@ -140,12 +139,12 @@ export const legislationEntries: LegislationEntry[] = [
     jacksonvilleNote:
       "If AJAX ever uses paid circulators, this act is central; if fully volunteer, focus on how it signals legislature intent — local petitions are no longer ‘lighter’ by default.",
     litigationWatch: true,
-    arklegQueryPath: arkleg(2025, "SB102"),
+    arklegQueryPath: buildArklegBillUrl(2025, "SB102"),
     sources: [
-      { label: "Arkansas Legislature — SB102", href: arkleg(2025, "SB102") },
+      { label: "Arkansas Legislature — SB102", href: buildArklegBillUrl(2025, "SB102") },
       {
         label: "Ballotpedia — March 2025 initiative package",
-        href: "https://news.ballotpedia.org/2025/03/03/arkansas-governor-signs-four-bills-revising-initiative-and-referendum-rules-including-signature-gathering-period-ballot-language-approval-and-circulator-requirements/",
+        href: getLegalSourceById("legal-ballotpedia-news-2025-03-initiative-package").url,
       },
     ],
   },
@@ -166,8 +165,8 @@ export const legislationEntries: LegislationEntry[] = [
     jacksonvilleNote:
       "City filing windows differ, but volunteers should understand the statewide mood: Arkansas is shortening the half-life of political consent on paper.",
     litigationWatch: true,
-    arklegQueryPath: arkleg(2025, "HB1221"),
-    sources: [{ label: "Arkansas Legislature — HB1221", href: arkleg(2025, "HB1221") }],
+    arklegQueryPath: buildArklegBillUrl(2025, "HB1221"),
+    sources: [{ label: "Arkansas Legislature — HB1221", href: buildArklegBillUrl(2025, "HB1221") }],
   },
   {
     slug: "act-154-hb1222-2025",
@@ -186,8 +185,8 @@ export const legislationEntries: LegislationEntry[] = [
     jacksonvilleNote:
       "Unlikely to apply directly to a single-city charter question, yet it shapes the legal culture and donor narratives around ‘ballot chaos.’",
     litigationWatch: true,
-    arklegQueryPath: arkleg(2025, "HB1222"),
-    sources: [{ label: "Arkansas Legislature — HB1222", href: arkleg(2025, "HB1222") }],
+    arklegQueryPath: buildArklegBillUrl(2025, "HB1222"),
+    sources: [{ label: "Arkansas Legislature — HB1222", href: buildArklegBillUrl(2025, "HB1222") }],
   },
   {
     slug: "act-218-sb207-2025",
@@ -206,8 +205,8 @@ export const legislationEntries: LegislationEntry[] = [
     jacksonvilleNote:
       "Build a one-sentence volunteer script approved by counsel; AJAX’s culture is transparency, not intimidation.",
     litigationWatch: true,
-    arklegQueryPath: arkleg(2025, "SB207"),
-    sources: [{ label: "Arkansas Legislature — SB207", href: arkleg(2025, "SB207") }],
+    arklegQueryPath: buildArklegBillUrl(2025, "SB207"),
+    sources: [{ label: "Arkansas Legislature — SB207", href: buildArklegBillUrl(2025, "SB207") }],
   },
   {
     slug: "act-240-sb208-2025",
@@ -226,8 +225,8 @@ export const legislationEntries: LegislationEntry[] = [
     jacksonvilleNote:
       "Do not improvise ID policies on AJAX tables — follow campaign counsel’s written stance for municipal paperwork.",
     litigationWatch: true,
-    arklegQueryPath: arkleg(2025, "SB208"),
-    sources: [{ label: "Arkansas Legislature — SB208", href: arkleg(2025, "SB208") }],
+    arklegQueryPath: buildArklegBillUrl(2025, "SB208"),
+    sources: [{ label: "Arkansas Legislature — SB208", href: buildArklegBillUrl(2025, "SB208") }],
   },
   {
     slug: "act-273-sb209-2025",
@@ -246,8 +245,8 @@ export const legislationEntries: LegislationEntry[] = [
     jacksonvilleNote:
       "Volunteer culture — never ghost-witness, never rush IDs — is now statutory self-defense.",
     litigationWatch: true,
-    arklegQueryPath: arkleg(2025, "SB209"),
-    sources: [{ label: "Arkansas Legislature — SB209", href: arkleg(2025, "SB209") }],
+    arklegQueryPath: buildArklegBillUrl(2025, "SB209"),
+    sources: [{ label: "Arkansas Legislature — SB209", href: buildArklegBillUrl(2025, "SB209") }],
   },
   {
     slug: "act-274-sb210-2025",
@@ -266,12 +265,12 @@ export const legislationEntries: LegislationEntry[] = [
     jacksonvilleNote:
       "For municipal sheets, confirm whether parallel requirements exist; do not assume statewide scripts apply without clerk/counsel sign-off.",
     litigationWatch: true,
-    arklegQueryPath: arkleg(2025, "SB210"),
+    arklegQueryPath: buildArklegBillUrl(2025, "SB210"),
     sources: [
-      { label: "Arkansas Legislature — SB210", href: arkleg(2025, "SB210") },
+      { label: "Arkansas Legislature — SB210", href: buildArklegBillUrl(2025, "SB210") },
       {
         label: "ACLU of Arkansas — legislative summary",
-        href: "https://www.acluarkansas.org/en/legislation/require-signer-read-ballot-title-petition-presence-canvasser-and-declare-emergency",
+        href: getLegalSourceById("legal-aclu-ar-read-ballot-title-2025").url,
       },
     ],
   },
@@ -292,12 +291,12 @@ export const legislationEntries: LegislationEntry[] = [
     jacksonvilleNote:
       "AJAX’s municipal title still needs clarity — even without FKGL automation, plain language is a strategic asset.",
     litigationWatch: true,
-    arklegQueryPath: arkleg(2025, "HB1713"),
+    arklegQueryPath: buildArklegBillUrl(2025, "HB1713"),
     sources: [
-      { label: "Arkansas Legislature — HB1713", href: arkleg(2025, "HB1713") },
+      { label: "Arkansas Legislature — HB1713", href: buildArklegBillUrl(2025, "HB1713") },
       {
         label: "Ballotpedia — readability law overview",
-        href: "https://news.ballotpedia.org/2025/04/23/arkansas-enacts-ballot-title-readability-law-joining-five-other-states-since-2018/",
+        href: getLegalSourceById("legal-ballotpedia-news-2025-04-readability").url,
       },
     ],
   },
@@ -318,15 +317,15 @@ export const legislationEntries: LegislationEntry[] = [
     jacksonvilleNote:
       "This is the statutory neighbor to everything AJAX files locally — pair reading with Jacksonville’s clerk checklist, not only SOS headlines.",
     litigationWatch: false,
-    arklegQueryPath: "https://law.justia.com/codes/arkansas/title-14/subtitle-2/chapter-14/subchapter-9/section-14-14-915/",
+    arklegQueryPath: getLegalSourceById("legal-justia-aca-14-14-915").url,
     sources: [
       {
         label: "Justia — § 14-14-915 text (confirm current)",
-        href: "https://law.justia.com/codes/arkansas/title-14/subtitle-2/chapter-14/subchapter-9/section-14-14-915/",
+        href: getLegalSourceById("legal-justia-aca-14-14-915").url,
       },
       {
         label: "Ballotpedia — local ballot measures in Arkansas",
-        href: "https://ballotpedia.org/Laws_governing_local_ballot_measures_in_Arkansas",
+        href: getLegalSourceById("legal-ballotpedia-local-measures-ar").url,
       },
     ],
   },

@@ -3,6 +3,8 @@
  * Measures arrays are intentionally partial; expand with clerk records + Ballotpedia imports over time.
  */
 
+import { getLegalSourceById } from "@/content/legal/sourceRegistry";
+
 export type HistoryMeasure = {
   year: number;
   shortName: string;
@@ -43,7 +45,7 @@ export const decadeBlocks: DecadeBlock[] = [
         shortName: "Amendment 10 — Initiative & referendum framework",
         result: "adopted",
         blurb: "Created the constitutional backbone for citizen lawmaking and veto referenda in Arkansas.",
-        href: "https://ballotpedia.org/Arkansas_Initiative_and_Referendum_Amendment_(1910)",
+        href: getLegalSourceById("legal-ballotpedia-ar-1910-amendment-10").url,
       },
     ],
   },
@@ -141,7 +143,7 @@ export const decadeBlocks: DecadeBlock[] = [
         shortName: "Minimum wage & medical cannabis package (context)",
         result: "context",
         blurb: "Illustrates how Arkansas campaigns paired labor and health measures — research exact certification timelines locally.",
-        href: "https://ballotpedia.org/Arkansas_Issue_5,_Minimum_Wage_Increase_Initiative_(2018)",
+        href: getLegalSourceById("legal-ballotpedia-ar-issue-5-2018-minwage").url,
       },
     ],
   },

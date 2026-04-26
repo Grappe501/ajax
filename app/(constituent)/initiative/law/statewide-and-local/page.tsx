@@ -3,6 +3,7 @@ import Link from "next/link";
 
 import { InitiativeSubnav } from "@/components/initiative/initiative-subnav";
 import { DrillDownShell, ProseBlock } from "@/components/initiative/drill-down-shell";
+import { getLegalSourceById } from "@/content/legal/sourceRegistry";
 
 export const metadata: Metadata = {
   title: "Statewide vs. municipal ballot measures",
@@ -51,7 +52,7 @@ export default function StatewideAndLocalPage() {
           <ul className="list-inside list-disc space-y-2">
             <li>
               <a
-                href="https://law.justia.com/constitution/arkansas/article-5.html"
+                href={getLegalSourceById("legal-justia-ar-const-art-5").url}
                 className="text-primary underline-offset-4 hover:underline"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -61,7 +62,7 @@ export default function StatewideAndLocalPage() {
             </li>
             <li>
               <a
-                href="https://law.justia.com/codes/arkansas/title-14/subtitle-2/chapter-14/subchapter-9/section-14-14-915/"
+                href={getLegalSourceById("legal-justia-aca-14-14-915").url}
                 className="text-primary underline-offset-4 hover:underline"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -71,7 +72,7 @@ export default function StatewideAndLocalPage() {
             </li>
             <li>
               <a
-                href="https://ballotpedia.org/Laws_governing_local_ballot_measures_in_Arkansas"
+                href={getLegalSourceById("legal-ballotpedia-local-measures-ar").url}
                 className="text-primary underline-offset-4 hover:underline"
                 target="_blank"
                 rel="noopener noreferrer"

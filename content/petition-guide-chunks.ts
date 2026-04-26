@@ -3,6 +3,8 @@
  * Routes: /initiative/petition-guide/rules/[slug]
  */
 
+import { getLegalSourceById } from "@/content/legal/sourceRegistry";
+
 export type GuideChunk = {
   id: string;
   parentId: string | null;
@@ -15,11 +17,6 @@ export type GuideChunk = {
   nittyGritty?: readonly { heading: string; body: string }[];
   statuteRefs?: readonly { label: string; href: string }[];
 };
-
-const SOS_HANDBOOK =
-  "https://www.sos.arkansas.gov/uploads/elections/2025-2026_I__R_Handbook_-_December_2025_(00000005)_Final_copy_12.31_.25_.pdf";
-const AR_CONST_ART5 = "https://law.justia.com/constitution/arkansas/article-5.html";
-const TITLE7_CH9 = "https://law.justia.com/codes/arkansas/title-7/chapter-9/";
 
 export const guideChunks: GuideChunk[] = [
   {
@@ -48,8 +45,11 @@ export const guideChunks: GuideChunk[] = [
       },
     ],
     statuteRefs: [
-      { label: "Ark. Const. art. 5, § 1 (Justia)", href: AR_CONST_ART5 },
-      { label: "SOS Initiatives & Referenda handbook (PDF)", href: SOS_HANDBOOK },
+      { label: "Ark. Const. art. 5, § 1 (Justia)", href: getLegalSourceById("legal-justia-ar-const-art-5").url },
+      {
+        label: "SOS Initiatives & Referenda handbook (PDF)",
+        href: getLegalSourceById("legal-sos-handbook-ir-2025-2026-pdf").url,
+      },
     ],
   },
   {
@@ -77,7 +77,7 @@ export const guideChunks: GuideChunk[] = [
       },
     ],
     statuteRefs: [
-      { label: "SOS voter information hub", href: "https://www.sos.arkansas.gov/elections/voter-information/" },
+      { label: "SOS voter information hub", href: getLegalSourceById("legal-sos-voter-information").url },
     ],
   },
   {
@@ -129,7 +129,9 @@ export const guideChunks: GuideChunk[] = [
           "Acts 115, 951, and related laws regulate paid statewide/local gatherers — know the landscape when talking to reporters.",
       },
     ],
-    statuteRefs: [{ label: "Title 7, Ch. 9 — overview (Justia)", href: TITLE7_CH9 }],
+    statuteRefs: [
+      { label: "Title 7, Ch. 9 — overview (Justia)", href: getLegalSourceById("legal-justia-title-7-ch-9").url },
+    ],
   },
   {
     id: "notary-process",
@@ -187,7 +189,7 @@ export const guideChunks: GuideChunk[] = [
     statuteRefs: [
       {
         label: "§ 14-14-915 (Justia)",
-        href: "https://law.justia.com/codes/arkansas/title-14/subtitle-2/chapter-14/subchapter-9/section-14-14-915/",
+        href: getLegalSourceById("legal-justia-aca-14-14-915").url,
       },
     ],
   },

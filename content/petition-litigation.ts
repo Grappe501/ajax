@@ -3,6 +3,8 @@
  * Verify docket entries with CourtListener / PACER as the case progresses.
  */
 
+import { getLegalSourceById } from "@/content/legal/sourceRegistry";
+
 export const petitionLitigation = {
   meta: {
     title: "Court challenges & injunctions",
@@ -13,7 +15,7 @@ export const petitionLitigation = {
     name: "League of Women Voters of Arkansas v. Jester",
     court: "U.S. District Court for the Western District of Arkansas",
     docketHint: "5:25-cv-05087",
-    courtListenerUrl: "https://www.courtlistener.com/docket/69919853/league-of-women-voters-of-arkansas-v-jester/",
+    courtListenerUrl: getLegalSourceById("legal-courtlistener-lwv-v-jester").url,
   },
   surfaceSummary:
     "Several groups challenged a package of 2025 Arkansas laws that change how statewide initiative and referendum petitions are circulated and verified. In late 2025, the federal district court entered a preliminary injunction blocking enforcement of some provisions against certain plaintiffs while the case moves forward.",
@@ -37,17 +39,17 @@ export const petitionLitigation = {
   reportingLinks: [
     {
       label: "Arkansas Advocate — overview of the federal challenge (April 2025)",
-      href: "https://arkansasadvocate.com/2025/04/21/federal-lawsuit-challenges-arkansas-restrictions-citizen-led-ballot-initiatives/",
+      href: getLegalSourceById("legal-arkansas-advocate-federal-challenge-2025-04").url,
     },
     {
       label: "Arkansas Times — reporting on the preliminary injunction (Nov. 2025)",
-      href: "https://arktimes.com/arkansas-blog/2025/11/19/judge-issues-injunction-against-arkansas-direct-democracy-laws",
+      href: getLegalSourceById("legal-arktimes-injunction-2025-11").url,
     },
     {
       label: "University of Arkansas Extension — plain-language note on laws “on hold”",
-      href: "https://www.uaex.uada.edu/business-communities/ced-blog/posts/2025/november/arkansas-citizen-initiative-laws-on-hold.aspx",
+      href: getLegalSourceById("legal-uaex-initiative-laws-on-hold-2025-11").url,
     },
   ],
   disclaimer:
     "This page summarizes publicly reported court developments for organizers. It is not legal advice. Campaign counsel interprets how any injunction interacts with this municipal petition.",
-} as const;
+};

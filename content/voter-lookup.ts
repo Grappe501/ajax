@@ -1,9 +1,11 @@
 /** Official Arkansas voter registration verification — front-and-center CTAs. */
 
+import { getLegalSourceById } from "@/content/legal/sourceRegistry";
+
 export const voterLookup = {
-  voterviewUrl: "https://www.voterview.ar-nova.org/VoterView",
-  sosVoterHubUrl: "https://www.sos.arkansas.gov/elections/voter-information/",
-  registrationPdfUrl: "https://www.sos.arkansas.gov/uploads/elections/Voter_Reg_App._8-2023_.pdf",
+  voterviewUrl: getLegalSourceById("legal-voterview").url,
+  sosVoterHubUrl: getLegalSourceById("legal-sos-voter-information").url,
+  registrationPdfUrl: getLegalSourceById("legal-sos-voter-registration-pdf").url,
   heroCallout: {
     title: "Check your registration first",
     body:
