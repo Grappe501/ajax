@@ -6,6 +6,9 @@ import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 
 const links = [
+  { href: "/initiative/voter-status", label: "Voter check" },
+  { href: "/initiative/petition-guide", label: "Rule guide" },
+  { href: "/initiative/law", label: "Law & history" },
   { href: "/initiative/petition", label: "Petition Coach" },
   { href: "/initiative/language", label: "Initiative language" },
   { href: "/initiative/how-to-sign", label: "How to sign" },

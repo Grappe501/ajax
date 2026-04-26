@@ -26,6 +26,14 @@ export const rules: RuleItem[] = [
       "Constitutional baseline: Arkansas Constitution Article 5, § 1 reserves initiative and referendum to the people and applies at the municipal level, so registered voters in a city may petition to place qualified local measures on the ballot.\n\nStatutory framework: Many general procedures for petitions appear in Arkansas Code Annotated Title 7, Chapter 9 (initiative and referendum). Additional Title 14 (local government) provisions address how cities process local measures. Your city clerk’s filing instructions and the ballot title approved for circulation control deadlines and form for this Jacksonville petition.\n\nStatewide vs. Jacksonville: The Secretary of State’s Initiatives & Referenda Handbook and most high-profile news coverage focus on statewide measures (initiated acts and constitutional amendments). Jacksonville’s petition is a municipal measure. Signature thresholds, filing windows, and verification are tied to municipal law and local filing — follow campaign counsel and the Jacksonville city clerk, not generic statewide initiative timelines alone.\n\n2025 Arkansas General Assembly: The legislature passed several bills affecting petition circulation and verification (commonly cited in public reporting as Acts 218, 240, 274, 453, 602, and related provisions). Many of those changes target statewide petitions and Secretary of State processes.\n\nFederal court injunction (2025): In League of Women Voters of Arkansas et al. v. Jester, the U.S. District Court for the Western District of Arkansas granted a preliminary injunction limiting enforcement of certain provisions against parties to that case while the lawsuit continues. The scope of the order applies to the statutes and parties described in the court’s docket — it does not replace your obligation to follow the law governing this municipal petition or advice from campaign counsel.\n\nPractical takeaway for AJAX volunteers: Rules on this site, the official petition form, and coordinator instructions are written for this campaign. When state law and city procedures overlap with statewide initiative headlines, ask a coordinator rather than assuming a TV story about statewide measures applies line-for-line to Jacksonville.",
     links: [
       {
+        label: "AJAX — Arkansas law & history hub (drill-down)",
+        href: "/initiative/law",
+      },
+      {
+        label: "AJAX — Chunked petition guide",
+        href: "/initiative/petition-guide",
+      },
+      {
         label: "Arkansas Secretary of State — Initiatives & Referenda",
         href: "https://www.sos.arkansas.gov/elections/initiatives-and-referenda/",
       },

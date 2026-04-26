@@ -17,6 +17,11 @@ export const metadata: Metadata = {
 
 const tiles = [
   {
+    title: "Check voter registration",
+    body: "Official VoterView + AJAX tips so every signature is eligible.",
+    href: "/initiative/voter-status",
+  },
+  {
     title: "Petition Coach",
     body: "Role-based guided walkthrough — fields, mistakes, and practice.",
     href: "/initiative/petition",

@@ -26,11 +26,11 @@ const steps = [
   },
   {
     step: "02",
-    title: "Why it matters",
-    body: "How at-large voting differs from ward-only elections for Jacksonville.",
+    title: "See the difference on your block",
+    body: "How at-large voting works today — and what ward-based representation would change for neighborhoods.",
     icon: Heart,
     href: "/why-it-matters",
-    cta: "Why it matters",
+    cta: "Explore the contrast",
   },
   {
     step: "03",
@@ -57,8 +57,8 @@ export function WelcomeJourney() {
     <SectionShell className="ajax-section-muted border-b border-primary/10">
       <SectionHeading
         eyebrow="Start here"
-        title="Four steps"
-        subtitle="Use them in order or skip to what you need."
+        title="Take the next step"
+        subtitle="Move from understanding to action — in whatever order fits your evening."
       />
       <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
         {steps.map((s, i) => (

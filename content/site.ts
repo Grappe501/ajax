@@ -21,6 +21,7 @@ export const site = {
     { label: "Faith", href: "/faith" },
     { label: "Mayor & Council", href: "/government" },
     { label: "Initiative", href: "/initiative" },
+    { label: "Ballot law", href: "/initiative/law" },
     { label: "Why It Matters", href: "/why-it-matters" },
     { label: "Volunteer", href: "/volunteer" },
     { label: "Rules", href: "/rules" },

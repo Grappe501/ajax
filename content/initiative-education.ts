@@ -36,9 +36,12 @@ export const initiativeEducation = {
     body:
       "Carrying petitions, hosting tables, and organizing by ward takes volunteers. The Volunteer Hub is the campaign’s home base for training, events, and next steps.",
     buttonLabel: "Join the Volunteer Hub",
-    hubHref: "/",
+    hubHref: "/hub",
   },
   secondaryLinks: [
+    { label: "Voter lookup (official)", href: "/initiative/voter-status" },
+    { label: "Chunked petition guide", href: "/initiative/petition-guide" },
+    { label: "Arkansas law & history", href: "/initiative/law" },
     { label: "Where to sign & events", href: "/events" },
     { label: "Petition rules (quick read)", href: "/rules" },
     { label: "FAQ", href: "/faq" },

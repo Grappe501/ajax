@@ -45,9 +45,18 @@ export default function InitiativeEducationPage() {
           Walk through the real petition layout, read the ordinance text, and learn how signing works — step by step.
         </p>
         <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-          <PrimaryButton href="/initiative/petition" className="justify-center">
-            Petition Coach
+          <PrimaryButton href="/initiative/voter-status" className="justify-center">
+            Check registration (VoterView)
           </PrimaryButton>
+          <SecondaryButton href="/initiative/petition" className="justify-center">
+            Petition Coach
+          </SecondaryButton>
+          <SecondaryButton href="/initiative/petition-guide" className="justify-center">
+            Chunked rule guide
+          </SecondaryButton>
+          <SecondaryButton href="/initiative/law" className="justify-center">
+            Law, bills & history
+          </SecondaryButton>
           <SecondaryButton href="/initiative/language" className="justify-center">
             Initiative language
           </SecondaryButton>
