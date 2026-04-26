@@ -8,6 +8,7 @@ import { DashboardAgentPanel } from "@/components/agents/dashboard-agent-panel";
 import { CopyReferralButton } from "@/components/wards/copy-referral-button";
 import { PowerOfFiveReachPanel } from "@/components/wards/power-of-five-reach-panel";
 import { SharePublicSiteCard } from "@/components/wards/share-public-site-card";
+import { WardPetitionAlumniPanel } from "@/components/wards/ward-petition-alumni-panel";
 import type { ReachOutListRow } from "@/lib/reach/types";
 
 export function WardDashboardPanel({
@@ -54,6 +55,8 @@ export function WardDashboardPanel({
       </div>
 
       <SharePublicSiteCard siteBase={siteBase} />
+
+      <WardPetitionAlumniPanel wardSlug={wardSlug} />
 
       <section className="space-y-4" aria-label="Ward AI assistants">
         <div>

@@ -18,6 +18,8 @@ export const site = {
   nav: [
     { label: "Home", href: "/" },
     { label: "Volunteer hub", href: "/hub" },
+    { label: "Faith", href: "/faith" },
+    { label: "Mayor & Council", href: "/government" },
     { label: "Initiative", href: "/initiative" },
     { label: "Why It Matters", href: "/why-it-matters" },
     { label: "Volunteer", href: "/volunteer" },

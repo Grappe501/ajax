@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
   CheckSquare,
+  Gauge,
   HeartHandshake,
   LayoutDashboard,
   Mail,
@@ -23,6 +24,7 @@ const nav: {
   match?: "exact";
 }[] = [
   { href: "/admin", label: "Overview", icon: LayoutDashboard, match: "exact" },
+  { href: "/admin/campaign-manager", label: "Campaign manager", icon: Gauge },
   { href: "/admin/volunteers", label: "Volunteers", icon: HeartHandshake },
   { href: "/admin/approvals", label: "Approvals", icon: CheckSquare },
   { href: "/admin/outreach", label: "Outreach queue", icon: Mail },
@@ -40,6 +42,8 @@ export function AdminShell({
   email: string | null;
 }) {
   const pathname = usePathname();
+  const fullBleed =
+    pathname.startsWith("/admin/campaign-manager") || pathname.startsWith("/admin/finance");
 
   return (
     <div className="flex min-h-dvh flex-col bg-[#050a12] text-zinc-100 md:flex-row">
@@ -84,14 +88,22 @@ export function AdminShell({
           </Link>
         </div>
       </aside>
-      <div className="min-w-0 flex-1">
-        <header className="flex items-center justify-between border-b border-white/10 bg-[#070f1c]/80 px-4 py-4 backdrop-blur-md md:px-8">
+      <div className="flex min-h-0 min-w-0 flex-1 flex-col">
+        <header className="flex shrink-0 items-center justify-between border-b border-white/10 bg-[#070f1c]/80 px-4 py-4 backdrop-blur-md md:px-8">
           <div className="flex items-center gap-2 text-zinc-500">
             <Radio className="size-4" aria-hidden />
             <span className="text-xs font-medium uppercase tracking-wider">Operations</span>
           </div>
         </header>
-        <div className="p-4 pb-28 md:p-8 md:pb-32">{children}</div>
+        <div
+          className={
+            fullBleed
+              ? "flex min-h-0 flex-1 flex-col overflow-hidden p-0 pb-24 md:pb-28"
+              : "p-4 pb-28 md:p-8 md:pb-32"
+          }
+        >
+          {children}
+        </div>
       </div>
       <AdminFloatingAgent />
     </div>

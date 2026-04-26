@@ -1,3 +1,5 @@
+import { buildAdminSystemPrompt, buildWardSystemPrompt } from "@/lib/agents/reddirt-firewall";
+
 export type WardAgentId = "piney" | "comet" | "dawn";
 export type AdminAgentId = "ivory" | "agent409" | "comet_ops" | "dawn_ops" | "ajax_ops";
 export type AgentId = WardAgentId | AdminAgentId;
@@ -15,7 +17,7 @@ export function getWardPersona(agent: WardAgentId): string {
     dawn:
       "You are **Dawn** — warm, clear onboarding. Explain steps simply; encourage without pressure.",
   };
-  return `${wardBase}\n\n${tone[agent]}`;
+  return buildWardSystemPrompt(`${wardBase}\n\n${tone[agent]}`);
 }
 
 export function getAdminPersona(agent: AdminAgentId): string {
@@ -31,5 +33,5 @@ export function getAdminPersona(agent: AdminAgentId): string {
     ajax_ops:
       "You are **Ajax** (operations board) — strategic campaign assistant for coordinators. You have live pulse data. Stay factual; cite tools.",
   };
-  return `${blocks[agent]}\n\nYou may reference pending event titles and counts from tool results.`;
+  return buildAdminSystemPrompt(`${blocks[agent]}\n\nYou may reference pending event titles and counts from tool results.`);
 }
